@@ -1,0 +1,452 @@
+.container {
+  margin: 1rem 0;
+  width: 100%;
+  max-width: 600px;
+  position: relative;
+}
+
+.header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #f8f9fa;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #B392F0 0%, #F87683 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 20px rgba(179, 146, 240, 0.3);
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: rgba(248, 249, 250, 0.7);
+  margin: 0;
+}
+
+.tabs {
+  display: flex;
+  gap: 0.25rem;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 0.25rem 0.25rem 0.5rem 0.25rem;
+  border-radius: 1rem 1rem 0 0;
+  border: 1px solid rgba(179, 146, 240, 0.15);
+  border-bottom: none;
+  margin-bottom: 0;
+  backdrop-filter: blur(20px);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      45deg,
+      transparent 0%,
+      rgba(179, 146, 240, 0.05) 25%,
+      transparent 50%,
+      rgba(248, 118, 131, 0.05) 75%,
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+}
+
+.tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.75rem 0.5rem;
+  background: transparent;
+  border: none;
+  border-radius: 0.75rem;
+  color: rgba(248, 249, 250, 0.6);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: none;
+  min-height: 70px;
+
+  &:hover {
+    color: rgba(248, 249, 250, 0.9);
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  &.active {
+    color: #f8f9fa;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 
+      0 4px 20px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--tab-gradient);
+      opacity: 0.1;
+      border-radius: 0.75rem;
+    }
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--tab-color, #B392F0);
+      border-radius: 2px 2px 0 0;
+      box-shadow: 0 0 10px var(--tab-color);
+    }
+  }
+
+  .icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.25rem;
+  }
+
+  .iconImg {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  }
+
+  .tabContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.125rem;
+  }
+
+  .name {
+    text-transform: capitalize;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  }
+
+  .description {
+    font-size: 0.65rem;
+    opacity: 0.8;
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  .activeIndicator {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background: var(--tab-color, #B392F0);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--tab-color);
+  }
+}
+
+.commandContainer {
+  background: color-mix(in srgb, var(--selected-gradient, #B392F0) 10%, rgba(0, 0, 0, 0.4));
+  border-radius: 0 0 1rem 1rem;
+  border: 1px solid color-mix(in srgb, var(--selected-color, #B392F0) 30%, transparent);
+  border-top: none;
+  backdrop-filter: blur(20px);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+  margin-top: 0;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      transparent 0%,
+      color-mix(in srgb, var(--selected-color, #B392F0) 5%, transparent) 50%,
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+}
+
+.commandHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.commandLabel {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(248, 249, 250, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.copyButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid;
+  border-radius: 0.5rem;
+  color: #f8f9fa;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.copyIcon {
+  display: flex;
+  align-items: end;
+  justify-content: end;
+}
+
+.copyText {
+  font-weight: 600;
+}
+
+.commandCode {
+  padding: 1rem;
+  font-family: 'Fira Code', 'Monaco', 'Menlo', monospace;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.commandText {
+  width: 100%;
+  word-break: break-all;
+  display: flex;
+  align-items: center;
+  line-height: 1.6;
+}
+
+.commandManager {
+  color: #ff79c6;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(255, 121, 198, 0.5);
+  display: inline-block;
+}
+
+.commandAction {
+  color: #ff79c6;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(255, 121, 198, 0.5);
+  display: inline-block;
+}
+
+.packageName {
+  color: #8be9fd;
+  font-weight: 500;
+  text-shadow: 
+    0 0 8px rgba(139, 233, 253, 0.4),
+    0 0 16px rgba(139, 233, 253, 0.2);
+  animation: glowPulse 3s ease-in-out infinite;
+  display: inline-block;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.successToast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: rgba(40, 202, 66, 0.9);
+  color: white;
+  border-radius: 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgba(40, 202, 66, 0.3);
+  z-index: 1000;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@keyframes slideIn {
+  from {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    text-shadow: 0 0 5px currentColor;
+  }
+  50% {
+    text-shadow: 0 0 20px currentColor, 0 0 30px currentColor;
+  }
+}
+
+// Responsive styles
+@media (max-width: 768px) {
+  .container {
+    margin: 0.75rem 0;
+  }
+  
+  .title {
+    font-size: 1.25rem;
+  }
+  
+  .subtitle {
+    font-size: 0.9rem;
+  }
+  
+  .tabs {
+    gap: 0.2rem;
+    padding: 0.2rem;
+  }
+  
+  .tab {
+    padding: 0.6rem 0.4rem;
+    min-height: 65px;
+    
+    .iconImg {
+      width: 18px;
+      height: 18px;
+    }
+    
+    .name {
+      font-size: 0.75rem;
+    }
+    
+    .description {
+      font-size: 0.6rem;
+    }
+  }
+  
+  .commandContainer {
+    padding: 1rem;
+  }
+  
+  .commandCode {
+    font-size: 0.85rem;
+  }
+  
+  .successToast {
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 0.85rem;
+    padding: 0.6rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    margin: 0.5rem 0;
+  }
+  
+  .title {
+    font-size: 1.1rem;
+  }
+  
+  .subtitle {
+    font-size: 0.85rem;
+  }
+  
+  .tabs {
+    flex-wrap: wrap;
+    gap: 0.15rem;
+  }
+  
+  .tab {
+    flex: 1 1 calc(50% - 0.075rem);
+    padding: 0.5rem 0.3rem;
+    min-height: 60px;
+    
+    .iconImg {
+      width: 16px;
+      height: 16px;
+    }
+    
+    .name {
+      font-size: 0.7rem;
+    }
+    
+    .description {
+      font-size: 0.55rem;
+    }
+  }
+  
+  .commandContainer {
+    padding: 0.75rem;
+  }
+  
+  .commandHeader {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: stretch;
+  }
+  
+  .copyButton {
+    align-self: center;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+  }
+  
+  .commandCode {
+    font-size: 0.8rem;
+  }
+  
+  .successToast {
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
+    justify-content: center;
+  }
+}
