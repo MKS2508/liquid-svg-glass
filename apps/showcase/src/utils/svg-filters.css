@@ -1,0 +1,262 @@
+/* SVG Filters Documentation Styles */
+
+.docs-container {
+  max-width: none;
+  background-color: #251B30;
+  color: #f8f9fa;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Contenedores de información */
+.info-box {
+  background: linear-gradient(135deg, rgba(179, 146, 240, 0.15) 0%, rgba(179, 146, 240, 0.05) 100%);
+  border: 1px solid rgba(179, 146, 240, 0.4);
+  border-left: 4px solid #B392F0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  color: #f8f9fa;
+}
+
+.warning-box {
+  background: linear-gradient(135deg, rgba(248, 118, 131, 0.15) 0%, rgba(248, 118, 131, 0.05) 100%);
+  border: 1px solid rgba(248, 118, 131, 0.4);
+  border-left: 4px solid #F87683;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  color: #f8f9fa;
+}
+
+.success-box {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(34, 197, 94, 0.05) 100%);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  border-left: 4px solid #22c55e;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  color: #f8f9fa;
+}
+
+.tip-box {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(251, 191, 36, 0.05) 100%);
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  border-left: 4px solid #fbbf24;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  color: #f8f9fa;
+}
+
+/* Código mejorado */
+.code-block {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(179, 146, 240, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+  overflow-x: auto;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+}
+
+.inline-code {
+  background: rgba(179, 146, 240, 0.2);
+  color: #B392F0;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+/* Tablas profesionales */
+.function-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.function-table th {
+  background: linear-gradient(135deg, #B392F0 0%, #9966CC 100%);
+  color: #fff;
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 0.9rem;
+}
+
+.function-table td {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(179, 146, 240, 0.1);
+  vertical-align: top;
+}
+
+.function-table tr:hover {
+  background: rgba(179, 146, 240, 0.05);
+}
+
+.function-table .param-name {
+  color: #B392F0;
+  font-weight: 600;
+  font-family: 'SF Mono', Monaco, monospace;
+}
+
+.function-table .param-type {
+  color: #F87683;
+  font-family: 'SF Mono', Monaco, monospace;
+  font-size: 0.9em;
+}
+
+/* Grid de características */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.feature-card {
+  background: linear-gradient(135deg, rgba(179, 146, 240, 0.1) 0%, rgba(248, 118, 131, 0.05) 100%);
+  border: 1px solid rgba(179, 146, 240, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(179, 146, 240, 0.15);
+}
+
+.feature-card h4 {
+  color: #F87683;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+/* Índice navegable */
+.toc {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+}
+
+.toc ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.toc li {
+  margin: 0.5rem 0;
+}
+
+.toc a {
+  color: #B392F0;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.toc a:hover {
+  color: #F87683;
+}
+
+/* Pipeline visual */
+.pipeline-step {
+  background: linear-gradient(135deg, rgba(179, 146, 240, 0.1) 0%, rgba(0, 0, 0, 0.2) 100%);
+  border: 1px solid rgba(179, 146, 240, 0.3);
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+  position: relative;
+}
+
+.pipeline-step::before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background: #B392F0;
+  border-radius: 50%;
+}
+
+.pipeline-step h4 {
+  color: #F87683;
+  margin-top: 0;
+}
+
+/* Secciones colapsables */
+.collapsible {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  margin: 1rem 0;
+  overflow: hidden;
+}
+
+.collapsible summary {
+  background: rgba(179, 146, 240, 0.1);
+  padding: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  color: #B392F0;
+  border-bottom: 1px solid rgba(179, 146, 240, 0.2);
+}
+
+.collapsible summary:hover {
+  background: rgba(179, 146, 240, 0.15);
+}
+
+.collapsible-content {
+  padding: 1.5rem;
+}
+
+/* Mejoras de sintaxis highlight para código */
+.hljs-keyword { color: #F87683; }
+.hljs-string { color: #98C379; }
+.hljs-number { color: #D19A66; }
+.hljs-comment { color: #5C6370; font-style: italic; }
+.hljs-function { color: #61AFEF; }
+.hljs-variable { color: #E06C75; }
+.hljs-type { color: #B392F0; }
+.hljs-property { color: #56B6C2; }
+
+/* Syntax highlighting manual para TypeScript */
+.ts-function { color: #61AFEF; font-weight: 600; }
+.ts-type { color: #B392F0; font-weight: 500; }
+.ts-param { color: #E06C75; }
+.ts-operator { color: #56B6C2; }
+.ts-keyword { color: #F87683; font-weight: 500; }
+.ts-string { color: #98C379; }
+.ts-number { color: #D19A66; }
+.ts-comment { color: #5C6370; font-style: italic; }
+.ts-property { color: #56B6C2; }
+.ts-variable { color: #E5C07B; }
+.ts-interface { color: #B392F0; font-weight: 600; }
+.ts-return { color: #C678DD; }
+.ts-punctuation { color: #ABB2BF; }
+
+/* Badges y etiquetas */
+.badge {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0.2rem;
+}
+
+.badge-new { background: #22c55e; color: #fff; }
+.badge-core { background: #B392F0; color: #fff; }
+.badge-advanced { background: #F87683; color: #fff; }
+.badge-performance { background: #fbbf24; color: #000; }

@@ -1,0 +1,300 @@
+import { Meta, PureArgsTable as ArgsTable, Story, Canvas, Source } from '@storybook/addon-docs/blocks';
+import GlassEffect from '../src/components/GlassEffect/index';
+import * as GlassEffectStories from '../src/stories/GlassEffect.stories';
+import * as DocStories from './GlassEffect.stories';
+
+<Meta of={DocStories} />
+
+<style>{`
+  .docs-container {
+    max-width: none;
+    background-color: #251B30;
+    color: #f8f9fa;
+  }
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+  .feature-card {
+    padding: 1.5rem;
+    border: 1px solid rgba(179, 146, 240, 0.2);
+    border-radius: 8px;
+    background: rgba(179, 146, 240, 0.05);
+    color: #f8f9fa;
+  }
+  .feature-card h4 {
+    margin-top: 0;
+    color: #F87683;
+  }
+  .code-preview {
+    background: rgba(179, 146, 240, 0.1);
+    border: 1px solid rgba(179, 146, 240, 0.2);
+    border-radius: 6px;
+    padding: 1rem;
+    margin: 1rem 0;
+    color: #f8f9fa;
+  }
+  .parameter-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: rgba(179, 146, 240, 0.02);
+  }
+  .parameter-table th,
+  .parameter-table td {
+    border: 1px solid rgba(179, 146, 240, 0.2);
+    padding: 0.75rem;
+    text-align: left;
+    color: #f8f9fa;
+  }
+  .parameter-table th {
+    background: rgba(179, 146, 240, 0.1);
+    font-weight: 600;
+    color: #F87683;
+  }
+  .warning-box {
+    background: rgba(248, 118, 131, 0.1);
+    border: 1px solid rgba(248, 118, 131, 0.3);
+    color: #f8f9fa;
+    border-radius: 6px;
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+  .info-box {
+    background: rgba(179, 146, 240, 0.1);
+    border: 1px solid rgba(179, 146, 240, 0.4);
+    border-radius: 6px;
+    padding: 1rem;
+    margin: 1rem 0;
+    color: #f8f9fa;
+  }
+  .success-box {
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.4);
+    border-radius: 6px;
+    padding: 1rem;
+    margin: 1rem 0;
+    color: #f8f9fa;
+  }
+`}</style>
+
+# Componente GlassEffect
+
+<div className="info-box">
+  <strong>🌟 Efecto Avanzado de Cristal Líquido</strong><br/>
+  El componente `GlassEffect` es la implementación central del efecto de "cristal líquido" en este proyecto. Crea elementos visuales dinámicos que simulan la refracción y distorsión de la luz a través de una superficie de cristal, añadiendo un toque moderno y sofisticado a tu interfaz de usuario.
+</div>
+
+## 🎯 ¿Qué es el Efecto de Cristal Líquido?
+
+El efecto de cristal líquido es un **sistema de distorsión de píxeles en tiempo real** que simula ver contenido a través de cristal líquido. Combina CSS avanzado con `backdrop-filter` y filtros SVG complejos para manipular los píxeles del contenido detrás del elemento `GlassEffect`.
+
+### Conceptos Técnicos Clave
+
+- **Mapeo de Desplazamiento**: Usa valores de color para determinar el movimiento de píxeles
+- **Aberración Cromática**: Separa los canales RGB para una dispersión de luz realista  
+- **Distorsión Progresiva**: Crea zonas de intensidad de distorsión variable
+- **Procesamiento en Tiempo Real**: Todos los efectos se calculan y aplican en tiempo real
+
+## ✨ Características Centrales
+
+<div className="feature-grid">
+  <div className="feature-card">
+    <h4>🔬 Simulación Física</h4>
+    <p>Incorpora aberración cromática y distorsión progresiva para un realismo visual convincente basado en la física óptica real.</p>
+  </div>
+  
+  <div className="feature-card">
+    <h4>⚙️ Altamente Configurable</h4>
+    <p>Ofrece personalización extensiva a través de presets predefinidos (<code>dock</code>, <code>pill</code>, <code>bubble</code>, <code>free</code>) y control granular de propiedades.</p>
+  </div>
+  
+  <div className="feature-card">
+    <h4>🎮 Interactivo</h4>
+    <p>Soporte integrado para arrastrar y posicionar gracias a la integración perfecta con GSAP.</p>
+  </div>
+  
+  <div className="feature-card">
+    <h4>🚀 Optimizado en Rendimiento</h4>
+    <p>Diseñado para un rendimiento fluido usando memoización inteligente y funciones puras.</p>
+  </div>
+  
+  <div className="feature-card">
+    <h4>📱 Responsivo y Adaptativo</h4>
+    <p>El modo AutoSize se adapta automáticamente a las dimensiones del contenido, perfecto para layouts dinámicos.</p>
+  </div>
+  
+  <div className="feature-card">
+    <h4>🔧 Experiencia de Desarrollador</h4>
+    <p>Sistema de depuración avanzado con logging contextual y soporte completo de TypeScript.</p>
+  </div>
+</div>
+
+## 📋 Referencia Completa de API
+
+La tabla siguiente muestra todas las propiedades disponibles del componente `GlassEffect`, organizadas por categorías para facilitar su comprensión y uso:
+
+<ArgsTable of={GlassEffect} />
+
+### 💡 Guía Rápida de Categorías
+
+- **🎯 Configuración Principal**: Controles básicos para inicializar el componente
+- **📐 Dimensiones y Layout**: Tamaño y forma del efecto de vidrio
+- **✨ Efectos Visuales**: Propiedades que controlan la apariencia del glassmorphism
+- **🌈 Aberración Cromática**: Sistema avanzado de separación de colores RGB
+- **⚙️ Controles Avanzados**: Parámetros técnicos para ajustes finos
+- **🖼️ Fondo de Demostración**: Controles específicos para Storybook (no disponibles en producción)
+
+## 🎭 Ejemplos de Uso
+
+### Demostración Principal
+
+<Canvas>
+  <Story of={GlassEffectStories.Default} />
+</Canvas>
+
+### Uso Básico con Presets
+
+```tsx
+import { GlassEffect } from 'react-liquid-glass';
+
+// Efecto de cristal estático con preset dock
+<GlassEffect draggable={false} preset="dock">
+  <nav>
+    <a href="/">Inicio</a>
+    <a href="/about">Acerca</a>
+    <a href="/contact">Contacto</a>
+  </nav>
+</GlassEffect>
+```
+
+### Elemento Arrastrable Interactivo
+
+```tsx
+// Efecto de cristal arrastrable con posicionamiento personalizado
+<GlassEffect 
+  draggable={true} 
+  preset="pill" 
+  initialPosition={{ x: 50, y: 50 }}
+  onMove={(position) => console.log('Movido a:', position)}
+>
+  <h3>¡Arrástrame!</h3>
+  <p>Este elemento se puede mover</p>
+</GlassEffect>
+```
+
+### Configuración Personalizada Avanzada
+
+```tsx
+// Efecto de cristal altamente personalizado
+<GlassEffect 
+  preset="free"
+  width={500} 
+  height={200}
+  radius={24}
+  blur={15}
+  frost={0.25}
+  r={60} g={70} b={50}
+  blend="multiply"
+  alpha={0.8}
+  lightness={85}
+  debug={true}
+>
+  <div className="custom-content">
+    <h2>Efecto de Cristal Personalizado</h2>
+    <p>Parámetros completamente personalizados</p>
+  </div>
+</GlassEffect>
+```
+
+<Canvas>
+  <Story of={GlassEffectStories.Playground} />
+</Canvas>
+
+### Modo Adaptativo AutoSize
+
+```tsx
+// Se adapta automáticamente al tamaño del contenido
+<GlassEffect autoSize preset="dock">
+  <button className="btn-primary">
+    Este botón determina el tamaño del cristal
+  </button>
+</GlassEffect>
+```
+
+<div className="success-box">
+  <strong>💡 Consejo Pro:</strong> El modo AutoSize es perfecto para botones, etiquetas y contenido dinámico donde el efecto de cristal debe ajustarse perfectamente a las dimensiones del contenido.
+</div>
+
+## 🎨 Comparación de Presets
+
+<Canvas>
+  <Story of={GlassEffectStories.Comparison} />
+</Canvas>
+
+### Presets Disponibles
+
+- **`dock`**: Optimizado para barras de navegación y docks con distorsión sutil
+- **`pill`**: Perfecto para botones y etiquetas con forma de píldora  
+- **`bubble`**: Distorsión mejorada para elementos flotantes
+- **`free`**: Máxima flexibilidad para configuraciones personalizadas
+
+## 🔧 Características Avanzadas
+
+### Modo Debug
+
+Habilita el modo debug para ver los mapas de desplazamiento internos y detalles de configuración:
+
+```tsx
+<GlassEffect debug={true} preset="dock">
+  El modo debug muestra overlay de imagen de desplazamiento
+</GlassEffect>
+```
+
+<div className="warning-box">
+  <strong>⚠️ Solo para Desarrollo:</strong> El modo debug solo debe usarse durante el desarrollo ya que añade overlays visuales y logging en consola.
+</div>
+
+### Consideraciones de Rendimiento
+
+- **Memoización**: Toda la generación SVG está memoizada - solo se regenera cuando cambian las props
+- **Funciones Puras**: Las utilidades SVG no tienen efectos secundarios para un rendimiento predecible
+- **Evaluación Perezosa**: Los cálculos solo se realizan cuando son necesarios
+- **Optimización del Navegador**: Los navegadores modernos optimizan los filtros SVG automáticamente
+
+### Compatibilidad de Navegadores
+
+- **Navegadores Modernos**: Soporte completo en Chrome 76+, Firefox 70+, Safari 14+
+- **Backdrop Filter**: Requiere soporte de `backdrop-filter`
+- **Filtros SVG**: Soporte universal de filtros SVG
+- **GSAP Draggable**: Característica opcional, degradación elegante cuando no está disponible
+
+## 🧪 Playground Interactivo
+
+Experimenta con todas las propiedades del componente en tiempo real:
+
+<Canvas>
+  <Story of={GlassEffectStories.Playground} />
+</Canvas>
+
+## 📚 Documentación Relacionada
+
+- **[Implementación Técnica](https://github.com/your-username/react-liquid-glass/blob/main/definitive.md)**: Análisis profundo del pipeline de filtros SVG
+- **[Guía de Inicio](https://github.com/your-username/react-liquid-glass/blob/main/glass_effect_explanation.md)**: Explicación simplificada de conceptos
+- **[Motor de Filtros SVG](./svg-filters)**: Documentación de utilidades centrales
+- **[Definiciones de Tipos](https://github.com/your-username/react-liquid-glass/tree/main/src/types)**: Interfaces completas de TypeScript
+
+## 🚀 Próximos Pasos
+
+1. **Explorar Ejemplos**: Prueba diferentes presets y configuraciones
+2. **Leer Documentación Técnica**: Comprende el pipeline de filtros SVG subyacente  
+3. **Integrar en tu Proyecto**: Añade efectos de cristal líquido a tus componentes
+4. **Personalizar**: Crea tus propios presets y configuraciones
+5. **Contribuir**: Ayuda a mejorar la librería con feedback y contribuciones
+
+<div className="info-box">
+  <strong>🎯 Listo para Producción</strong><br/>
+  El componente GlassEffect está listo para producción con soporte completo de TypeScript, optimizaciones de rendimiento y pruebas extensivas a través de Storybook.
+</div>

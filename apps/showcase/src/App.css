@@ -1,0 +1,84 @@
+:root {
+  --primary-color: #ffffff;
+  --secondary-color: #b3b3b3;
+  --background-start: #1a1a1a;
+  --background-end: #0d0d0d;
+  --font-family: 'Inter', sans-serif;
+  --glow-color-vite: #646cff;
+  --glow-color-react: #61dafbaa;
+  --glow-color-title: #a794ff;
+}
+
+body {
+  background: linear-gradient(135deg, var(--background-start), var(--background-end));
+  color: var(--primary-color);
+  font-family: var(--font-family);
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.app-container {
+  position: relative;
+  padding: 2rem;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 0.4s ease-in-out;
+  filter: drop-shadow(0 0 0.75em rgba(255, 255, 255, 0.1));
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2.5em var(--glow-color-vite));
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2.5em var(--glow-color-react));
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .logo.react {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.app-header h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.05em;
+  background: -webkit-linear-gradient(45deg, #a794ff, #5b8def);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 15px rgba(167, 148, 255, 0.4), 0 0 30px rgba(91, 141, 239, 0.3);
+}
+
+.app-header p {
+  font-size: 1.2rem;
+  color: var(--secondary-color);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}

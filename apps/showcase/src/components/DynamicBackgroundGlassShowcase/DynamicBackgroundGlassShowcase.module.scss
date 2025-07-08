@@ -1,0 +1,1537 @@
+/**
+ * @file DynamicBackgroundGlassShowcase.module.scss
+ * @author MKS
+ */
+
+.showcase {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  
+  &.darkTheme {
+    border-color: rgba(255, 255, 255, 0.15);
+    color: white;
+  }
+  
+  &.lightTheme {
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #1a1a1a;
+  }
+}
+
+// Animated gradient backgrounds
+.gradientBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.cyberpunk-gradient .gradientBackground {
+  background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #667eea);
+  background-size: 400% 400%;
+  animation: cyberpunkGradient 8s ease infinite;
+}
+
+.sunset-gradient .gradientBackground {
+  background: linear-gradient(-45deg, #f093fb, #f5576c, #ff9068, #f093fb);
+  background-size: 400% 400%;
+  animation: sunsetGradient 10s ease infinite;
+}
+
+.ocean-gradient .gradientBackground {
+  background: linear-gradient(-45deg, #4facfe, #00f2fe, #43e97b, #4facfe);
+  background-size: 400% 400%;
+  animation: oceanGradient 12s ease infinite;
+}
+
+.forest-gradient .gradientBackground {
+  background: linear-gradient(-45deg, #43e97b, #38f9d7, #667eea, #43e97b);
+  background-size: 400% 400%;
+  animation: forestGradient 9s ease infinite;
+}
+
+.cosmic-gradient .gradientBackground {
+  background: radial-gradient(ellipse at center, #d299c2, #fef9d7, #a8edea, #d299c2);
+  background-size: 400% 400%;
+  animation: cosmicGradient 15s ease infinite;
+}
+
+.fire-gradient .gradientBackground {
+  background: linear-gradient(-45deg, #ff9a9e, #fecfef, #ffecd2, #ff9a9e);
+  background-size: 400% 400%;
+  animation: fireGradient 6s ease infinite;
+}
+
+.dark-gradient .gradientBackground {
+  background: linear-gradient(-45deg, #0c0c0c, #1a1a1a, #2d2d2d, #0c0c0c);
+  background-size: 400% 400%;
+  animation: darkGradient 20s ease infinite;
+}
+
+.light-gradient .gradientBackground {
+  background: linear-gradient(-45deg, #ffffff, #f8f9fa, #e9ecef, #ffffff);
+  background-size: 400% 400%;
+  animation: lightGradient 14s ease infinite;
+}
+
+.backgroundContent {
+  position: absolute;
+  inset: 0;
+  padding: 24px;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.contentDark {
+  position: absolute;
+  inset: 0;
+  padding: 24px;
+  overflow: hidden;
+  z-index: 10;
+  color: white;
+}
+
+.contentLight {
+  position: absolute;
+  inset: 0;
+  padding: 24px;
+  overflow: hidden;
+  z-index: 10;
+  color: #1a1a1a;
+}
+
+.backgroundLabel {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 6px 12px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 40;
+  
+  .labelContent {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .statusDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+  }
+  
+  .separator {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 12px;
+  }
+  
+  .contentType {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 12px;
+    text-transform: capitalize;
+  }
+}
+
+.glassContent {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 30;
+}
+
+// Grid layouts
+.grid {
+  display: grid;
+  gap: 16px;
+  
+  &.cols2 { grid-template-columns: repeat(2, 1fr); }
+  &.cols3 { grid-template-columns: repeat(3, 1fr); }
+  &.cols4 { grid-template-columns: repeat(4, 1fr); }
+  
+  &.mb6 { margin-bottom: 24px; }
+}
+
+// Profile Card Base
+.profileCard {
+  border-radius: 12px;
+  padding: 16px;
+  max-width: 200px;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+// Profile Card Variants
+.profileCard-glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  
+  &:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  }
+}
+
+.profileCard-solid {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  color: #1a1a1a;
+  
+  &:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.profileCard-outline {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  box-shadow: none;
+  
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+.profileCard-minimal {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: none;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+}
+
+.profileHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+// Avatar Base
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+// Avatar Variants
+.avatar-glass {
+  background: linear-gradient(135deg, #60a5fa, #a855f7);
+  box-shadow: 0 4px 16px rgba(168, 85, 247, 0.3);
+}
+
+.avatar-solid {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.4);
+}
+
+.avatar-outline {
+  background: transparent;
+  border: 2px solid rgba(96, 165, 250, 0.8);
+  color: #60a5fa;
+}
+
+.avatar-minimal {
+  background: rgba(96, 165, 250, 0.2);
+  color: #60a5fa;
+}
+
+.profileInfo h3 {
+  font-weight: 600;
+  font-size: 14px;
+  margin: 0 0 4px 0;
+}
+
+.profileInfo p {
+  font-size: 12px;
+  margin: 0;
+  opacity: 0.7;
+}
+
+.contactIcons {
+  display: flex;
+  gap: 8px;
+  opacity: 0.6;
+}
+
+// Product Card Base
+.productCard {
+  border-radius: 16px;
+  padding: 16px;
+  max-width: 180px;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+// Product Card Variants
+.productCard-glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  
+  &:hover {
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+  }
+}
+
+.productCard-solid {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  color: #1a1a1a;
+  
+  &:hover {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.productCard-outline {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  box-shadow: none;
+  
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+.productCard-minimal {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: none;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
+}
+
+// Product Card Common Elements
+.productImage {
+  width: 100%;
+  height: 96px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  
+  .imageOverlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.1);
+  }
+  
+  .emoji {
+    font-size: 32px;
+    position: relative;
+    z-index: 10;
+  }
+  
+  .highlight {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+    border-radius: 50%;
+    filter: blur(4px);
+  }
+}
+
+.productName {
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  margin: 0 0 8px 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.productFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.price {
+  color: #22c55e;
+  font-weight: 900;
+  font-size: 18px;
+  text-shadow: 0 2px 4px rgba(34, 197, 94, 0.3);
+  background: rgba(34, 197, 94, 0.2);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.rating {
+  display: flex;
+  gap: 2px;
+}
+
+.star {
+  width: 16px;
+  height: 16px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+  
+  &.filled {
+    color: #fde047;
+    fill: #fde047;
+  }
+  
+  &.empty {
+    color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+// Dashboard Widget Base
+.dashboardWidget {
+  border-radius: 16px;
+  padding: 20px;
+  min-width: 160px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+// Dashboard Widget Variants
+.dashboardWidget-glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  
+  &:hover {
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+  }
+}
+
+.dashboardWidget-solid {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  color: #1a1a1a;
+  
+  &:hover {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.dashboardWidget-outline {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  box-shadow: none;
+  
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+.dashboardWidget-minimal {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: none;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
+}
+
+// Dashboard Widget Common Elements
+.topBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-from), var(--color-to));
+}
+
+.widgetHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.widgetTitle {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+.widgetIcon {
+  color: white;
+  padding: 8px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--color-from), var(--color-to));
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.widgetValue {
+  color: white;
+  font-weight: 900;
+  font-size: 24px;
+  margin: 0 0 8px 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.widgetTrend {
+  color: #22c55e;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(34, 197, 94, 0.2);
+  padding: 4px 12px;
+  border-radius: 20px;
+  
+  .trendIcon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .trendValue {
+    font-weight: bold;
+  }
+}
+
+.backgroundBlur {
+  position: absolute;
+  bottom: -16px;
+  right: -16px;
+  width: 64px;
+  height: 64px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  filter: blur(20px);
+}
+
+// Data Table Base
+.dataTable {
+  border-radius: 12px;
+  overflow: hidden;
+  max-width: 400px;
+}
+
+// Data Table Variants
+.dataTable-glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.dataTable-solid {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  color: #1a1a1a;
+}
+
+.dataTable-outline {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  box-shadow: none;
+}
+
+.dataTable-minimal {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: none;
+}
+
+// SocialPost variants
+.socialPost {
+  border-radius: 12px;
+  padding: 16px;
+  max-width: 300px;
+  transition: all 0.3s ease;
+}
+
+.socialPost-glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.socialPost-solid {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  color: #1a1a1a;
+}
+
+.socialPost-outline {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  box-shadow: none;
+}
+
+.socialPost-minimal {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: none;
+}
+
+// CodeBlock variants
+.codeBlock {
+  border-radius: 12px;
+  overflow: hidden;
+  max-width: 350px;
+  transition: all 0.3s ease;
+}
+
+.codeBlock-glass {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.codeBlock-solid {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  color: #1a1a1a;
+}
+
+.codeBlock-outline {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  box-shadow: none;
+}
+
+.codeBlock-minimal {
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: none;
+}
+
+// Table Common Elements
+.tableHeader {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  
+  h3 {
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    margin: 0;
+  }
+}
+
+.tableBody {
+  padding: 0;
+  
+  table {
+    width: 100%;
+    font-size: 12px;
+    border-collapse: collapse;
+  }
+  
+  th {
+    text-align: left;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: 600;
+    
+    &:last-child {
+      text-align: right;
+    }
+  }
+  
+  td {
+    color: white;
+    padding: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    
+    &:last-child {
+      text-align: right;
+      font-family: 'Courier New', monospace;
+    }
+    
+    &.value {
+      text-align: right;
+      font-family: 'Courier New', monospace;
+    }
+    
+    &.change {
+      color: #22c55e;
+      text-align: right;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+    }
+  }
+}
+
+// Progress Chart Base
+.progressChart {
+  border-radius: 12px;
+  padding: 16px;
+  max-width: 250px;
+  transition: all 0.3s ease;
+}
+
+// Progress Chart Variants
+.progressChart-glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.progressChart-solid {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  color: #1a1a1a;
+}
+
+.progressChart-outline {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  box-shadow: none;
+}
+
+.progressChart-minimal {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: none;
+}
+
+// Progress Chart Common Elements
+.chartTitle {
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  margin: 0 0 16px 0;
+}
+
+.progressItems {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.progressItem {
+  .progressHeader {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 4px;
+  }
+  
+  .progressBar {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    height: 8px;
+    overflow: hidden;
+  }
+  
+  .progressFill {
+    height: 8px;
+    border-radius: 20px;
+    transition: all 0.5s ease;
+  }
+}
+
+// Layout utilities
+.spaceY4 > * + * { margin-top: 16px; }
+.spaceY3 > * + * { margin-top: 12px; }
+.spaceY2 > * + * { margin-top: 8px; }
+
+.flexBetween {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flexCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flexGap2 { display: flex; gap: 8px; }
+.flexGap3 { display: flex; gap: 12px; }
+.flexGap4 { display: flex; gap: 16px; }
+
+// Text utilities
+.textWhite { color: white; }
+.textWhite70 { color: rgba(255, 255, 255, 0.7); }
+.textWhite50 { color: rgba(255, 255, 255, 0.5); }
+.textSm { font-size: 14px; }
+.textXs { font-size: 12px; }
+.fontBold { font-weight: bold; }
+.fontSemibold { font-weight: 600; }
+
+// Particle System
+.particleContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  animation: particleFloat var(--duration, 4s) ease-in-out infinite var(--delay, 0s);
+  left: var(--x, 50%);
+  top: var(--y, 50%);
+  
+  &.particleDark {
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.2);
+  }
+  
+  &.particleLight {
+    background: rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.particle-tech {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  width: 3px;
+  height: 8px;
+  border-radius: 1px;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -1px;
+    width: 1px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.6);
+  }
+}
+
+.particle-hearts {
+  background: transparent;
+  
+  &::before {
+    content: '♥';
+    position: absolute;
+    top: -6px;
+    left: -4px;
+    font-size: 8px;
+    color: rgba(240, 101, 149, 0.6);
+  }
+}
+
+.particle-bubbles {
+  border: 1px solid rgba(79, 172, 254, 0.3);
+  background: rgba(79, 172, 254, 0.1);
+  width: 6px;
+  height: 6px;
+}
+
+.particle-leaves {
+  background: linear-gradient(45deg, #43e97b, #38f9d7);
+  width: 5px;
+  height: 3px;
+  border-radius: 50% 0;
+  transform: rotate(45deg);
+}
+
+.particle-stars {
+  background: transparent;
+  
+  &::before {
+    content: '✦';
+    position: absolute;
+    top: -6px;
+    left: -4px;
+    font-size: 8px;
+    color: rgba(210, 153, 194, 0.6);
+  }
+}
+
+.particle-sparks {
+  background: linear-gradient(45deg, #ff9a9e, #fecfef);
+  width: 2px;
+  height: 6px;
+  border-radius: 1px;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: 1px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.8);
+  }
+}
+
+.particle-code {
+  background: transparent;
+  
+  &::before {
+    content: '< />';
+    position: absolute;
+    top: -6px;
+    left: -8px;
+    font-size: 6px;
+    font-family: monospace;
+    color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+.particle-docs {
+  background: rgba(0, 0, 0, 0.1);
+  width: 4px;
+  height: 5px;
+  border-radius: 1px;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: 2px;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.2);
+  }
+}
+
+// Theme-aware content containers
+.contentDark {
+  color: white;
+  
+  .textWhite { color: white; }
+  .textWhite70 { color: rgba(255, 255, 255, 0.7); }
+  .textWhite50 { color: rgba(255, 255, 255, 0.5); }
+}
+
+.contentLight {
+  color: #1a1a1a;
+  
+  .textWhite { color: #1a1a1a; }
+  .textWhite70 { color: rgba(26, 26, 26, 0.8); }
+  .textWhite50 { color: rgba(26, 26, 26, 0.6); }
+}
+
+// Label theming
+.labelDark {
+  background: rgba(0, 0, 0, 0.4);
+  color: rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.labelLight {
+  background: rgba(255, 255, 255, 0.8);
+  color: rgba(26, 26, 26, 0.9);
+  border-color: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(12px);
+}
+
+// Keyframes for gradients
+@keyframes cyberpunkGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes sunsetGradient {
+  0% { background-position: 0% 50%; }
+  25% { background-position: 100% 0%; }
+  50% { background-position: 100% 100%; }
+  75% { background-position: 0% 100%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes oceanGradient {
+  0% { background-position: 0% 50%; }
+  33% { background-position: 100% 50%; }
+  66% { background-position: 50% 100%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes forestGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes cosmicGradient {
+  0% { background-position: 0% 50%; }
+  25% { background-position: 100% 0%; }
+  50% { background-position: 100% 100%; }
+  75% { background-position: 0% 100%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes fireGradient {
+  0% { background-position: 0% 50%; }
+  33% { background-position: 100% 0%; }
+  66% { background-position: 100% 100%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes darkGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes lightGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes particleFloat {
+  0%, 100% { 
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+    opacity: 0.3;
+  }
+  25% { 
+    transform: translateY(-10px) translateX(5px) rotate(90deg);
+    opacity: 0.7;
+  }
+  50% { 
+    transform: translateY(-5px) translateX(-5px) rotate(180deg);
+    opacity: 1;
+  }
+  75% { 
+    transform: translateY(-15px) translateX(10px) rotate(270deg);
+    opacity: 0.6;
+  }
+}
+
+// Original keyframes
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg); 
+  }
+  50% { 
+    transform: translateY(-8px) rotate(5deg); 
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { 
+    opacity: 0.3; 
+  }
+  50% { 
+    opacity: 0.6; 
+  }
+}
+
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+.animateFadeIn {
+  animation: fadeIn 0.6s ease-out;
+}
+
+// Gradient Keyframes
+@keyframes cyberpunkGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes sunsetGradient {
+  0% { background-position: 0% 50%; }
+  25% { background-position: 100% 50%; }
+  50% { background-position: 50% 100%; }
+  75% { background-position: 0% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes oceanGradient {
+  0% { background-position: 0% 50%; }
+  33% { background-position: 100% 50%; }
+  66% { background-position: 50% 0%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes forestGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes cosmicGradient {
+  0% { background-position: 0% 50%; }
+  20% { background-position: 100% 50%; }
+  40% { background-position: 50% 100%; }
+  60% { background-position: 0% 50%; }
+  80% { background-position: 100% 0%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes fireGradient {
+  0% { background-position: 0% 50%; }
+  25% { background-position: 100% 0%; }
+  50% { background-position: 0% 100%; }
+  75% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes darkGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes lightGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+// Particle System
+.particleContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  animation: particleFloat var(--duration) ease-in-out infinite;
+  animation-delay: var(--delay);
+  top: var(--y);
+  left: var(--x);
+}
+
+.particleDark, .particleLight {
+  // Base particle styles
+}
+
+.particle-tech {
+  background: linear-gradient(45deg, #00f2fe, #4facfe);
+  box-shadow: 0 0 8px rgba(0, 242, 254, 0.5);
+}
+
+.particle-hearts {
+  background: linear-gradient(45deg, #f093fb, #f5576c);
+  box-shadow: 0 0 8px rgba(240, 147, 251, 0.5);
+}
+
+.particle-bubbles {
+  background: linear-gradient(45deg, #4facfe, #00f2fe);
+  box-shadow: 0 0 6px rgba(79, 172, 254, 0.4);
+}
+
+.particle-leaves {
+  background: linear-gradient(45deg, #43e97b, #38f9d7);
+  box-shadow: 0 0 6px rgba(67, 233, 123, 0.4);
+}
+
+.particle-stars {
+  background: linear-gradient(45deg, #d299c2, #fef9d7);
+  box-shadow: 0 0 8px rgba(210, 153, 194, 0.6);
+}
+
+.particle-sparks {
+  background: linear-gradient(45deg, #ff9a9e, #fecfef);
+  box-shadow: 0 0 10px rgba(255, 154, 158, 0.7);
+}
+
+.particle-code {
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  box-shadow: 0 0 4px rgba(102, 126, 234, 0.3);
+}
+
+.particle-docs {
+  background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+  box-shadow: 0 0 4px rgba(248, 249, 250, 0.6);
+}
+
+@keyframes particleFloat {
+  0%, 100% { 
+    transform: translateY(0px) translateX(0px) scale(1);
+    opacity: 0.3;
+  }
+  50% { 
+    transform: translateY(-20px) translateX(10px) scale(1.2);
+    opacity: 0.8;
+  }
+}
+
+// UI Element Style Variants
+
+// ProfileCard variants
+.profileCard-glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.profileCard-solid {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #1a1a1a;
+  
+  h3, p { color: inherit; }
+}
+
+.profileCard-outline {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: none;
+}
+
+.profileCard-minimal {
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+  backdrop-filter: none;
+}
+
+// ProductCard variants
+.productCard-glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.productCard-solid {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #1a1a1a;
+  backdrop-filter: none;
+}
+
+.productCard-outline {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: none;
+}
+
+.productCard-minimal {
+  background: rgba(0, 0, 0, 0.03);
+  border: none;
+  backdrop-filter: none;
+}
+
+// DashboardWidget variants
+.dashboardWidget-glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dashboardWidget-solid {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #1a1a1a;
+  backdrop-filter: none;
+}
+
+.dashboardWidget-outline {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: none;
+}
+
+.dashboardWidget-minimal {
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: none;
+}
+
+// SocialPost variants
+.socialPost-glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.socialPost-solid {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #1a1a1a;
+  border-radius: 12px;
+  padding: 16px;
+  backdrop-filter: none;
+}
+
+.socialPost-outline {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  padding: 16px;
+  backdrop-filter: none;
+}
+
+.socialPost-minimal {
+  background: rgba(0, 0, 0, 0.02);
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  backdrop-filter: none;
+}
+
+// DataTable variants
+.dataTable-glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dataTable-solid {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #1a1a1a;
+  backdrop-filter: none;
+}
+
+.dataTable-outline {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: none;
+}
+
+.dataTable-minimal {
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: none;
+}
+
+// ProgressChart variants
+.progressChart-glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.progressChart-solid {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #1a1a1a;
+  backdrop-filter: none;
+}
+
+.progressChart-outline {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: none;
+}
+
+.progressChart-minimal {
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: none;
+}
+
+// Avatar variants
+.avatar-glass {
+  background: linear-gradient(135deg, #60a5fa, #a855f7);
+  backdrop-filter: blur(4px);
+}
+
+.avatar-solid {
+  background: linear-gradient(135deg, #60a5fa, #a855f7);
+  border: 2px solid rgba(255, 255, 255, 0.9);
+}
+
+.avatar-outline {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.avatar-minimal {
+  background: linear-gradient(135deg, rgba(96, 165, 250, 0.3), rgba(168, 85, 247, 0.3));
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+// Enhanced hover effects for all variants
+.profileCard-glass:hover,
+.productCard-glass:hover,
+.dashboardWidget-glass:hover,
+.socialPost-glass:hover,
+.dataTable-glass:hover,
+.progressChart-glass:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.profileCard-solid:hover,
+.productCard-solid:hover,
+.dashboardWidget-solid:hover,
+.socialPost-solid:hover,
+.dataTable-solid:hover,
+.progressChart-solid:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.profileCard-outline:hover,
+.productCard-outline:hover,
+.dashboardWidget-outline:hover,
+.socialPost-outline:hover,
+.dataTable-outline:hover,
+.progressChart-outline:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.profileCard-minimal:hover,
+.productCard-minimal:hover,
+.dashboardWidget-minimal:hover,
+.socialPost-minimal:hover,
+.dataTable-minimal:hover,
+.progressChart-minimal:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+// Force dark text colors for solid variant elements
+.profileCard-solid,
+.productCard-solid,
+.dashboardWidget-solid,
+.socialPost-solid,
+.dataTable-solid,
+.progressChart-solid,
+.codeBlock-solid {
+  h1, h2, h3, h4, h5, h6 {
+    color: #1a1a1a !important;
+  }
+  
+  p, span, div, td, th {
+    color: #374151 !important;
+  }
+  
+  .textWhite, 
+  .textWhite70, 
+  .textWhite50 {
+    color: #1a1a1a !important;
+  }
+  
+  .widgetTitle {
+    color: #1a1a1a !important;
+  }
+  
+  .widgetValue {
+    color: #0f172a !important;
+  }
+  
+  .widgetTrend {
+    color: #374151 !important;
+  }
+  
+  .tableHeader h3 {
+    color: #1a1a1a !important;
+  }
+  
+  .value {
+    color: #059669 !important;
+  }
+  
+  .change {
+    color: #dc2626 !important;
+  }
+  
+  .chartTitle {
+    color: #1a1a1a !important;
+  }
+  
+  .progressHeader span {
+    color: #374151 !important;
+  }
+}
+
+// Product name specific styling for solid variant
+.productCard-solid .productName {
+  color: #1a1a1a !important;
+  text-shadow: none !important;
+}
+
+// Social post content styling for solid variant
+.socialPost-solid {
+  .textSm {
+    color: #374151 !important;
+  }
+  
+  .fontSemibold {
+    color: #1a1a1a !important;
+  }
+  
+  .textXs {
+    color: #6b7280 !important;
+  }
+}
+
+// Avatar styling for solid variant
+.avatar-solid {
+  color: white !important;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8) !important;
+  border: 2px solid rgba(59, 130, 246, 0.3) !important;
+}

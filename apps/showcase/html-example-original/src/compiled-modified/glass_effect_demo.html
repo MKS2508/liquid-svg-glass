@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquid Glass Effect Demo</title>
+    <link rel="stylesheet" href="glass_effect_demo.css">
+</head>
+<body>
+    <div class="effect">
+        <div class="nav-wrap">
+            <span class="glass-content">✨</span>
+        </div>
+        <svg class="filter" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <filter id="filter" color-interpolation-filters="sRGB">
+                    <feImage x="0" y="0" width="100%" height="100%" result="map"></feImage>
+                    <feDisplacementMap
+                        in="SourceGraphic"
+                        in2="map"
+                        id="redchannel"
+                        xChannelSelector="R"
+                        yChannelSelector="G"
+                        result="dispRed"
+                    />
+                    <feColorMatrix
+                        in="dispRed"
+                        type="matrix"
+                        values="1 0 0 0 0
+                                0 0 0 0 0
+                                0 0 0 0 0
+                                0 0 0 1 0"
+                        result="red"
+                    />
+                    <feDisplacementMap
+                        in="SourceGraphic"
+                        in2="map"
+                        id="greenchannel"
+                        xChannelSelector="R"
+                        yChannelSelector="G"
+                        result="dispGreen"
+                    />
+                    <feColorMatrix
+                        in="dispGreen"
+                        type="matrix"
+                        values="0 0 0 0 0
+                                0 1 0 0 0
+                                0 0 0 0 0
+                                0 0 0 1 0"
+                        result="green"
+                    />
+                    <feDisplacementMap
+                        in="SourceGraphic"
+                        in2="map"
+                        id="bluechannel"
+                        xChannelSelector="R"
+                        yChannelSelector="G"
+                        result="dispBlue"
+                    />
+                    <feColorMatrix
+                        in="dispBlue"
+                        type="matrix"
+                        values="0 0 0 0 0
+                                0 0 0 0 0
+                                0 0 1 0 0
+                                0 0 0 1 0"
+                        result="blue"
+                    />
+                    <feBlend in="red" in2="green" mode="screen" result="rg" />
+                    <feBlend in="rg" in2="blue" mode="screen" result="output" />
+                    <feGaussianBlur in="output" stdDeviation="0.7" />
+                </filter>
+            </defs>
+        </svg>
+    </div>
+
+    <div class="content-wrapper">
+        <section class="section-one">
+            <h1>Explore the Liquid Glass Effect</h1>
+            <p>Drag the glass element around to see how it distorts the background.</p>
+            <div class="shape-container">
+                <svg class="svg-shape" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="40" fill="url(#gradientCircle)" />
+                    <defs>
+                        <linearGradient id="gradientCircle" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#FFD700" />
+                            <stop offset="100%" stop-color="#FFA500" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <svg class="svg-shape" viewBox="0 0 100 100">
+                    <rect x="10" y="10" width="80" height="80" fill="url(#gradientRect)" />
+                    <defs>
+                        <linearGradient id="gradientRect" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#4CAF50" />
+                            <stop offset="100%" stop-color="#8BC34A" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+        </section>
+
+        <section class="section-two">
+            <h2>Dynamic Backgrounds</h2>
+            <p>Observe the effect over various gradient patterns and textures.</p>
+            <div class="text-overlay">Layered Text</div>
+        </section>
+
+        <section class="section-three">
+            <h3>Interactive Elements</h3>
+            <p>Even simple shapes and text can be transformed.</p>
+            <div class="pseudo-element-demo"></div>
+        </section>
+    </div>
+
+    <button id="backgroundToggle" style="position: fixed; bottom: 20px; left: 20px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; z-index: 1000;">Change Background</button>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Draggable.min.js"></script>
+    <script type="module" src="glass_effect_demo.js"></script>
+</body>
+</html>

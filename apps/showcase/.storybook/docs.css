@@ -1,0 +1,466 @@
+/**
+ * Custom CSS for Storybook Docs
+ * Ensures consistent theming across all documentation pages
+ */
+
+/* === DOCS CONTAINER STYLING === */
+/* Root docs container */
+#storybook-docs,
+.docs-story,
+.sbdocs {
+  background-color: #251B30 !important;
+  color: #f8f9fa !important;
+}
+
+/* Main docs wrapper */
+.sbdocs-wrapper,
+.sb-show-main.sb-main-padded {
+  background-color: #251B30 !important;
+  color: #f8f9fa !important;
+}
+
+/* Content area */
+.sbdocs-content {
+  background-color: #251B30 !important;
+  color: #f8f9fa !important;
+  max-width: none !important;
+  padding: 2rem !important;
+}
+
+/* Any remaining white containers */
+.css-1t1ph26,
+[class*="css-"] {
+  background-color: #251B30 !important;
+}
+
+/* Docs page wrapper */
+.docs-page {
+  background-color: #251B30 !important;
+}
+
+/* Force override for stubborn elements */
+* {
+  color: inherit !important;
+}
+
+/* Iframe containers in docs */
+iframe {
+  border-radius: 8px !important;
+  border: 1px solid rgba(179, 146, 240, 0.2) !important;
+}
+
+/* === TYPOGRAPHY === */
+.sbdocs h1,
+.sbdocs h2,
+.sbdocs h3,
+.sbdocs h4,
+.sbdocs h5,
+.sbdocs h6 {
+  color: #F87683 !important;
+  font-weight: 600 !important;
+}
+
+.sbdocs p,
+.sbdocs li,
+.sbdocs span {
+  color: #f8f9fa !important;
+  line-height: 1.6 !important;
+}
+
+/* === CODE BLOCKS === */
+/* All pre elements in docs - MOST AGGRESSIVE RULES */
+.sbdocs pre,
+pre,
+.docblock-source pre,
+.docs-story pre,
+div pre,
+.sb-show-main pre,
+.sb-show-preparing pre,
+iframe pre {
+  background-color: rgba(179, 146, 240, 0.1) !important;
+  border: 1px solid rgba(179, 146, 240, 0.2) !important;
+  border-radius: 6px !important;
+  padding: 1rem !important;
+  color: #f8f9fa !important;
+  font-family: "JetBrains Mono", "Fira Code", monospace !important;
+  overflow-x: auto !important;
+  font-size: 0.9em !important;
+  line-height: 1.5 !important;
+}
+
+/* All code elements in docs - MOST AGGRESSIVE RULES */
+.sbdocs code,
+code,
+.docblock-source code,
+.docs-story code,
+div code,
+.sb-show-main code,
+.sb-show-preparing code,
+iframe code {
+  background-color: rgba(179, 146, 240, 0.15) !important;
+  color: #B392F0 !important;
+  padding: 0.25rem 0.5rem !important;
+  border-radius: 4px !important;
+  font-family: "JetBrains Mono", "Fira Code", monospace !important;
+  border: 1px solid rgba(179, 146, 240, 0.2) !important;
+  font-size: 0.9em !important;
+}
+
+/* Code inside pre blocks */
+.sbdocs pre code,
+pre code,
+.docblock-source pre code,
+.docs-story pre code,
+div pre code,
+.sb-show-main pre code,
+.sb-show-preparing pre code,
+iframe pre code {
+  background-color: transparent !important;
+  padding: 0 !important;
+  color: #f8f9fa !important;
+  border: none !important;
+}
+
+/* Storybook's specific code blocks */
+.docblock-source {
+  background-color: rgba(179, 146, 240, 0.05) !important;
+  border: 1px solid rgba(179, 146, 240, 0.2) !important;
+  border-radius: 6px !important;
+}
+
+/* Override any default prism themes */
+.language-javascript,
+.language-jsx,
+.language-typescript,
+.language-tsx {
+  background-color: rgba(179, 146, 240, 0.1) !important;
+  color: #f8f9fa !important;
+}
+
+/* Code syntax highlighting override */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: rgba(248, 249, 250, 0.6) !important;
+}
+
+.token.string,
+.token.attr-value {
+  color: #F87683 !important;
+}
+
+.token.keyword,
+.token.control,
+.token.directive,
+.token.unit {
+  color: #B392F0 !important;
+}
+
+.token.function,
+.token.class-name {
+  color: #f8f9fa !important;
+}
+
+.token.number,
+.token.constant {
+  color: #F87683 !important;
+}
+
+.token.boolean {
+  color: #B392F0 !important;
+}
+
+.token.property,
+.token.tag,
+.token.symbol,
+.token.deleted {
+  color: #F87683 !important;
+}
+
+.token.operator,
+.token.entity,
+.token.url {
+  color: #B392F0 !important;
+}
+
+/* Additional overrides for stubborn code blocks */
+[class*="language-"] {
+  background: rgba(179, 146, 240, 0.1) !important;
+  color: #f8f9fa !important;
+}
+
+code[class*="language-"],
+pre[class*="language-"] {
+  background: rgba(179, 146, 240, 0.1) !important;
+  color: #f8f9fa !important;
+}
+
+/* === LINKS === */
+.sbdocs a {
+  color: #B392F0 !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid rgba(179, 146, 240, 0.3) !important;
+  transition: all 0.2s ease !important;
+}
+
+.sbdocs a:hover {
+  color: #F87683 !important;
+  border-bottom-color: #F87683 !important;
+}
+
+/* === PROFESSIONAL TABLES === */
+/* ArgsTable Styling */
+.docblock-argstable,
+.sbdocs table {
+  border-collapse: separate !important;
+  border-spacing: 0 !important;
+  background-color: rgba(179, 146, 240, 0.02) !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  margin: 1.5rem 0 !important;
+  width: 100% !important;
+  border: 1px solid rgba(179, 146, 240, 0.2) !important;
+}
+
+/* Table Headers */
+.docblock-argstable thead th,
+.docblock-argstable-head,
+.sbdocs th {
+  background: linear-gradient(135deg, rgba(179, 146, 240, 0.1), rgba(248, 118, 131, 0.05)) !important;
+  color: #F87683 !important;
+  font-weight: 600 !important;
+  padding: 1rem 0.75rem !important;
+  border-bottom: 2px solid rgba(179, 146, 240, 0.3) !important;
+  font-size: 0.875rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 10 !important;
+}
+
+/* Table Data Cells */
+.docblock-argstable tbody td,
+.docblock-argstable-body td,
+.sbdocs td {
+  color: #f8f9fa !important;
+  padding: 0.875rem 0.75rem !important;
+  border-bottom: 1px solid rgba(179, 146, 240, 0.1) !important;
+  vertical-align: top !important;
+  line-height: 1.5 !important;
+}
+
+/* Alternating Row Colors */
+.docblock-argstable tbody tr:nth-child(even),
+.sbdocs tr:nth-child(even) {
+  background-color: rgba(179, 146, 240, 0.02) !important;
+}
+
+.docblock-argstable tbody tr:nth-child(odd),
+.sbdocs tr:nth-child(odd) {
+  background-color: transparent !important;
+}
+
+/* Hover Effects */
+.docblock-argstable tbody tr:hover,
+.sbdocs tr:hover {
+  background-color: rgba(179, 146, 240, 0.05) !important;
+  transition: background-color 0.2s ease !important;
+}
+
+/* Remove border from last row */
+.docblock-argstable tbody tr:last-child td,
+.sbdocs tr:last-child td {
+  border-bottom: none !important;
+}
+
+/* Column Specific Styling */
+/* Property Name Column */
+.docblock-argstable td:first-child,
+.sbdocs td:first-child {
+  font-family: "JetBrains Mono", "Fira Code", monospace !important;
+  font-weight: 500 !important;
+  color: #B392F0 !important;
+  background-color: rgba(179, 146, 240, 0.03) !important;
+}
+
+/* Description Column */
+.docblock-argstable td:nth-child(2),
+.sbdocs td:nth-child(2) {
+  font-size: 0.9rem !important;
+  line-height: 1.6 !important;
+  max-width: 300px !important;
+}
+
+/* Type Column */
+.docblock-argstable td:nth-child(3),
+.sbdocs td:nth-child(3) {
+  font-family: "JetBrains Mono", "Fira Code", monospace !important;
+  font-size: 0.85rem !important;
+  color: #F87683 !important;
+  background-color: rgba(248, 118, 131, 0.05) !important;
+}
+
+/* Default Value Column */
+.docblock-argstable td:nth-child(4),
+.sbdocs td:nth-child(4) {
+  font-family: "JetBrains Mono", "Fira Code", monospace !important;
+  font-size: 0.85rem !important;
+  color: rgba(248, 249, 250, 0.8) !important;
+}
+
+/* Control Column */
+.docblock-argstable td:last-child,
+.sbdocs td:last-child {
+  text-align: center !important;
+  width: 120px !important;
+}
+
+/* Category Headers */
+.docblock-argstable .docblock-argstable-category {
+  background: linear-gradient(135deg, rgba(179, 146, 240, 0.15), rgba(248, 118, 131, 0.1)) !important;
+  color: #F87683 !important;
+  font-weight: 700 !important;
+  padding: 1rem 0.75rem !important;
+  font-size: 0.95rem !important;
+  border-bottom: 2px solid rgba(179, 146, 240, 0.4) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+}
+
+/* Code in table cells */
+.docblock-argstable code,
+.sbdocs table code {
+  background-color: rgba(179, 146, 240, 0.2) !important;
+  color: #B392F0 !important;
+  padding: 0.2rem 0.4rem !important;
+  border-radius: 3px !important;
+  font-size: 0.8rem !important;
+  border: 1px solid rgba(179, 146, 240, 0.3) !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .docblock-argstable,
+  .sbdocs table {
+    font-size: 0.85rem !important;
+    display: block !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+  }
+  
+  .docblock-argstable th,
+  .docblock-argstable td,
+  .sbdocs th,
+  .sbdocs td {
+    padding: 0.5rem !important;
+    min-width: 120px !important;
+  }
+}
+
+/* Loading States */
+.docblock-argstable-loading {
+  background: linear-gradient(90deg, rgba(179, 146, 240, 0.1) 25%, rgba(179, 146, 240, 0.2) 50%, rgba(179, 146, 240, 0.1) 75%) !important;
+  background-size: 200% 100% !important;
+  animation: loading 1.5s infinite !important;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* === BLOCKQUOTES === */
+.sbdocs blockquote {
+  background-color: rgba(179, 146, 240, 0.05) !important;
+  border-left: 4px solid #B392F0 !important;
+  padding: 1rem !important;
+  margin: 1rem 0 !important;
+  border-radius: 0 6px 6px 0 !important;
+}
+
+.sbdocs blockquote p {
+  margin: 0 !important;
+  font-style: italic !important;
+  color: rgba(248, 249, 250, 0.9) !important;
+}
+
+/* === DOC BLOCKS === */
+.docblock-source {
+  background-color: rgba(179, 146, 240, 0.05) !important;
+  border: 1px solid rgba(179, 146, 240, 0.2) !important;
+  border-radius: 6px !important;
+}
+
+.docblock-argstable {
+  background-color: transparent !important;
+}
+
+.docblock-argstable-head {
+  background-color: rgba(179, 146, 240, 0.05) !important;
+}
+
+/* === STORY BLOCKS === */
+.docs-story > div[class*="wrapper"] {
+  background-color: transparent !important;
+}
+
+/* Canvas container in docs */
+.docs-story .sb-show-main {
+  background-color: #ffffff !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(179, 146, 240, 0.2) !important;
+  margin: 1rem 0 !important;
+}
+
+/* === CONTROLS PANEL IN DOCS === */
+.docblock-argstable-body {
+  background-color: transparent !important;
+}
+
+.docblock-argstable-row {
+  border-bottom: 1px solid rgba(179, 146, 240, 0.1) !important;
+}
+
+/* === NAVIGATION === */
+.sbdocs .css-1t1ph26 {
+  background-color: #1a1222 !important;
+}
+
+/* === SCROLLBARS === */
+.sbdocs *::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.sbdocs *::-webkit-scrollbar-track {
+  background: rgba(179, 146, 240, 0.05);
+  border-radius: 4px;
+}
+
+.sbdocs *::-webkit-scrollbar-thumb {
+  background: rgba(179, 146, 240, 0.3);
+  border-radius: 4px;
+}
+
+.sbdocs *::-webkit-scrollbar-thumb:hover {
+  background: rgba(179, 146, 240, 0.5);
+}
+
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 768px) {
+  .sbdocs-content {
+    padding: 1rem !important;
+  }
+  
+  .sbdocs table {
+    font-size: 0.9rem !important;
+  }
+  
+  .sbdocs th,
+  .sbdocs td {
+    padding: 0.5rem !important;
+  }
+}

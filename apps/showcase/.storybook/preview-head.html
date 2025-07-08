@@ -1,0 +1,62 @@
+<!-- Custom CSS for Storybook Docs -->
+<link rel="stylesheet" href="./docs.css">
+
+<!-- Fonts for better typography -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Additional meta tags for better docs experience -->
+<meta name="theme-color" content="#251B30">
+<meta name="description" content="React Liquid Glass - Professional Glassmorphism Component Library">
+
+<style>
+  /* Ensure fonts are loaded immediately */
+  body {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", sans-serif !important;
+  }
+  
+  /* Override any default white backgrounds in docs */
+  .sb-show-main.sb-main-padded {
+    background-color: #251B30 !important;
+  }
+  
+  /* Fix for any remaining white areas */
+  #storybook-docs {
+    background-color: #251B30 !important;
+  }
+  
+  /* NUCLEAR OPTION FOR CODE BLOCKS */
+  * pre {
+    background-color: rgba(179, 146, 240, 0.1) !important;
+    border: 1px solid rgba(179, 146, 240, 0.2) !important;
+    border-radius: 6px !important;
+    padding: 1rem !important;
+    color: #f8f9fa !important;
+    font-family: "JetBrains Mono", "Fira Code", monospace !important;
+  }
+  
+  * code {
+    background-color: rgba(179, 146, 240, 0.15) !important;
+    color: #B392F0 !important;
+    padding: 0.25rem 0.5rem !important;
+    border-radius: 4px !important;
+    font-family: "JetBrains Mono", "Fira Code", monospace !important;
+    border: 1px solid rgba(179, 146, 240, 0.2) !important;
+  }
+  
+  * pre code {
+    background-color: transparent !important;
+    padding: 0 !important;
+    border: none !important;
+    color: #f8f9fa !important;
+  }
+  
+  /* Override prism themes completely */
+  .token.string { color: #F87683 !important; }
+  .token.keyword { color: #B392F0 !important; }
+  .token.function { color: #f8f9fa !important; }
+  .token.number { color: #F87683 !important; }
+  .token.boolean { color: #B392F0 !important; }
+  .token.comment { color: rgba(248, 249, 250, 0.6) !important; }
+</style>

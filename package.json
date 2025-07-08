@@ -1,0 +1,31 @@
+{
+  "name": "liquid-svg-glass-monorepo",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "bun run build:core && bun run build:react && bun run build:showcase && bun run build:storybook",
+    "build:core": "cd packages/core && bun run build",
+    "build:react": "cd packages/react && bun run build",
+    "build:showcase": "cd apps/showcase && bun run build",
+    "build:storybook": "cd apps/showcase && bun run build-storybook",
+    "dev": "cd apps/showcase && bun run dev",
+    "dev:core": "cd packages/core && bun run dev",
+    "dev:react": "cd packages/react && bun run dev",
+    "dev:storybook": "cd apps/showcase && bun run storybook",
+    "dev:all": "concurrently \"bun run dev\" \"bun run dev:storybook\"",
+    "storybook": "bun run dev:storybook",
+    "lint": "cd apps/showcase && bun run lint",
+    "clean": "rm -rf packages/*/dist apps/*/dist apps/*/storybook-static"
+  },
+  "devDependencies": {
+    "bun": "^1.0.0",
+    "concurrently": "^9.2.0",
+    "typescript": "~5.8.3"
+  },
+  "packageManager": "bun@1.0.0"
+}

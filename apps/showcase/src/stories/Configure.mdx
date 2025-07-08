@@ -1,0 +1,467 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Comenzar/Guía de Inicio Rápido" />
+
+<div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+  <img src="./logo.png" alt="React Liquid Glass" style={{ maxWidth: '400px', height: 'auto' }} />
+</div>
+
+# React Liquid Glass <span class="badge badge-new">v1.0</span>
+
+<div class="info-box">
+  <strong>🎯 Efectos Avanzados de Cristal Líquido</strong><br/>
+  Crea interfaces espectaculares con glassmorphism y distorsión de píxeles en tiempo real usando React, TypeScript, filtros SVG y GSAP.
+</div>
+
+## 📑 Índice de Contenidos
+
+<div class="toc">
+  <ul>
+    <li><a href="#🚀-inicio-rápido-en-3-pasos">🚀 Inicio Rápido en 3 Pasos</a></li>
+    <li><a href="#✨-características-principales">✨ Características Principales</a></li>
+    <li><a href="#🎨-casos-de-uso-comunes">🎨 Casos de Uso Comunes</a></li>
+    <li><a href="#📋-ejemplos-básicos">📋 Ejemplos Básicos</a></li>
+    <li><a href="#⚠️-compatibilidad-del-navegador">⚠️ Compatibilidad del Navegador</a></li>
+    <li><a href="#🎯-presets-disponibles">🎯 Presets Disponibles</a></li>
+    <li><a href="#🔧-modo-debug">🔧 Modo Debug</a></li>
+    <li><a href="#📋-api-reference-rápida">📋 API Reference Rápida</a></li>
+    <li><a href="#🔧-troubleshooting-común">🔧 Troubleshooting Común</a></li>
+    <li><a href="#💡-mejores-prácticas">💡 Mejores Prácticas</a></li>
+    <li><a href="#📚-próximos-pasos">📚 Próximos Pasos</a></li>
+  </ul>
+</div>
+
+## 🚀 Inicio Rápido en 3 Pasos
+
+<div class="pipeline-step">
+  <h4>📦 Paso 1: Instalar Dependencias</h4>
+  <p>Añade las dependencias necesarias a tu proyecto React.</p>
+</div>
+
+```bash
+# NPM
+npm install gsap react@^19.0.0
+
+# Yarn
+yarn add gsap react@^19.0.0
+
+# PNPM  
+pnpm add gsap react@^19.0.0
+```
+
+<div class="tip-box">
+  <strong>💡 Nota:</strong> GSAP es opcional y solo necesario si planeas usar funcionalidad de arrastre.
+</div>
+
+<div class="pipeline-step">
+  <h4>📥 Paso 2: Importar Componente</h4>
+  <p>Importa el componente GlassEffect en tu aplicación React.</p>
+</div>
+
+```tsx
+import { GlassEffect } from '@liquid-svg-glass/react';
+```
+
+<div class="pipeline-step">
+  <h4>✨ Paso 3: Usar el Efecto</h4>
+  <p>Añade el efecto de cristal a cualquier contenido con un simple preset.</p>
+</div>
+
+```tsx
+<GlassEffect preset="dock">
+  <nav>Tu contenido aquí</nav>
+</GlassEffect>
+```
+
+<div class="success-box">
+  <strong>🎉 ¡Listo!</strong> Ya tienes un efecto de cristal líquido funcionando. El preset "dock" es perfecto para barras de navegación.
+</div>
+
+## ✨ Características Principales
+
+<div class="features-grid">
+  <div class="feature-card">
+    <h4>🔬 Simulación Física</h4>
+    <p>Aberración cromática real y distorsión progresiva basada en física óptica auténtica.</p>
+  </div>
+  
+  <div class="feature-card">
+    <h4>⚙️ Altamente Configurable</h4>
+    <p>4 presets integrados + control granular sobre más de 15 parámetros visuales únicos.</p>
+  </div>
+  
+  <div class="feature-card">
+    <h4>🎮 Totalmente Interactivo</h4>
+    <p>Soporte integrado para arrastrar con GSAP y callbacks de posición en tiempo real.</p>
+  </div>
+  
+  <div class="feature-card">
+    <h4>🚀 Optimizado en Rendimiento</h4>
+    <p>Memoización inteligente y arquitectura de funciones puras para máxima eficiencia.</p>
+  </div>
+  
+  <div class="feature-card">
+    <h4>📱 Completamente Responsivo</h4>
+    <p>Modo AutoSize se adapta automáticamente a las dimensiones del contenido.</p>
+  </div>
+  
+  <div class="feature-card">
+    <h4>🔧 Developer Friendly</h4>
+    <p>Soporte TypeScript completo, modo debug integrado y documentación exhaustiva.</p>
+  </div>
+</div>
+
+## 🎨 Casos de Uso Comunes
+
+Perfecto para:
+
+- **Barras de Navegación** - Crea navegación flotante estilo dock
+- **Overlays de Modal** - Añade efectos sofisticados de fondo
+- **Componentes de Tarjeta** - Mejora tarjetas UI con efectos de cristal
+- **Elementos Flotantes** - Widgets y controles arrastrables
+- **Secciones Hero** - Elementos llamativos para páginas de inicio
+- **Widgets de Dashboard** - Interfaces modernas con glassmorphism
+
+## 📋 Ejemplos Básicos
+
+### Efecto de Cristal Estático (Barra de Navegación)
+
+```tsx
+<GlassEffect draggable={false} preset="dock">
+  <nav className="main-nav">
+    <a href="/">Inicio</a>
+    <a href="/acerca">Acerca</a>
+    <a href="/contacto">Contacto</a>
+  </nav>
+</GlassEffect>
+```
+
+### Elemento Arrastrable Interactivo
+
+```tsx
+<GlassEffect 
+  draggable={true}
+  preset="pill"
+  initialPosition={{ x: 100, y: 50 }}
+  onMove={(pos) => console.log('Movido a:', pos)}
+>
+  <div className="widget">
+    <h3>Widget Arrastrable</h3>
+    <p>¡Arrástrame por la pantalla!</p>
+  </div>
+</GlassEffect>
+```
+
+### Efecto de Cristal con Tamaño Automático
+
+```tsx
+<GlassEffect autoSize preset="dock">
+  <button className="glass-button">
+    Botón con efecto de cristal auto-ajustable
+  </button>
+</GlassEffect>
+```
+
+### Configuración Personalizada
+
+```tsx
+<GlassEffect
+  preset="free"
+  width={400}
+  height={200}
+  blur={15}
+  r={60} g={70} b={50}
+  blend="multiply"
+  debug={true}
+>
+  <div className="custom-content">
+    <h2>Efecto de Cristal Personalizado</h2>
+    <p>Parámetros totalmente personalizados</p>
+  </div>
+</GlassEffect>
+```
+
+## ⚠️ Compatibilidad del Navegador
+
+<div class="warning-box">
+  <strong>🚨 Requisito Crítico:</strong> Es esencial el soporte de la propiedad CSS <code>backdrop-filter</code> para que los efectos funcionen correctamente.
+</div>
+
+<table class="function-table">
+  <thead>
+    <tr>
+      <th>Navegador</th>
+      <th>Versión Mínima</th>
+      <th>Soporte</th>
+      <th>Notas</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="param-name">Chrome</span></td>
+      <td>76+</td>
+      <td>✅ Completo</td>
+      <td>Soporte nativo de backdrop-filter</td>
+    </tr>
+    <tr>
+      <td><span class="param-name">Firefox</span></td>
+      <td>70+</td>
+      <td>✅ Completo</td>
+      <td>Requiere habilitar backdrop-filter en about:config</td>
+    </tr>
+    <tr>
+      <td><span class="param-name">Safari</span></td>
+      <td>14+</td>
+      <td>✅ Completo</td>
+      <td>Soporte en macOS e iOS</td>
+    </tr>
+    <tr>
+      <td><span class="param-name">Edge</span></td>
+      <td>79+</td>
+      <td>✅ Completo</td>
+      <td>Basado en Chromium</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="tip-box">
+  <strong>💡 Detección Automática:</strong> El componente incluye detección automática de soporte y fallbacks elegantes para navegadores incompatibles.
+</div>
+
+## 🎯 Presets Disponibles
+
+<table class="function-table">
+  <thead>
+    <tr>
+      <th>Preset</th>
+      <th>Dimensiones</th>
+      <th>Ideal Para</th>
+      <th>Características</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="param-name">dock</span></td>
+      <td>336×96</td>
+      <td>Barras de navegación y docks</td>
+      <td>Efecto sutil, horizontal, alta legibilidad</td>
+    </tr>
+    <tr>
+      <td><span class="param-name">pill</span></td>
+      <td>200×60</td>
+      <td>Botones y pills</td>
+      <td>Compacto, bordes redondeados, interactivo</td>
+    </tr>
+    <tr>
+      <td><span class="param-name">bubble</span></td>
+      <td>150×150</td>
+      <td>Elementos flotantes circulares</td>
+      <td>Formato cuadrado, efecto pronunciado</td>
+    </tr>
+    <tr>
+      <td><span class="param-name">free</span></td>
+      <td>300×150</td>
+      <td>Configuraciones personalizadas</td>
+      <td>Base neutra para customización total</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="tip-box">
+  <strong>💡 Consejo:</strong> Comienza siempre con un preset y luego personaliza según necesites. Los presets están optimizados para sus casos de uso específicos.
+</div>
+
+## 🔧 Modo Debug
+
+Habilita el modo debug durante el desarrollo:
+
+```tsx
+<GlassEffect debug={true} preset="dock">
+  Contenido en modo debug
+</GlassEffect>
+```
+
+El modo debug muestra:
+- Overlay de imagen de desplazamiento
+- Logging de configuración en consola
+- Detalles del pipeline de filtros SVG
+- Métricas de rendimiento
+
+## 📋 API Reference Rápida
+
+<div class="info-box">
+  <strong>📚 Referencia de Props Principales</strong><br/>
+  Las propiedades más comunes para personalizar el efecto de cristal líquido.
+</div>
+
+<table class="function-table">
+  <thead>
+    <tr>
+      <th>Prop</th>
+      <th>Tipo</th>
+      <th>Default</th>
+      <th>Descripción</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="param-name">preset</span></td>
+      <td><span class="param-type">'dock' | 'pill' | 'bubble' | 'free'</span></td>
+      <td>'dock'</td>
+      <td>Configuración predefinida base</td>
+    </tr>
+    <tr>
+      <td><span class="param-name">draggable</span></td>
+      <td><span class="param-type">boolean</span></td>
+      <td>false</td>
+      <td>Habilita funcionalidad de arrastre</td>
+    </tr>
+    <tr>
+      <td><span class="param-name">autoSize</span></td>
+      <td><span class="param-type">boolean</span></td>
+      <td>false</td>
+      <td>Auto-ajusta al contenido</td>
+    </tr>
+    <tr>
+      <td><span class="param-name">width</span></td>
+      <td><span class="param-type">number</span></td>
+      <td>preset</td>
+      <td>Ancho en píxeles</td>
+    </tr>
+    <tr>
+      <td><span class="param-name">height</span></td>
+      <td><span class="param-type">number</span></td>
+      <td>preset</td>
+      <td>Alto en píxeles</td>
+    </tr>
+    <tr>
+      <td><span class="param-name">blur</span></td>
+      <td><span class="param-type">number</span></td>
+      <td>preset</td>
+      <td>Intensidad del desenfoque</td>
+    </tr>
+    <tr>
+      <td><span class="param-name">r, g, b</span></td>
+      <td><span class="param-type">number</span></td>
+      <td>preset</td>
+      <td>Aberración cromática por canal</td>
+    </tr>
+    <tr>
+      <td><span class="param-name">debug</span></td>
+      <td><span class="param-type">boolean</span></td>
+      <td>false</td>
+      <td>Activa modo debug</td>
+    </tr>
+  </tbody>
+</table>
+
+<details class="collapsible">
+  <summary><strong>🔧 Props Avanzadas</strong></summary>
+  <div class="collapsible-content">
+    <p>Para control total del efecto, también están disponibles:</p>
+    <ul>
+      <li><strong>frost</strong> - Nivel de opacidad del cristal</li>
+      <li><strong>displace</strong> - Intensidad de desplazamiento</li>
+      <li><strong>scale</strong> - Factor de escala base</li>
+      <li><strong>alpha</strong> - Transparencia general</li>
+      <li><strong>lightness</strong> - Brillo del efecto</li>
+      <li><strong>blend</strong> - Modo de mezcla CSS</li>
+      <li><strong>x, y</strong> - Canales de desplazamiento ('R', 'G', 'B')</li>
+      <li><strong>initialPosition</strong> - Posición inicial para elementos arrastrables</li>
+      <li><strong>onMove</strong> - Callback de movimiento</li>
+    </ul>
+  </div>
+</details>
+
+## 🔧 Troubleshooting Común
+
+<details class="collapsible">
+  <summary><strong>❓ Problemas Frecuentes y Soluciones</strong></summary>
+  <div class="collapsible-content">
+
+### El efecto no se ve o es muy sutil
+
+<div class="warning-box">
+  <strong>Causa:</strong> Falta soporte de <code>backdrop-filter</code> o no hay contenido detrás del elemento.
+</div>
+
+**Soluciones:**
+<ul>
+<li>Verifica que tu navegador soporte <code>backdrop-filter</code></li>
+<li>Asegúrate de que hay contenido visible detrás del elemento</li>
+<li>Aumenta el valor de <code>blur</code> para un efecto más pronunciado</li>
+</ul>
+
+### Performance degradada en móviles
+
+<div class="tip-box">
+  <strong>Solución:</strong> Reduce la complejidad del filtro en dispositivos móviles.
+</div>
+
+```tsx
+<GlassEffect 
+  preset="dock"
+  blur={isMobile ? 5 : 11}
+  r={isMobile ? 25 : 50}
+  g={isMobile ? 30 : 55}
+  b={isMobile ? 20 : 45}
+>
+  Contenido optimizado para móvil
+</GlassEffect>
+```
+
+### El contenido no es arrastrable
+
+**Verifica:**
+<ul>
+<li>GSAP está instalado: <code>npm install gsap</code></li>
+<li>La prop <code>draggable={true}</code> está configurada</li>
+<li>No hay overlays CSS que bloqueen el input</li>
+</ul>
+
+  </div>
+</details>
+
+## 📚 Próximos Pasos
+
+<div class="features-grid">
+  <div class="feature-card">
+    <h4>📖 Documentación del Componente</h4>
+    <p>Referencia completa de API, props y ejemplos interactivos para dominar todos los aspectos del GlassEffect.</p>
+  </div>
+  
+  <div class="feature-card">
+    <h4>🔧 Motor SVG</h4>
+    <p>Análisis técnico profundo del sistema de filtros SVG y el pipeline de procesamiento interno.</p>
+  </div>
+  
+  <div class="feature-card">
+    <h4>🧪 Playground Interactivo</h4>
+    <p>Experimenta en tiempo real con todos los parámetros y descubre configuraciones únicas.</p>
+  </div>
+  
+  <div class="feature-card">
+    <h4>🐙 Código Fuente</h4>
+    <p>Explora la implementación completa, contribuye al proyecto y accede a documentación técnica detallada.</p>
+  </div>
+</div>
+
+## 💡 Mejores Prácticas
+
+<div class="tip-box">
+  <strong>🎯 Consejos para el Éxito:</strong> Sigue estas recomendaciones para obtener los mejores resultados.
+</div>
+
+- **🎚️ Comienza con presets** - Usa las configuraciones predefinidas antes de personalizar
+- **📏 Usa AutoSize** - Para contenido dinámico, habilita el modo autoSize
+- **🐛 Habilita debug** - Usa modo debug durante desarrollo para diagnosticar problemas
+- **⚡ Monitorea rendimiento** - Prueba el rendimiento especialmente en layouts complejos
+- **♿ Considera accesibilidad** - Asegura suficiente contraste para legibilidad
+- **📱 Optimiza para móvil** - Reduce la complejidad de filtros en dispositivos móviles
+
+---
+
+<div class="success-box">
+  <strong>🎉 ¡Listo para Crear Efectos de Cristal Increíbles!</strong><br/>
+  Ahora tienes todo lo que necesitas para integrar efectos de cristal líquido en tus aplicaciones React. Comienza con los ejemplos anteriores y explora la documentación del componente para opciones de personalización avanzadas.
+</div>
