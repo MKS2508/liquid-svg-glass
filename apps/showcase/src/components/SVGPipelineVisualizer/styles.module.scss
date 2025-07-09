@@ -1,0 +1,241 @@
+// SVG Pipeline Visualizer - Main Styles
+// Clean, modern styles for the main container and quick presets
+
+.visualizer {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(135deg, #251B30 0%, #1e1527 100%);
+  color: #f8f9fa;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  
+  // Ensure proper stacking context
+  isolation: isolate;
+  
+  // Performance optimizations
+  will-change: transform;
+  contain: layout style;
+}
+
+// Quick Presets (Desktop only)
+.quickPresets {
+  position: fixed;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  z-index: 90;
+  display: none;
+  flex-direction: column;
+  gap: 0.5rem;
+  
+  @media (min-width: 1280px) {
+    display: flex;
+  }
+}
+
+.quickPresetBtn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border-default, rgba(179, 146, 240, 0.2));
+  background: rgba(37, 27, 48, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--color-text-secondary, rgba(248, 249, 250, 0.8));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  
+  &:hover {
+    background: var(--color-primary, #B392F0);
+    color: white;
+    transform: scale(1.05);
+    border-color: var(--color-primary, #B392F0);
+    box-shadow: 0 4px 16px rgba(179, 146, 240, 0.4);
+  }
+  
+  &:active {
+    transform: scale(0.95);
+  }
+  
+  &:focus {
+    outline: 2px solid var(--color-primary, #B392F0);
+    outline-offset: 2px;
+  }
+  
+  &.active {
+    background: var(--color-primary, #B392F0);
+    color: white;
+    border-color: var(--color-primary, #B392F0);
+    box-shadow: 0 0 16px rgba(179, 146, 240, 0.4);
+  }
+}
+
+// Hidden SVG for filters
+.hiddenSvg {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+// Global CSS Custom Properties
+:root {
+  // Theme colors
+  --color-primary: #B392F0;
+  --color-secondary: #F87683;
+  --color-accent-green: #4ade80;
+  --color-accent-blue: #3b82f6;
+  --color-accent-purple: #8b5cf6;
+  --color-accent-red: #ef4444;
+  --color-accent-yellow: #f59e0b;
+  --color-accent-orange: #f97316;
+  
+  // Background colors
+  --color-bg-primary: #251B30;
+  --color-bg-secondary: #1e1527;
+  --color-bg-tertiary: #1a1222;
+  --color-bg-elevated: rgba(179, 146, 240, 0.1);
+  
+  // Surface colors
+  --color-surface-primary: rgba(179, 146, 240, 0.08);
+  --color-surface-secondary: rgba(179, 146, 240, 0.15);
+  --color-surface-tertiary: rgba(179, 146, 240, 0.03);
+  --color-surface-elevated: rgba(179, 146, 240, 0.12);
+  
+  // Border colors
+  --color-border-subtle: rgba(179, 146, 240, 0.1);
+  --color-border-default: rgba(179, 146, 240, 0.2);
+  --color-border-strong: rgba(179, 146, 240, 0.3);
+  
+  // Text colors
+  --color-text-primary: #f8f9fa;
+  --color-text-secondary: rgba(248, 249, 250, 0.8);
+  --color-text-tertiary: rgba(248, 249, 250, 0.65);
+  --color-text-muted: rgba(248, 249, 250, 0.4);
+  
+  // Status colors
+  --color-status-processing: var(--color-primary);
+  --color-status-completed: var(--color-accent-green);
+  --color-status-pending: var(--color-text-muted);
+  --color-status-warning: var(--color-accent-yellow);
+  --color-status-error: var(--color-accent-red);
+  
+  // Spacing system (8px grid) with responsive clamp
+  --space-1: clamp(0.1875rem, 0.125rem + 0.25vw, 0.25rem);   // 3-4px
+  --space-2: clamp(0.375rem, 0.25rem + 0.5vw, 0.5rem);       // 6-8px
+  --space-3: clamp(0.5625rem, 0.5rem + 0.25vw, 0.75rem);     // 9-12px
+  --space-4: clamp(0.75rem, 0.75rem + 0.25vw, 1rem);         // 12-16px
+  --space-5: clamp(1rem, 1rem + 0.25vw, 1.25rem);            // 16-20px
+  --space-6: clamp(1.25rem, 1.25rem + 0.25vw, 1.5rem);       // 20-24px
+  --space-8: clamp(1.5rem, 1.5rem + 0.5vw, 2rem);            // 24-32px
+  --space-10: clamp(2rem, 2rem + 0.5vw, 2.5rem);             // 32-40px
+  --space-12: clamp(2.5rem, 2.5rem + 0.5vw, 3rem);           // 40-48px
+  --space-16: clamp(3rem, 3rem + 1vw, 4rem);                 // 48-64px
+  
+  // Typography scale with clamp for responsive sizing
+  --text-xs: clamp(0.6875rem, 0.6rem + 0.375vw, 0.75rem);
+  --text-sm: clamp(0.8125rem, 0.75rem + 0.25vw, 0.875rem);
+  --text-base: clamp(0.9375rem, 0.875rem + 0.25vw, 1rem);
+  --text-lg: clamp(1.0625rem, 1rem + 0.25vw, 1.125rem);
+  --text-xl: clamp(1.1875rem, 1.125rem + 0.25vw, 1.25rem);
+  --text-2xl: clamp(1.375rem, 1.25rem + 0.5vw, 1.5rem);
+  --text-3xl: clamp(1.6875rem, 1.5rem + 0.75vw, 1.875rem);
+  --text-4xl: clamp(2rem, 1.875rem + 0.75vw, 2.25rem);
+  
+  // Border radius
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  
+  // Shadows
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  
+  // Transitions
+  --transition-fast: 150ms ease-out;
+  --transition-base: 250ms ease-out;
+  --transition-slow: 350ms ease-out;
+  
+  // Z-index scale
+  --z-dropdown: 1000;
+  --z-sticky: 1010;
+  --z-fixed: 1020;
+  --z-modal-backdrop: 1030;
+  --z-modal: 1040;
+  --z-popover: 1050;
+  --z-tooltip: 1060;
+  --z-toast: 1070;
+}
+
+// Accessibility improvements
+@media (prefers-reduced-motion: reduce) {
+  .quickPresetBtn {
+    transition: none;
+  }
+  
+  .quickPresetBtn:hover {
+    transform: none;
+  }
+  
+  .quickPresetBtn:active {
+    transform: none;
+  }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .quickPresetBtn {
+    border-width: 2px;
+  }
+}
+
+// Focus visible for keyboard navigation
+.quickPresetBtn:focus-visible {
+  outline: 2px solid var(--color-primary, #B392F0);
+  outline-offset: 2px;
+}
+
+// Performance optimizations
+.visualizer * {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.visualizer *:before,
+.visualizer *:after {
+  box-sizing: border-box;
+}
+
+// Global overflow management
+.visualizer {
+  overflow-x: hidden;
+  
+  & * {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  // Prevent horizontal scrolling
+  & code,
+  & pre {
+    overflow-x: auto;
+    max-width: 100%;
+  }
+}

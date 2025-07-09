@@ -1,15 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color-scheme: dark;
+  color: #f8f9fa;
+  background-color: #251B30;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -19,11 +21,11 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #B392F0;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #F87683;
 }
 
 body {
@@ -41,32 +43,46 @@ h1 {
 
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: 1px solid rgba(179, 146, 240, 0.2);
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: rgba(179, 146, 240, 0.08);
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: all 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #B392F0;
+  background-color: rgba(179, 146, 240, 0.12);
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 2px solid #B392F0;
+  outline-offset: 2px;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
+    color: #251B30;
     background-color: #ffffff;
   }
+  a {
+    color: #8b5fbf;
+  }
   a:hover {
-    color: #747bff;
+    color: #e85d70;
   }
   button {
-    background-color: #f9f9f9;
+    background-color: rgba(139, 95, 191, 0.08);
+    border-color: rgba(139, 95, 191, 0.25);
+  }
+  button:hover {
+    border-color: #8b5fbf;
+    background-color: rgba(139, 95, 191, 0.12);
+  }
+  button:focus,
+  button:focus-visible {
+    outline: 2px solid #8b5fbf;
   }
 }

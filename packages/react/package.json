@@ -6,7 +6,8 @@
   "types": "dist/index.d.ts",
   "files": ["dist"],
   "scripts": {
-    "build": "bun run tsc",
+    "build": "bun run tsc && bun run copy-styles",
+    "copy-styles": "cp src/components/GlassEffect/glass-styles.module.scss dist/components/GlassEffect/",
     "dev": "bun run tsc --watch"
   },
   "dependencies": {

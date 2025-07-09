@@ -1,0 +1,125 @@
+/* Trigger */
+.trigger {
+  display: inline-block;
+  position: relative;
+}
+
+/* Tooltip */
+.tooltip {
+  position: fixed;
+  z-index: 9999;
+  padding: 0.75rem 1rem;
+  background: rgba(0, 0, 0, 0.9);
+  border: 1px solid rgba(179, 146, 240, 0.2);
+  border-radius: 0.5rem;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: #f8f9fa;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.3),
+    0 1px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+  word-wrap: break-word;
+  transform-origin: center;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Arrow */
+.arrow {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.9);
+  border: 1px solid rgba(179, 146, 240, 0.2);
+  transform: rotate(45deg);
+}
+
+/* Position variants */
+.tooltip.top {
+  transform: translateX(-50%) translateY(-100%);
+}
+
+.tooltip.top .arrow {
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  border-top: none;
+  border-left: none;
+}
+
+.tooltip.bottom {
+  transform: translateX(-50%);
+}
+
+.tooltip.bottom .arrow {
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  border-bottom: none;
+  border-right: none;
+}
+
+.tooltip.left {
+  transform: translateX(-100%) translateY(-50%);
+}
+
+.tooltip.left .arrow {
+  right: -4px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  border-left: none;
+  border-bottom: none;
+}
+
+.tooltip.right {
+  transform: translateY(-50%);
+}
+
+.tooltip.right .arrow {
+  left: -4px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  border-right: none;
+  border-top: none;
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .tooltip {
+    background: rgba(10, 10, 10, 0.95);
+    border-color: rgba(179, 146, 240, 0.3);
+  }
+  
+  .arrow {
+    background: rgba(10, 10, 10, 0.95);
+    border-color: rgba(179, 146, 240, 0.3);
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .tooltip {
+    background: black;
+    border-color: white;
+    color: white;
+  }
+  
+  .arrow {
+    background: black;
+    border-color: white;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .tooltip {
+    transition: none;
+  }
+}

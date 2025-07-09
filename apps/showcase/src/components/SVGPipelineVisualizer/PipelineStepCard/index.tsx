@@ -6,7 +6,7 @@ import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import type { PipelineStepCardProps } from './types';
 import styles from './styles.module.scss';
 
-const IOTable: React.FC<{ title: string; data: Record<string, any> }> = ({ title, data }) => (
+const IOTable: React.FC<{ title: string; data: Record<string, unknown> }> = ({ title, data }) => (
   <div className={styles.ioTable}>
     <h5 className={title === 'INPUT' ? styles.inputTitle : styles.outputTitle}>{title}</h5>
     <div className={styles.ioContent}>

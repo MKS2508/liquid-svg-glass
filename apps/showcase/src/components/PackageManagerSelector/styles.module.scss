@@ -3,11 +3,33 @@
   width: 100%;
   max-width: 600px;
   position: relative;
+  border-radius: 1rem;
+  box-sizing: border-box;
+}
+
+/* Background Glow Effect */
+.glowBackground {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border-radius: 1.2rem;
+  z-index: -10;
+  pointer-events: none;
+  will-change: box-shadow;
+  transition: box-shadow 0.5s ease-in-out;
+  
+  @media (max-width: 480px) {
+    display: none; // Disable glow on mobile for performance
+  }
 }
 
 .header {
   margin-bottom: 1.5rem;
   text-align: center;
+  position: relative;
+  z-index: 2;
 }
 
 .title {
@@ -42,6 +64,7 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
   position: relative;
   overflow: hidden;
+  z-index: 2;
   
   &::before {
     content: '';
@@ -65,36 +88,47 @@
 .tab {
   flex: 1;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 0.25rem;
-  padding: 0.75rem 0.5rem;
+  gap: 0.4rem;
+  padding: 0.5rem 0.4rem;
   background: transparent;
   border: none;
-  border-radius: 0.75rem;
+  border-radius: 0.6rem;
   color: rgba(248, 249, 250, 0.6);
   font-size: 0.8rem;
   font-weight: 500;
   cursor: pointer;
   position: relative;
-  overflow: hidden;
-  transition: none;
-  min-height: 70px;
+  overflow: visible;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 45px;
 
   &:hover {
     color: rgba(248, 249, 250, 0.9);
-    background: rgba(255, 255, 255, 0.05);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    
+    .icon {
+      transform: scale(1.1) rotate(2deg);
+    }
+    
+    .iconImg {
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4)) brightness(1.1);
+    }
   }
 
   &.active {
     color: #f8f9fa;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.12);
     box-shadow: 
       0 4px 20px rgba(0, 0, 0, 0.3),
       inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+    position: relative;
+    z-index: 1;
     
     &::before {
       content: '';
@@ -104,20 +138,21 @@
       right: 0;
       bottom: 0;
       background: var(--tab-gradient);
-      opacity: 0.1;
-      border-radius: 0.75rem;
+      opacity: 0.15;
+      border-radius: 0.6rem;
+      z-index: -1;
     }
     
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: var(--tab-color, #B392F0);
-      border-radius: 2px 2px 0 0;
-      box-shadow: 0 0 10px var(--tab-color);
+    .icon {
+      transform: scale(1.05);
+    }
+    
+    .iconImg {
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4)) brightness(1.2);
+    }
+    
+    .name {
+      text-shadow: 0 0 8px var(--tab-color), 0 1px 2px rgba(0, 0, 0, 0.5);
     }
   }
 
@@ -125,47 +160,44 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 0.25rem;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .iconImg {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     object-fit: contain;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.3));
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .tabContent {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 0.125rem;
+    align-items: flex-start;
+    gap: 0;
   }
 
   .name {
-    text-transform: capitalize;
+    text-transform: uppercase;
     font-weight: 600;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    letter-spacing: 0.4px;
+    line-height: 1;
   }
 
-  .description {
-    font-size: 0.65rem;
-    opacity: 0.8;
-    text-align: center;
-    line-height: 1.2;
-  }
-
-  .activeIndicator {
+  .activeBar {
     position: absolute;
     bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 4px;
+    left: 0;
+    right: 0;
     height: 4px;
-    background: var(--tab-color, #B392F0);
-    border-radius: 50%;
-    box-shadow: 0 0 8px var(--tab-color);
+    border-radius: 4px 4px 0 0;
+    transform-origin: left;
+    will-change: transform, background, box-shadow;
+    z-index: 10;
+    pointer-events: none;
   }
 }
 
@@ -181,6 +213,7 @@
   position: relative;
   overflow: hidden;
   margin-top: 0;
+  z-index: 2;
   
   &::before {
     content: '';
@@ -259,14 +292,57 @@
   min-height: 50px;
   display: flex;
   align-items: center;
+  position: relative;
+  
+  &:hover .copyButtonContainer {
+    opacity: 1;
+  }
+}
+
+.copyButtonContainer {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.hoverCopyButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(179, 146, 240, 0.3);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:hover {
+    background: rgba(179, 146, 240, 0.2);
+    border-color: rgba(179, 146, 240, 0.5);
+    box-shadow: 0 4px 15px rgba(179, 146, 240, 0.3);
+  }
+  
+  svg {
+    width: 16px;
+    height: 16px;
+    color: rgba(248, 249, 250, 0.8);
+  }
 }
 
 .commandText {
-  width: 100%;
-  word-break: break-all;
+  width: calc(100% - 45px); // Reserve space for copy button
   display: flex;
   align-items: center;
   line-height: 1.6;
+  white-space: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-right: 0.5rem;
 }
 
 .commandManager {
@@ -337,6 +413,8 @@
 @media (max-width: 768px) {
   .container {
     margin: 0.75rem 0;
+    max-width: calc(100vw - 1rem);
+    width: 100%;
   }
   
   .title {
@@ -348,25 +426,25 @@
   }
   
   .tabs {
-    gap: 0.2rem;
+    gap: 0.15rem;
     padding: 0.2rem;
+    width: 100%;
+    box-sizing: border-box;
   }
   
   .tab {
-    padding: 0.6rem 0.4rem;
-    min-height: 65px;
+    padding: 0.6rem 0.3rem;
+    min-height: 55px;
+    gap: 0.4rem;
     
     .iconImg {
-      width: 18px;
-      height: 18px;
+      width: 16px;
+      height: 16px;
     }
     
     .name {
       font-size: 0.75rem;
-    }
-    
-    .description {
-      font-size: 0.6rem;
+      letter-spacing: 0.3px;
     }
   }
   
@@ -389,6 +467,8 @@
 @media (max-width: 480px) {
   .container {
     margin: 0.5rem 0;
+    max-width: calc(100vw - 1rem);
+    width: 100%;
   }
   
   .title {
@@ -400,26 +480,42 @@
   }
   
   .tabs {
-    flex-wrap: wrap;
-    gap: 0.15rem;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
   }
   
   .tab {
-    flex: 1 1 calc(50% - 0.075rem);
-    padding: 0.5rem 0.3rem;
-    min-height: 60px;
+    flex: 1;
+    flex-direction: row;
+    padding: 0.75rem 1rem;
+    min-height: auto;
+    justify-content: flex-start;
+    gap: 0.75rem;
     
     .iconImg {
-      width: 16px;
-      height: 16px;
+      width: 20px;
+      height: 20px;
     }
     
     .name {
-      font-size: 0.7rem;
+      font-size: 0.85rem;
     }
     
-    .description {
-      font-size: 0.55rem;
+    .tabContent {
+      align-items: flex-start;
+    }
+    
+    .activeBar {
+      height: 100%;
+      width: 3px;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: auto;
+      border-radius: 0 3px 3px 0;
     }
   }
   
@@ -427,20 +523,36 @@
     padding: 0.75rem;
   }
   
-  .commandHeader {
-    flex-direction: column;
-    gap: 0.75rem;
-    align-items: stretch;
-  }
-  
-  .copyButton {
-    align-self: center;
-    padding: 0.5rem 0.75rem;
-    font-size: 0.75rem;
-  }
-  
   .commandCode {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
+    padding: 0.75rem;
+    min-height: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .commandText {
+    width: calc(100% - 35px); // Adjust for smaller copy button on mobile
+    white-space: nowrap;
+    overflow-x: auto;
+  }
+  
+  .copyButtonContainer {
+    position: static;
+    opacity: 1;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+  
+  .hoverCopyButton {
+    width: 28px;
+    height: 28px;
+    
+    svg {
+      width: 14px;
+      height: 14px;
+    }
   }
   
   .successToast {
@@ -448,5 +560,55 @@
     left: 1rem;
     right: 1rem;
     justify-content: center;
+    font-size: 0.8rem;
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+// Extra small screens
+@media (max-width: 380px) {
+  .container {
+    margin: 0.25rem 0;
+    max-width: calc(100vw - 0.5rem);
+    width: 100%;
+  }
+  
+  .title {
+    font-size: 1rem;
+  }
+  
+  .subtitle {
+    font-size: 0.8rem;
+  }
+  
+  .tabs {
+    padding: 0.4rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .tab {
+    padding: 0.6rem 0.8rem;
+    
+    .iconImg {
+      width: 18px;
+      height: 18px;
+    }
+    
+    .name {
+      font-size: 0.8rem;
+    }
+  }
+  
+  .commandCode {
+    font-size: 0.7rem;
+    padding: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  
+  .commandText {
+    width: calc(100% - 30px); // Even smaller space for tiny screens
   }
 }

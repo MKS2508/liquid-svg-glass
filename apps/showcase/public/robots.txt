@@ -1,0 +1,32 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://svg-liquid-glass.dev/sitemap.xml
+
+# Specific instructions for search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Block access to development and build files
+Disallow: /src/
+Disallow: /dist/
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /.storybook/
+Disallow: /storybook-static/
+Disallow: /*.json$
+Disallow: /*.config.*
+Disallow: /*.lock
+
+# Allow access to essential files
+Allow: /sitemap.xml
+Allow: /favicon.ico
+Allow: /robots.txt
+Allow: /assets/
+Allow: /public/

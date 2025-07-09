@@ -142,6 +142,19 @@ export const PackageManagerSelector: React.FC = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
+      {/* Background Glow Effect */}
+      <motion.div
+        className={styles.glowBackground}
+        animate={{
+          boxShadow: `
+            0 0 20px ${selectedManager.color}40,
+            0 0 40px ${selectedManager.color}30,
+            0 0 60px ${selectedManager.color}20,
+            inset 0 0 20px ${selectedManager.color}15
+          `,
+        }}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
+      />
       <motion.div className={styles.header}>
         <motion.h3 
           className={styles.title}
@@ -203,16 +216,34 @@ export const PackageManagerSelector: React.FC = () => {
               <img src={pm.icon} alt={`${pm.name} icon`} className={styles.iconImg} />
             </motion.span>
             <div className={styles.tabContent}>
-              <span className={styles.name}>{pm.name.toLocaleUpperCase()}</span>
+              <span className={styles.name}>{pm.name}</span>
             </div>
             
             {selected === pm.name && (
               <motion.div
-                className={styles.activeIndicator}
-                layoutId="activeIndicator"
-                initial={{ scale: 0 }}
-                animate={{ scale: 0.1 }}
-                transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                className={styles.activeBar}
+                layoutId="activeTabBar"
+                initial={false}
+                animate={{
+                  background: pm.color,
+                  boxShadow: `0 0 12px ${pm.color}, 0 0 24px ${pm.color}60`
+                }}
+                transition={{ 
+                  layout: {
+                    type: "spring", 
+                    stiffness: 300, 
+                    damping: 35,
+                    mass: 0.8
+                  },
+                  background: { 
+                    duration: 0.4, 
+                    ease: "easeInOut" 
+                  },
+                  boxShadow: { 
+                    duration: 0.4, 
+                    ease: "easeInOut" 
+                  }
+                }}
               />
             )}
           </motion.button>
@@ -226,50 +257,39 @@ export const PackageManagerSelector: React.FC = () => {
           '--selected-color': selectedManager.color,
         } as React.CSSProperties}
       >
-        <div className={styles.commandHeader}>
-          <span className={styles.commandLabel}>v0.0.1</span>
-          <motion.button
-            className={styles.copyButton}
-            onClick={() => copy(selectedManager.command)}
-            whileHover={{ scale: 1.01 }}
-            whileTap={{ scale: 0.95 }}
-            style={{
-              background: `color-mix(in srgb, var(--selected-color) 20%, transparent)`,
-              borderColor: 'var(--selected-color)',
-            }}
-          >
-            <AnimatePresence mode="wait">
-              {copied ? (
-                <motion.div
-                  key="check"
-                  initial={{ scale: 0, rotate: -180 }}
-                  animate={{ scale: 1, rotate: 0 }}
-                  exit={{ scale: 0, rotate: 180 }}
-                  transition={{ duration: 0.3 }}
-                  className={styles.copyIcon}
-                >
-                  <CheckIcon />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="copy"
-                  initial={{ scale: 0, rotate: 180 }}
-                  animate={{ scale: 1, rotate: 0 }}
-                  exit={{ scale: 0, rotate: -180 }}
-                  transition={{ duration: 0.3 }}
-                  className={styles.copyIcon}
-                >
-                  <CopyIcon />
-                </motion.div>
-              )}
-            </AnimatePresence>
-            <span className={styles.copyText}>
-              {copied ? 'Copied!' : 'Copy'}
-            </span>
-          </motion.button>
-        </div>
-        
         <div className={styles.commandCode}>
+          <div className={styles.copyButtonContainer}>
+            <motion.button
+              className={styles.hoverCopyButton}
+              onClick={() => copy(selectedManager.command)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <AnimatePresence mode="wait">
+                {copied ? (
+                  <motion.div
+                    key="check"
+                    initial={{ scale: 0, rotate: -90 }}
+                    animate={{ scale: 1, rotate: 0 }}
+                    exit={{ scale: 0, rotate: 90 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <CheckIcon />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="copy"
+                    initial={{ scale: 0, rotate: 90 }}
+                    animate={{ scale: 1, rotate: 0 }}
+                    exit={{ scale: 0, rotate: -90 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <CopyIcon />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.button>
+          </div>
           <div className={styles.commandText}>
             <AnimatePresence mode="wait">
               <motion.span
@@ -310,12 +330,14 @@ export const PackageManagerSelector: React.FC = () => {
               <span style={{margin: ".5ch"}}> </span>
               <motion.span
               className={styles.packageName}
-              layout
+              layout="position"
               transition={{
-                type: "spring",
-                stiffness: 280,
-                damping: 30,
-                mass: 1.2
+                layout: {
+                  type: "spring",
+                  stiffness: 350,
+                  damping: 35,
+                  mass: 0.9
+                }
               }}
             >
               {' @liquid-svg-glass/core @liquid-svg-glass/react'}
@@ -324,18 +346,6 @@ export const PackageManagerSelector: React.FC = () => {
         </div>
       </div>
 
-      {copied && (
-        <motion.div
-          className={styles.successToast}
-          initial={{ opacity: 0, y: 50, scale: 0.3 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: -50, scale: 0.3 }}
-          transition={{ type: "spring", stiffness: 500, damping: 30 }}
-        >
-          <CheckIcon />
-          <span>Command copied to clipboard!</span>
-        </motion.div>
-      )}
     </motion.div>
   );
 };

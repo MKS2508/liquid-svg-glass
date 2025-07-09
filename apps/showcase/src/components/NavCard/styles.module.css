@@ -1,0 +1,291 @@
+/* Base Card Styles */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid;
+  cursor: pointer;
+  text-decoration: none;
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: inherit;
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  
+  /* Ensure proper stacking context */
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.card:hover {
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.15),
+    0 8px 16px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.card:focus-visible {
+  outline: 2px solid #B392F0;
+  outline-offset: 2px;
+}
+
+.card.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Glow Effect */
+.glow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  opacity: 0;
+  border-radius: inherit;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Shimmer Effect */
+.shimmer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Icon Container */
+.iconContainer {
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  z-index: 5;
+  color: white;
+  box-shadow: 
+    0 8px 16px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.iconContainer svg {
+  width: 60%;
+  height: 60%;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* Spinner for loading state */
+.spinner {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+}
+
+/* Content */
+.content {
+  text-align: center;
+  z-index: 5;
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-weight: 700;
+  margin: 0;
+  color: #f8f9fa;
+  line-height: 1.3;
+  letter-spacing: -0.025em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.description {
+  font-size: 0.875rem;
+  color: rgba(248, 249, 250, 0.7);
+  margin: 0;
+  line-height: 1.4;
+  text-align: center;
+  max-width: 200px;
+}
+
+.externalIcon {
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.card:hover .externalIcon {
+  opacity: 1;
+}
+
+/* Category Indicator */
+.categoryIndicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  transform-origin: left;
+  z-index: 10;
+}
+
+/* Priority Variants */
+.primary {
+  min-height: 160px;
+}
+
+.primary .iconContainer {
+  width: 4rem;
+  height: 4rem;
+}
+
+.secondary {
+  min-height: 140px;
+}
+
+.secondary .iconContainer {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.tertiary {
+  min-height: 120px;
+}
+
+.tertiary .iconContainer {
+  width: 3rem;
+  height: 3rem;
+}
+
+/* Category-specific hover effects */
+.documentation:hover {
+  border-color: rgba(59, 130, 246, 0.4);
+  background-color: rgba(59, 130, 246, 0.08);
+}
+
+.resources:hover {
+  border-color: rgba(16, 185, 129, 0.4);
+  background-color: rgba(16, 185, 129, 0.08);
+}
+
+.tools:hover {
+  border-color: rgba(179, 146, 240, 0.4);
+  background-color: rgba(179, 146, 240, 0.08);
+}
+
+.community:hover {
+  border-color: rgba(248, 118, 131, 0.4);
+  background-color: rgba(248, 118, 131, 0.08);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .card {
+    padding: 1.25rem;
+  }
+  
+  .primary,
+  .secondary,
+  .tertiary {
+    min-height: 120px;
+  }
+  
+  .iconContainer {
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+    margin-bottom: 0.75rem;
+  }
+  
+  .title {
+    font-size: 0.9rem !important;
+  }
+  
+  .description {
+    font-size: 0.8rem;
+    max-width: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 1rem;
+  }
+  
+  .primary,
+  .secondary,
+  .tertiary {
+    min-height: 100px;
+  }
+  
+  .iconContainer {
+    width: 2rem !important;
+    height: 2rem !important;
+    margin-bottom: 0.5rem;
+  }
+  
+  .title {
+    font-size: 0.85rem !important;
+  }
+  
+  .description {
+    font-size: 0.75rem;
+    max-width: 150px;
+    line-height: 1.3;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+  
+  .card * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .card {
+    border-width: 2px;
+  }
+  
+  .title {
+    color: white;
+  }
+  
+  .description {
+    color: rgba(255, 255, 255, 0.9);
+  }
+}

@@ -40,17 +40,20 @@ import { Meta } from "@storybook/addon-docs/blocks";
 
 ```bash
 # NPM
-npm install gsap react@^19.0.0
+npm install @liquid-svg-glass/core @liquid-svg-glass/react
 
 # Yarn
-yarn add gsap react@^19.0.0
+yarn add @liquid-svg-glass/core @liquid-svg-glass/react
 
 # PNPM  
-pnpm add gsap react@^19.0.0
+pnpm add @liquid-svg-glass/core @liquid-svg-glass/react
+
+# Bun (recommended)
+bun add @liquid-svg-glass/core @liquid-svg-glass/react
 ```
 
 <div class="tip-box">
-  <strong>💡 Nota:</strong> GSAP es opcional y solo necesario si planeas usar funcionalidad de arrastre.
+  <strong>💡 Nota:</strong> GSAP se incluye automáticamente con @liquid-svg-glass/react para funcionalidad de arrastre. React 19+ es requerido.
 </div>
 
 <div class="pipeline-step">
@@ -60,6 +63,9 @@ pnpm add gsap react@^19.0.0
 
 ```tsx
 import { GlassEffect } from '@liquid-svg-glass/react';
+
+// También puedes importar tipos y presets
+import { GlassEffect, glassPresets, type GlassEffectProps } from '@liquid-svg-glass/react';
 ```
 
 <div class="pipeline-step">
@@ -72,6 +78,14 @@ import { GlassEffect } from '@liquid-svg-glass/react';
   <nav>Tu contenido aquí</nav>
 </GlassEffect>
 ```
+
+<div class="info-box">
+  <strong>🏗️ Arquitectura Monorepo:</strong> Este proyecto utiliza un monorepo con dos paquetes principales:
+  <ul>
+    <li><strong>@liquid-svg-glass/core</strong> - Utilidades y tipos framework-agnostic</li>
+    <li><strong>@liquid-svg-glass/react</strong> - Componentes React que usan el core</li>
+  </ul>
+</div>
 
 <div class="success-box">
   <strong>🎉 ¡Listo!</strong> Ya tienes un efecto de cristal líquido funcionando. El preset "dock" es perfecto para barras de navegación.

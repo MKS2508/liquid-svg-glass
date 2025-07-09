@@ -1,0 +1,381 @@
+// Mobile Controls Styles
+// Collapsible mobile controls with tabs and parameters
+
+.mobileControls {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--color-bg-primary, #251B30);
+  border-top: 1px solid var(--color-border-default, rgba(179, 146, 240, 0.2));
+  border-radius: 1rem 1rem 0 0;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 100;
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+  max-height: 70vh;
+  overflow: hidden;
+  
+  &.expanded {
+    transform: translateY(0);
+  }
+}
+
+// Toggle Button
+.toggleButton {
+  width: 100%;
+  padding: 1rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-primary, #f8f9fa);
+  
+  &:focus {
+    outline: 2px solid var(--color-primary, #B392F0);
+    outline-offset: 2px;
+  }
+}
+
+.toggleContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.toggleIndicator {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  color: var(--color-text-secondary, rgba(248, 249, 250, 0.8));
+}
+
+// Controls Content
+.controlsContent {
+  overflow: hidden;
+  border-top: 1px solid var(--color-border-subtle, rgba(179, 146, 240, 0.1));
+}
+
+// Tab Navigation
+.tabNavigation {
+  display: flex;
+  background: var(--color-bg-secondary, #1e1527);
+  border-bottom: 1px solid var(--color-border-subtle, rgba(179, 146, 240, 0.1));
+  
+  @media (max-width: 480px) {
+    flex-direction: column;
+  }
+}
+
+.tabButton {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: transparent;
+  border: none;
+  color: var(--color-text-secondary, rgba(248, 249, 250, 0.8));
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  @media (max-width: 480px) {
+    justify-content: flex-start;
+    padding: 0.875rem 1rem;
+  }
+  
+  &:hover {
+    background: var(--color-surface-primary, rgba(179, 146, 240, 0.08));
+    color: var(--color-text-primary, #f8f9fa);
+  }
+  
+  &.active {
+    background: var(--color-primary, #B392F0);
+    color: white;
+  }
+  
+  &:focus {
+    outline: 2px solid var(--color-primary, #B392F0);
+    outline-offset: 2px;
+  }
+}
+
+// Tab Content
+.tabContent {
+  max-height: 50vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+// Presets Panel
+.presetsPanel {
+  padding: 1rem;
+}
+
+.presetsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 0.75rem;
+  
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    gap: 0.5rem;
+  }
+}
+
+.presetButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: var(--color-surface-primary, rgba(179, 146, 240, 0.08));
+  border: 1px solid var(--color-border-default, rgba(179, 146, 240, 0.2));
+  border-radius: 0.5rem;
+  color: var(--color-text-secondary, rgba(248, 249, 250, 0.8));
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: var(--color-surface-secondary, rgba(179, 146, 240, 0.15));
+    color: var(--color-text-primary, #f8f9fa);
+    border-color: var(--color-border-strong, rgba(179, 146, 240, 0.3));
+  }
+  
+  &.active {
+    background: var(--color-primary, #B392F0);
+    color: white;
+    border-color: var(--color-primary, #B392F0);
+  }
+  
+  &:focus {
+    outline: 2px solid var(--color-primary, #B392F0);
+    outline-offset: 2px;
+  }
+}
+
+.presetIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: currentColor;
+  color: var(--color-bg-primary, #251B30);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.875rem;
+  
+  @media (max-width: 480px) {
+    width: 28px;
+    height: 28px;
+    font-size: 0.75rem;
+  }
+}
+
+.presetName {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  
+  @media (max-width: 480px) {
+    font-size: 0.625rem;
+  }
+}
+
+// Parameters Panel
+.parametersPanel {
+  padding: 1rem;
+}
+
+.parametersList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.parameterGroup {
+  h4 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text-primary, #f8f9fa);
+    margin: 0 0 0.75rem 0;
+    padding-bottom: 0.25rem;
+    border-bottom: 1px solid var(--color-border-subtle, rgba(179, 146, 240, 0.1));
+  }
+}
+
+.parameterRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  
+  label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-text-secondary, rgba(248, 249, 250, 0.8));
+    min-width: 50px;
+  }
+}
+
+.parameterInput {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.slider {
+  flex: 1;
+  height: 4px;
+  background: var(--color-surface-primary, rgba(179, 146, 240, 0.08));
+  border-radius: 2px;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--color-primary, #B392F0);
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(179, 146, 240, 0.3);
+  }
+  
+  &::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--color-primary, #B392F0);
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 6px rgba(179, 146, 240, 0.3);
+  }
+  
+  &:focus {
+    outline: 2px solid var(--color-primary, #B392F0);
+    outline-offset: 2px;
+  }
+}
+
+.parameterValue {
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: monospace;
+  color: var(--color-text-primary, #f8f9fa);
+  min-width: 40px;
+  text-align: right;
+  
+  @media (max-width: 480px) {
+    font-size: 0.625rem;
+    min-width: 35px;
+  }
+}
+
+// Performance Panel
+.performancePanel {
+  padding: 1rem;
+}
+
+.performanceWarnings {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  
+  &.warning {
+    background: rgba(251, 146, 60, 0.1);
+    border: 1px solid rgba(251, 146, 60, 0.3);
+  }
+  
+  &.error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+  }
+}
+
+.warningIcon {
+  flex-shrink: 0;
+  font-size: 1rem;
+}
+
+.warningMessage {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary, rgba(248, 249, 250, 0.8));
+  line-height: 1.4;
+}
+
+.noWarnings {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: rgba(74, 222, 128, 0.1);
+  border: 1px solid rgba(74, 222, 128, 0.3);
+  border-radius: 0.5rem;
+  color: var(--color-text-secondary, rgba(248, 249, 250, 0.8));
+  font-size: 0.875rem;
+  justify-content: center;
+}
+
+.successIcon {
+  font-size: 1.25rem;
+}
+
+// Accessibility
+@media (prefers-reduced-motion: reduce) {
+  .mobileControls {
+    transition: none;
+  }
+  
+  .tabButton {
+    transition: none;
+  }
+  
+  .presetButton {
+    transition: none;
+  }
+}
+
+// Focus styles
+.toggleButton:focus-visible,
+.tabButton:focus-visible,
+.presetButton:focus-visible,
+.slider:focus-visible {
+  outline: 2px solid var(--color-primary, #B392F0);
+  outline-offset: 2px;
+}
+
+// High contrast mode
+@media (prefers-contrast: high) {
+  .presetButton {
+    border-width: 2px;
+  }
+  
+  .warning {
+    border-width: 2px;
+  }
+  
+  .noWarnings {
+    border-width: 2px;
+  }
+}

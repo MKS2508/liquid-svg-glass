@@ -11,7 +11,7 @@ export const liquidGlassProfessionalTheme = create({
   brandTitle: 'React Liquid Glass',
   brandUrl: 'https://github.com/react-liquid-glass',
   brandTarget: '_self',
-  brandImage: './logo.png',
+  brandImage: '../../../assets/logo.png',
   
   // === TYPOGRAPHY SYSTEM ===
   // Modern, readable fonts with excellent legibility
@@ -108,7 +108,7 @@ export const liquidGlassProfessionalLightTheme = create({
   brandTitle: 'React Liquid Glass',
   brandUrl: 'https://github.com/react-liquid-glass',
   brandTarget: '_self',
-  brandImage: './logo.png',
+  brandImage: '../../../assets/logo.png',
   
   // === TYPOGRAPHY SYSTEM ===
   fontBase: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", sans-serif',

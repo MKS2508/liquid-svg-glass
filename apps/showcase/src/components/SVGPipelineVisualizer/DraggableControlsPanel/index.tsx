@@ -2,10 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GripVertical, Minimize2, Maximize2, Palette, Settings, Cpu, Eye, Code, Copy, Download, CheckCircle } from 'lucide-react';
 import { DraggableItem, glassPresets } from '@liquid-svg-glass/react';
-import DynamicBackgroundGlassShowcase from '../../DynamicBackgroundGlassShowcase';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import type { GeometryConfig, VisualConfig } from '@liquid-svg-glass/core';
 import styles from './styles.module.scss';
 
 interface DraggableControlsPanelProps {
@@ -40,7 +36,17 @@ type PreviewMode = 'code' | 'live';
 type BackgroundType = 'dark' | 'code' | 'minimal';
 
 const STORAGE_KEY = 'svgPipelineControlsPosition';
-const DEFAULT_POSITION = { x: window.innerWidth - 420, y: window.innerHeight - 500 };
+
+// Responsive default position calculation
+const getDefaultPosition = () => {
+  const isMobile = window.innerWidth <= 768;
+  const panelWidth = isMobile ? Math.min(window.innerWidth - 40, 340) : 380;
+  
+  return {
+    x: isMobile ? (window.innerWidth - panelWidth) / 2 : window.innerWidth - panelWidth - 40,
+    y: isMobile ? 60 : Math.max(60, window.innerHeight - 500)
+  };
+};
 
 const DraggableControlsPanel: React.FC<DraggableControlsPanelProps> = ({
   selectedPreset,
@@ -63,12 +69,19 @@ const DraggableControlsPanel: React.FC<DraggableControlsPanelProps> = ({
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
       try {
-        return JSON.parse(saved);
+        const savedPosition = JSON.parse(saved);
+        // Validate saved position is within viewport
+        const maxX = window.innerWidth - 100;
+        const maxY = window.innerHeight - 100;
+        if (savedPosition.x > maxX || savedPosition.y > maxY || savedPosition.x < 0 || savedPosition.y < 0) {
+          return getDefaultPosition();
+        }
+        return savedPosition;
       } catch {
-        return DEFAULT_POSITION;
+        return getDefaultPosition();
       }
     }
-    return DEFAULT_POSITION;
+    return getDefaultPosition();
   });
 
   const handleDragEnd = useCallback((x: number, y: number) => {
@@ -81,9 +94,28 @@ const DraggableControlsPanel: React.FC<DraggableControlsPanelProps> = ({
     setIsMinimized(prev => !prev);
   }, []);
 
+  // Handle window resize to keep panel in view
+  useEffect(() => {
+    const handleResize = () => {
+      setPosition((prev: { x: number; y: number }) => {
+        const panelWidth = window.innerWidth <= 768 ? Math.min(window.innerWidth - 40, 340) : 380;
+        const maxX = window.innerWidth - panelWidth - 20;
+        const maxY = window.innerHeight - 100;
+        
+        return {
+          x: Math.min(Math.max(20, prev.x), maxX),
+          y: Math.min(Math.max(20, prev.y), maxY)
+        };
+      });
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <DraggableItem
-      draggable={true}
+      draggable={!isMinimized}
       bounds="body"
       type="x,y"
       initialPosition={position}

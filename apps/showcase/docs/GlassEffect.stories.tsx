@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import GlassEffect from '../src/components/GlassEffect';
+import { GlassEffect } from '@liquid-svg-glass/react';
 
 const meta: Meta<typeof GlassEffect> = {
   title: 'Documentación/GlassEffect - Guía Completa',
