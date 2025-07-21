@@ -1,0 +1,169 @@
+name: 🚀 Deploy Monorepo
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  release:
+    types: [published]
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  # Build and test all packages
+  build-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18, 20]
+    
+    steps:
+    - name: 📥 Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0 # Needed for semantic release
+
+    - name: 🏗️ Setup Bun
+      uses: oven-sh/setup-bun@v1
+      with:
+        bun-version: latest
+
+    - name: 📦 Install dependencies
+      run: bun install --frozen-lockfile
+
+    - name: 🔧 Build packages
+      run: |
+        bun run build:core
+        bun run build:react
+
+    - name: 🧪 Run tests
+      run: |
+        # Add test commands when available
+        echo "Running tests..."
+
+    - name: 📊 Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: packages-build-${{ matrix.node-version }}
+        path: |
+          packages/*/dist
+        retention-days: 1
+
+  # Publish NPM packages on release
+  publish-npm:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release' && github.event.action == 'published'
+    
+    steps:
+    - name: 📥 Checkout repository
+      uses: actions/checkout@v4
+
+    - name: 🏗️ Setup Bun
+      uses: oven-sh/setup-bun@v1
+
+    - name: 📦 Install dependencies
+      run: bun install --frozen-lockfile
+
+    - name: 🔧 Build packages
+      run: |
+        bun run build:core
+        bun run build:react
+
+    - name: 📋 Setup NPM authentication
+      run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+
+    - name: 🚀 Publish to NPM
+      run: |
+        cd packages/core
+        npm publish --access public
+        cd ../react
+        npm publish --access public
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  # Build Storybook and Showcase for deployment
+  build-sites:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: 📥 Checkout repository
+      uses: actions/checkout@v4
+
+    - name: 🏗️ Setup Bun
+      uses: oven-sh/setup-bun@v1
+
+    - name: 📦 Install dependencies
+      run: bun install --frozen-lockfile
+
+    - name: 🔧 Build packages first
+      run: |
+        bun run build:core
+        bun run build:react
+
+    - name: 📚 Build Storybook
+      run: |
+        cd apps/showcase
+        bun run build:storybook
+
+    - name: 🌟 Build Showcase app
+      run: |
+        cd apps/showcase
+        bun run build
+
+    - name: 🗂️ Prepare deployment structure
+      run: |
+        mkdir -p dist-combined
+        
+        # Copy Showcase app to root (main landing page)
+        cp -r apps/showcase/dist/* dist-combined/
+        
+        # Copy Storybook to /storybook subdirectory
+        cp -r apps/showcase/storybook-static dist-combined/storybook
+
+    - name: 📤 Upload Pages artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: dist-combined
+
+  # Deploy to GitHub Pages
+  deploy-pages:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build-sites
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: 🚀 Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
+
+  # Notify on completion
+  notify:
+    runs-on: ubuntu-latest
+    needs: [build-and-test, deploy-pages]
+    if: always() && github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: 📢 Deployment Status
+      run: |
+        if [ "${{ needs.deploy-pages.result }}" == "success" ]; then
+          echo "✅ Deployment successful!"
+          echo "🌟 Showcase App: ${{ needs.deploy-pages.outputs.page_url }}"
+          echo "📚 Storybook: ${{ needs.deploy-pages.outputs.page_url }}storybook/"
+        else
+          echo "❌ Deployment failed!"
+        fi

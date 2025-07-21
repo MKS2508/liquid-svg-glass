@@ -1,14 +1,42 @@
 {
   "name": "@liquid-svg-glass/react",
   "version": "0.0.1",
+  "description": "React components for creating stunning SVG liquid glass effects",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": ["dist", "README.md"],
   "scripts": {
     "build": "bun run tsc && bun run copy-styles",
     "copy-styles": "cp src/components/GlassEffect/glass-styles.module.scss dist/components/GlassEffect/",
-    "dev": "bun run tsc --watch"
+    "dev": "bun run tsc --watch",
+    "prepublishOnly": "bun run build"
+  },
+  "keywords": [
+    "react",
+    "svg",
+    "glass",
+    "glassmorphism",
+    "liquid",
+    "visual-effects",
+    "components",
+    "ui",
+    "typescript",
+    "gsap"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/liquid-svg-glass.git",
+    "directory": "packages/react"
+  },
+  "homepage": "https://your-username.github.io/liquid-svg-glass",
+  "bugs": {
+    "url": "https://github.com/your-username/liquid-svg-glass/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "dependencies": {
     "@liquid-svg-glass/core": "workspace:*",
