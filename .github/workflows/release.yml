@@ -1,0 +1,76 @@
+name: 🏷️ Semantic Release
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    if: github.repository_owner != 'github-actions[bot]'
+    
+    steps:
+    - name: 📥 Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: 🏗️ Setup Bun
+      uses: oven-sh/setup-bun@v1
+
+    - name: 📦 Install dependencies
+      run: bun install --frozen-lockfile
+
+    - name: 🔧 Build packages
+      run: |
+        bun run build:core
+        bun run build:react
+
+    - name: 🏷️ Create Release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        # Get current version from package.json
+        CURRENT_VERSION=$(cat packages/core/package.json | grep '"version"' | sed -E 's/.*"version": "([^"]+)".*/\1/')
+        
+        # Generate release notes
+        if git tag -l | grep -q "v${CURRENT_VERSION}"; then
+          echo "Version v${CURRENT_VERSION} already exists, skipping release"
+          exit 0
+        fi
+        
+        # Create a simple release
+        NEW_VERSION="v${CURRENT_VERSION}"
+        
+        # Generate changelog from commits since last tag
+        LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+        if [ -n "$LAST_TAG" ]; then
+          CHANGELOG=$(git log ${LAST_TAG}..HEAD --pretty=format:"- %s" --no-merges)
+        else
+          CHANGELOG=$(git log --pretty=format:"- %s" --no-merges)
+        fi
+        
+        # Create release
+        gh release create "$NEW_VERSION" \
+          --title "Release $NEW_VERSION" \
+          --notes "## Changes
+        
+        $CHANGELOG
+        
+        ## Packages
+        
+        - \`@liquid-svg-glass/core@${CURRENT_VERSION}\`
+        - \`@liquid-svg-glass/react@${CURRENT_VERSION}\`
+        
+        ## Links
+        
+        - 🌟 [Live Demo](https://your-username.github.io/liquid-svg-glass/)
+        - 📚 [Documentation](https://your-username.github.io/liquid-svg-glass/storybook/)" \
+          --latest

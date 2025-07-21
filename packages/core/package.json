@@ -1,13 +1,39 @@
 {
   "name": "@liquid-svg-glass/core",
   "version": "0.0.1",
+  "description": "Framework-agnostic core utilities for creating SVG liquid glass effects",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "files": ["dist", "README.md"],
   "scripts": {
     "build": "bun run tsc",
-    "dev": "bun run tsc --watch"
+    "dev": "bun run tsc --watch",
+    "prepublishOnly": "bun run build"
+  },
+  "keywords": [
+    "svg",
+    "glass",
+    "glassmorphism",
+    "liquid",
+    "visual-effects",
+    "frontend",
+    "ui",
+    "typescript"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/liquid-svg-glass.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://your-username.github.io/liquid-svg-glass",
+  "bugs": {
+    "url": "https://github.com/your-username/liquid-svg-glass/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "devDependencies": {
     "typescript": "~5.8.3"

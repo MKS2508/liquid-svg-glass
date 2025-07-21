@@ -1,0 +1,16 @@
+name: 📄 Configure GitHub Pages
+
+on:
+  workflow_dispatch: # Allow manual trigger
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  setup-pages:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🔧 Setup Pages
+      uses: actions/configure-pages@v4
