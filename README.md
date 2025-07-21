@@ -13,7 +13,7 @@
 
 *A sophisticated React component library for creating realistic liquid glass effects using SVG displacement mapping and chromatic aberration*
 
-[📱 Live Demo](https://your-demo-url.com) • [📚 Documentation](https://your-docs-url.com) • [🎨 Storybook](https://your-storybook-url.com)
+[📱 Live Demo](https://mks2508.github.io/liquid-svg-glass/) • [📚 Documentation](https://mks2508.github.io/liquid-svg-glass/storybook/) • [🎨 Storybook](https://mks2508.github.io/liquid-svg-glass/storybook/)
 
 </div>
 
