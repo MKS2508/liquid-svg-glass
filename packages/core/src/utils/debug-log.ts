@@ -168,7 +168,7 @@ export class GlassLogger {
    */
   constructor(component: string = 'LIQUID GLASS', debugMode: boolean = false) {
     this.component = component;
-    this.isDebugMode = debugMode || process.env.NODE_ENV === 'development';
+    this.isDebugMode = debugMode || (typeof process !== 'undefined' && process.env?.NODE_ENV === 'development');
   }
 
   /**
