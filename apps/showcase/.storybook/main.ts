@@ -21,6 +21,10 @@ const config: StorybookConfig = {
   "docs": {
     "autodocs": "tag"
   },
-  "staticDirs": ["../src/assets"]
+  "staticDirs": ["../src/assets"],
+  viteFinal: (config) => {
+    config.base = '/liquid-svg-glass/storybook/';
+    return config;
+  }
 };
 export default config;
