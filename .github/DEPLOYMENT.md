@@ -135,3 +135,5 @@ bun run dev:all       # Ambos concurrentemente
 4. Crea tu primer release para publicar en NPM
 
 ¡Tu monorepo está listo para desplegarse automáticamente! 🎉
+
+---
