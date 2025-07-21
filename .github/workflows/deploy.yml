@@ -121,22 +121,17 @@ jobs:
         cd apps/showcase
         bun run build-storybook
 
-    # TODO: Fix showcase build error with index.html
-    # - name: 🌟 Build Showcase app
-    #   run: |
-    #     cd apps/showcase
-    #     bun run build
+    - name: 🌟 Build Showcase app
+      run: |
+        cd apps/showcase
+        bun run build
 
     - name: 🗂️ Prepare deployment structure
       run: |
         mkdir -p dist-combined
         
-        # For now, only deploy Storybook
-        # TODO: When showcase builds, uncomment the line below
-        # cp -r apps/showcase/dist/* dist-combined/
-        
-        # Create a simple index.html redirect to Storybook
-        echo '<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0; url=./storybook/"></head><body>Redirecting to Storybook...</body></html>' > dist-combined/index.html
+        # Copy Showcase app to root (main landing page)
+        cp -r apps/showcase/dist/* dist-combined/
         
         # Copy Storybook to /storybook subdirectory
         cp -r apps/showcase/storybook-static dist-combined/storybook
