@@ -34,7 +34,7 @@ const navigationItems: NavCardProps[] = [
     external: true,
   },
   {
-    href: "?path=/story/components-interactive-glasseffect--default",
+    href: "/storybook/?path=/story/components-interactive-glasseffect--default",
     icon: <StorybookIcon />,
     title: "Storybook Docs",
     description: "Interactive component documentation and examples",
@@ -43,7 +43,7 @@ const navigationItems: NavCardProps[] = [
     status: "updated",
   },
   {
-    href: "?path=/story/comenzar-guía-de-inicio-rápido--docs",
+    href: "/storybook/?path=/story/comenzar-guía-de-inicio-rápido--docs",
     icon: <RocketIcon />,
     title: "Getting Started",
     description: "Quick start guide and installation instructions",
@@ -51,7 +51,7 @@ const navigationItems: NavCardProps[] = [
     priority: "primary",
   },
   {
-    href: "?path=/story/documentación-glasseffect-guía-completa--docs",
+    href: "/storybook/?path=/story/documentación-glasseffect-guía-completa--docs",
     icon: <BookIcon />,
     title: "API Reference",
     description: "Complete documentation and API reference",
@@ -68,7 +68,7 @@ const navigationItems: NavCardProps[] = [
     status: "new",
   },
   {
-    href: "?path=/story/components-interactive-glasseffect--playground",
+    href: "/storybook/?path=/story/components-interactive-glasseffect--playground",
     icon: <PlayIcon />,
     title: "Interactive Playground",
     description: "Test all parameters and experiment with effects",
@@ -266,18 +266,41 @@ function App() {
                 aria-label="Navegación de ubicación"
                 role="navigation"
             >
-                <ol role="list">
-                    <li>
+                <script type="application/ld+json">
+                {JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "BreadcrumbList",
+                    "itemListElement": [
+                        {
+                            "@type": "ListItem",
+                            "position": 1,
+                            "name": "Home",
+                            "item": "https://mks2508.github.io/liquid-svg-glass/"
+                        },
+                        {
+                            "@type": "ListItem", 
+                            "position": 2,
+                            "name": "Liquid Glass SVG - React SVG Displacement Library",
+                            "item": "https://mks2508.github.io/liquid-svg-glass/"
+                        }
+                    ]
+                })}
+                </script>
+                <ol role="list" itemScope itemType="https://schema.org/BreadcrumbList">
+                    <li itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
                         <a 
                             href="/" 
                             aria-label="Ir al inicio"
                             title="Página principal"
+                            itemProp="item"
                         >
-                            Home
+                            <span itemProp="name">Home</span>
                         </a>
+                        <meta itemProp="position" content="1" />
                     </li>
-                    <li aria-current="page">
-                        <span aria-label="Página actual">SVG Liquid Glass</span>
+                    <li aria-current="page" itemProp="itemListElement" itemScope itemType="https://schema.org/ListItem">
+                        <span aria-label="Página actual" itemProp="name">Liquid Glass SVG - React SVG Displacement Library</span>
+                        <meta itemProp="position" content="2" />
                     </li>
                 </ol>
             </nav>
@@ -561,6 +584,239 @@ function App() {
                 showCategories={true}
                 staggerDelay={0.1}
             />
+
+            {/* SEO-Rich Content Sections */}
+            <motion.section 
+                className="seo-content-section"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                style={{ 
+                    padding: '80px 20px', 
+                    maxWidth: '1200px', 
+                    margin: '0 auto',
+                    background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05))',
+                    borderRadius: '20px',
+                    marginBottom: '60px'
+                }}
+            >
+                <h2 style={{ 
+                    fontSize: '2.5rem', 
+                    textAlign: 'center', 
+                    marginBottom: '40px',
+                    background: 'linear-gradient(135deg, #667eea, #764ba2)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text'
+                }}>
+                    What is Liquid Glass SVG? Complete Guide to SVG Displacement Mapping
+                </h2>
+                
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px', marginBottom: '50px' }}>
+                    <div style={{ padding: '30px', background: 'rgba(255, 255, 255, 0.1)', borderRadius: '15px', backdropFilter: 'blur(10px)' }}>
+                        <h3 style={{ color: '#667eea', marginBottom: '20px', fontSize: '1.5rem' }}>SVG Liquid Glass Effects</h3>
+                        <p style={{ lineHeight: '1.6', color: '#e2e8f0', marginBottom: '15px' }}>
+                            <strong>Liquid glass SVG</strong> effects use advanced SVG displacement mapping to create realistic glass distortion. 
+                            Our library implements <strong>svg liquid glass</strong> technology that distorts background pixels in real-time, 
+                            simulating the optical properties of liquid crystal glass.
+                        </p>
+                        <p style={{ lineHeight: '1.6', color: '#e2e8f0' }}>
+                            Unlike traditional CSS filters, <strong>svg displacement mapping</strong> provides pixel-perfect control over 
+                            how light refracts through virtual glass surfaces, creating authentic glassmorphism effects.
+                        </p>
+                    </div>
+                    
+                    <div style={{ padding: '30px', background: 'rgba(255, 255, 255, 0.1)', borderRadius: '15px', backdropFilter: 'blur(10px)' }}>
+                        <h3 style={{ color: '#764ba2', marginBottom: '20px', fontSize: '1.5rem' }}>React Liquid Glass Components</h3>
+                        <p style={{ lineHeight: '1.6', color: '#e2e8f0', marginBottom: '15px' }}>
+                            Our <strong>react liquid glass</strong> components make it easy to integrate liquid glass effects into any React application. 
+                            The <strong>liquid glass react</strong> library provides TypeScript support, customizable presets, and GSAP animations.
+                        </p>
+                        <p style={{ lineHeight: '1.6', color: '#e2e8f0' }}>
+                            Perfect for React 18+, Next.js, and modern JavaScript frameworks. No complex setup required - just install and start creating stunning <strong>react glass components</strong>.
+                        </p>
+                    </div>
+                    
+                    <div style={{ padding: '30px', background: 'rgba(255, 255, 255, 0.1)', borderRadius: '15px', backdropFilter: 'blur(10px)' }}>
+                        <h3 style={{ color: '#10b981', marginBottom: '20px', fontSize: '1.5rem' }}>CSS Liquid Glass & Framework Support</h3>
+                        <p style={{ lineHeight: '1.6', color: '#e2e8f0', marginBottom: '15px' }}>
+                            Use <strong>css liquid glass</strong> effects with any framework including <strong>astro liquid glass</strong> integration. 
+                            Our core utilities work with vanilla CSS, making it perfect for any web technology stack.
+                        </p>
+                        <p style={{ lineHeight: '1.6', color: '#e2e8f0' }}>
+                            Compatible with Astro, Svelte, Vue, and more. The <strong>liquid glass css</strong> approach uses backdrop-filter 
+                            with SVG filters for maximum browser compatibility and performance.
+                        </p>
+                    </div>
+                </div>
+
+                <div style={{ textAlign: 'center', marginTop: '40px' }}>
+                    <h3 style={{ fontSize: '2rem', marginBottom: '30px', color: '#f8f9fa' }}>
+                        Why Choose Liquid Glass SVG for Your Projects?
+                    </h3>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '30px' }}>
+                        <div style={{ padding: '25px', background: 'rgba(102, 126, 234, 0.1)', borderRadius: '12px' }}>
+                            <h4 style={{ color: '#667eea', marginBottom: '15px' }}>🚀 Performance Optimized</h4>
+                            <p style={{ color: '#cbd5e0', fontSize: '0.9rem' }}>
+                                Hardware-accelerated SVG filters with minimal performance impact. 
+                                Perfect for high-performance web applications requiring smooth animations.
+                            </p>
+                        </div>
+                        <div style={{ padding: '25px', background: 'rgba(118, 75, 162, 0.1)', borderRadius: '12px' }}>
+                            <h4 style={{ color: '#764ba2', marginBottom: '15px' }}>🎨 Highly Customizable</h4>
+                            <p style={{ color: '#cbd5e0', fontSize: '0.9rem' }}>
+                                Full control over displacement parameters, chromatic aberration, blur effects, 
+                                and glass transparency. Create unique effects for your brand.
+                            </p>
+                        </div>
+                        <div style={{ padding: '25px', background: 'rgba(16, 185, 129, 0.1)', borderRadius: '12px' }}>
+                            <h4 style={{ color: '#10b981', marginBottom: '15px' }}>🔧 Developer Friendly</h4>
+                            <p style={{ color: '#cbd5e0', fontSize: '0.9rem' }}>
+                                TypeScript support, comprehensive documentation, Storybook examples, 
+                                and easy integration with existing React codebases.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </motion.section>
+
+            {/* Technical Deep Dive Section */}
+            <motion.section 
+                className="technical-seo-section"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                style={{ 
+                    padding: '60px 20px', 
+                    maxWidth: '1000px', 
+                    margin: '0 auto 60px',
+                    textAlign: 'center'
+                }}
+            >
+                <h2 style={{ 
+                    fontSize: '2.2rem', 
+                    marginBottom: '30px',
+                    background: 'linear-gradient(135deg, #f093fb, #f5576c)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text'
+                }}>
+                    SVG Displacement Mapping: The Science Behind Liquid Glass Effects
+                </h2>
+                
+                <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'left' }}>
+                    <p style={{ lineHeight: '1.7', color: '#e2e8f0', marginBottom: '25px', fontSize: '1.1rem' }}>
+                        <strong>SVG displacement mapping</strong> is a powerful graphics technique that uses color values from a displacement map 
+                        to determine how much to offset each pixel. In our <strong>liquid glass svg</strong> implementation, 
+                        we create dynamic displacement maps that simulate the optical properties of liquid crystal.
+                    </p>
+                    
+                    <div style={{ background: 'rgba(102, 126, 234, 0.1)', padding: '30px', borderRadius: '15px', marginBottom: '25px' }}>
+                        <h3 style={{ color: '#667eea', marginBottom: '20px' }}>How SVG Displacement Works:</h3>
+                        <ul style={{ color: '#cbd5e0', lineHeight: '1.6', paddingLeft: '20px' }}>
+                            <li><strong>Displacement Map Generation:</strong> Creates SVG gradients that define distortion patterns</li>
+                            <li><strong>Channel Separation:</strong> RGB channels control different displacement axes and intensities</li>
+                            <li><strong>Chromatic Aberration:</strong> Simulates how light separates through glass prisms</li>
+                            <li><strong>Backdrop Filter Application:</strong> Uses CSS backdrop-filter to apply effects to background content</li>
+                        </ul>
+                    </div>
+                    
+                    <p style={{ lineHeight: '1.7', color: '#e2e8f0', marginBottom: '25px', fontSize: '1.1rem' }}>
+                        This approach makes our <strong>react liquid glass</strong> and <strong>css liquid glass</strong> effects 
+                        significantly more realistic than traditional CSS blur or opacity effects. The result is a convincing 
+                        simulation of looking through actual liquid glass surfaces.
+                    </p>
+                </div>
+            </motion.section>
+
+            {/* Framework Integration Guide */}
+            <motion.section 
+                className="framework-integration-section"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                style={{ 
+                    padding: '60px 20px', 
+                    maxWidth: '1200px', 
+                    margin: '0 auto 60px',
+                    background: 'linear-gradient(135deg, rgba(240, 147, 251, 0.05), rgba(245, 87, 108, 0.05))',
+                    borderRadius: '20px'
+                }}
+            >
+                <h2 style={{ 
+                    fontSize: '2.2rem', 
+                    textAlign: 'center',
+                    marginBottom: '40px',
+                    background: 'linear-gradient(135deg, #667eea, #764ba2)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text'
+                }}>
+                    Liquid Glass SVG Integration Guide for Popular Frameworks
+                </h2>
+                
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '30px' }}>
+                    <div style={{ padding: '30px', background: 'rgba(255, 255, 255, 0.08)', borderRadius: '15px' }}>
+                        <h3 style={{ color: '#61dafb', marginBottom: '20px', fontSize: '1.4rem' }}>⚛️ React Liquid Glass</h3>
+                        <p style={{ color: '#e2e8f0', lineHeight: '1.6', marginBottom: '15px' }}>
+                            Perfect <strong>react liquid glass</strong> integration with hooks, TypeScript support, and component composition. 
+                            Our <strong>liquid glass react</strong> components work seamlessly with React 18+ and modern build tools.
+                        </p>
+                        <code style={{ 
+                            display: 'block', 
+                            background: 'rgba(0, 0, 0, 0.3)', 
+                            padding: '15px', 
+                            borderRadius: '8px', 
+                            fontSize: '0.9rem',
+                            color: '#a0aec0',
+                            overflow: 'auto'
+                        }}>
+                            npm install @liquid-svg-glass/react
+                        </code>
+                    </div>
+                    
+                    <div style={{ padding: '30px', background: 'rgba(255, 255, 255, 0.08)', borderRadius: '15px' }}>
+                        <h3 style={{ color: '#ff6b35', marginBottom: '20px', fontSize: '1.4rem' }}>🚀 Astro Liquid Glass</h3>
+                        <p style={{ color: '#e2e8f0', lineHeight: '1.6', marginBottom: '15px' }}>
+                            Use <strong>astro liquid glass</strong> effects in static sites with our framework-agnostic core utilities. 
+                            Perfect for <strong>css liquid glass</strong> implementations in Astro components.
+                        </p>
+                        <code style={{ 
+                            display: 'block', 
+                            background: 'rgba(0, 0, 0, 0.3)', 
+                            padding: '15px', 
+                            borderRadius: '8px', 
+                            fontSize: '0.9rem',
+                            color: '#a0aec0',
+                            overflow: 'auto'
+                        }}>
+                            npm install @liquid-svg-glass/core
+                        </code>
+                    </div>
+                    
+                    <div style={{ padding: '30px', background: 'rgba(255, 255, 255, 0.08)', borderRadius: '15px' }}>
+                        <h3 style={{ color: '#4fc08d', marginBottom: '20px', fontSize: '1.4rem' }}>💚 Vue & Vanilla CSS</h3>
+                        <p style={{ color: '#e2e8f0', lineHeight: '1.6', marginBottom: '15px' }}>
+                            Implement <strong>liquid glass css</strong> effects in Vue, Svelte, or vanilla JavaScript projects. 
+                            Our <strong>svg liquid glass</strong> core works with any framework or no framework at all.
+                        </p>
+                        <code style={{ 
+                            display: 'block', 
+                            background: 'rgba(0, 0, 0, 0.3)', 
+                            padding: '15px', 
+                            borderRadius: '8px', 
+                            fontSize: '0.9rem',
+                            color: '#a0aec0',
+                            overflow: 'auto'
+                        }}>
+                            backdrop-filter: url(#liquid-glass-filter);
+                        </code>
+                    </div>
+                </div>
+            </motion.section>
             
             {/* Footer with additional accessibility information */}
             <footer 

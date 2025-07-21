@@ -2,15 +2,27 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://svg-liquid-glass.dev/sitemap.xml
+Sitemap: https://mks2508.github.io/liquid-svg-glass/sitemap.xml
 
-# Specific instructions for search engines
+# High-priority crawling for search engines
 User-agent: Googlebot
 Allow: /
-Crawl-delay: 1
+Allow: /storybook/
+Crawl-delay: 0.5
 
 User-agent: Bingbot
 Allow: /
+Allow: /storybook/
+Crawl-delay: 0.5
+
+User-agent: DuckDuckBot
+Allow: /
+Allow: /storybook/
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Allow: /storybook/
 Crawl-delay: 1
 
 # Block access to development and build files
@@ -23,10 +35,32 @@ Disallow: /storybook-static/
 Disallow: /*.json$
 Disallow: /*.config.*
 Disallow: /*.lock
+Disallow: /temp/
+Disallow: /tmp/
+Disallow: /*?utm_*
+Disallow: /*&utm_*
 
-# Allow access to essential files
+# Allow access to essential files and directories
 Allow: /sitemap.xml
 Allow: /favicon.ico
 Allow: /robots.txt
 Allow: /assets/
 Allow: /public/
+Allow: /storybook/
+Allow: /storybook/?path=*
+
+# Special instructions for AI crawlers
+User-agent: GPTBot
+Allow: /
+Allow: /storybook/
+
+User-agent: ChatGPT-User
+Allow: /
+Allow: /storybook/
+
+User-agent: Google-Extended
+Allow: /
+Allow: /storybook/
+
+# Cache control
+Cache-delay: 86400
