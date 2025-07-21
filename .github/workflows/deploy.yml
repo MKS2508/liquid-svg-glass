@@ -119,7 +119,7 @@ jobs:
     - name: 📚 Build Storybook
       run: |
         cd apps/showcase
-        bun run build:storybook
+        bun run build-storybook
 
     - name: 🌟 Build Showcase app
       run: |
