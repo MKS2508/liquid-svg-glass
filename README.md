@@ -1,4 +1,4 @@
-# Liquid SVG Glass
+# Liquid Glass SVG - #1 React Library for SVG Displacement Mapping Effects
 
 ![Liquid SVG Glass Banner](./assets/banner.png)
 
@@ -8,29 +8,50 @@
 
 ![React](https://img.shields.io/badge/React-18+-61DAFB?style=for-the-badge&logo=react&logoColor=black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5+-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-![SVG](https://img.shields.io/badge/SVG-Filters-FFB13B?style=for-the-badge&logo=svg&logoColor=black)
+![SVG](https://img.shields.io/badge/SVG-Displacement-FFB13B?style=for-the-badge&logo=svg&logoColor=black)
 ![GSAP](https://img.shields.io/badge/GSAP-Animation-88CE02?style=for-the-badge&logo=greensock&logoColor=black)
+![CSS](https://img.shields.io/badge/CSS-Liquid%20Glass-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![Astro](https://img.shields.io/badge/Astro-Compatible-FF5D01?style=for-the-badge&logo=astro&logoColor=white)
 
-*A sophisticated React component library for creating realistic liquid glass effects using SVG displacement mapping and chromatic aberration*
+*The ultimate **liquid glass SVG** and **react liquid glass** component library for creating realistic liquid glass effects using **SVG displacement mapping** and chromatic aberration. Perfect for **css liquid glass**, **astro liquid glass**, and modern **glassmorphism** projects.*
 
-[📱 Live Demo](https://mks2508.github.io/liquid-svg-glass/) • [📚 Documentation](https://mks2508.github.io/liquid-svg-glass/storybook/) • [🎨 Storybook](https://mks2508.github.io/liquid-svg-glass/storybook/)
+**Keywords:** liquid glass svg, svg liquid glass, react liquid glass, css liquid glass, astro liquid glass, svg displacement, svg displacement mapping, glassmorphism, liquid glass effect, react glassmorphism
+
+[📱 Live Demo](https://mks2508.github.io/liquid-svg-glass/) • [📚 Documentation](https://mks2508.github.io/liquid-svg-glass/storybook/) • [🎨 Storybook](https://mks2508.github.io/liquid-svg-glass/storybook/) • [📦 NPM](https://www.npmjs.com/package/@liquid-svg-glass/react)
 
 </div>
 
-## 🎯 What is Liquid Glass Effect?
+## 🎯 What is Liquid Glass SVG Effect?
 
-The Liquid Glass Effect is a **real-time pixel distortion system** that simulates viewing content through liquid crystal. It combines SVG displacement mapping with chromatic aberration to create convincing optical refraction effects using only standard web technologies.
+The **Liquid Glass SVG** effect is a **real-time pixel distortion system** that simulates viewing content through liquid crystal glass. Our **svg liquid glass** technology combines **SVG displacement mapping** with chromatic aberration to create convincing optical refraction effects using only standard web technologies.
 
-### Key Concept
+### Why Choose Liquid Glass SVG?
+
+- **🎨 Realistic Glass Effects**: Advanced **svg displacement mapping** creates authentic liquid glass distortion
+- **⚛️ React Ready**: Perfect **react liquid glass** components with TypeScript support
+- **🌍 Framework Agnostic**: Use **css liquid glass** effects in React, **astro liquid glass**, Vue, or vanilla JS
+- **🚀 Performance**: Hardware-accelerated SVG filters with minimal performance impact
+- **🛠️ Developer Friendly**: Easy integration with modern build tools and frameworks
+
+### How SVG Displacement Mapping Works
+
+**SVG displacement mapping** is the core technology behind our **liquid glass svg** effects. Unlike traditional CSS blur or opacity effects, **svg displacement** actually distorts pixels based on mathematical color calculations:
 
 ```css
-.glass-element {
-  backdrop-filter: url(#custom-svg-filter);
-  /* ☝️ This applies an SVG filter to the content BEHIND the element */
+.liquid-glass-element {
+  backdrop-filter: url(#liquid-glass-filter);
+  /* ☝️ This applies SVG displacement to content BEHIND the element */
 }
 ```
 
-> **Key insight**: Unlike `filter` which affects the element itself, `backdrop-filter` distorts what you see **through** the element, like applying a real-time Photoshop shader to the background.
+> **Key insight**: Our **css liquid glass** implementation uses `backdrop-filter` to distort background content in real-time, creating authentic **glassmorphism** effects that simulate actual liquid crystal optics.
+
+### Perfect for Modern Frameworks
+
+- **React Liquid Glass**: Native **react liquid glass** components with hooks and TypeScript
+- **Astro Liquid Glass**: Framework-agnostic core for **astro liquid glass** static sites  
+- **CSS Liquid Glass**: Pure **css liquid glass** for Vue, Svelte, and vanilla JavaScript
+- **SVG Liquid Glass**: Universal **svg liquid glass** that works everywhere
 
 ## 🏗️ Architecture
 
