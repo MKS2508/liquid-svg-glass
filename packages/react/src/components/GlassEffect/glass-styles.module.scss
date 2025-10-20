@@ -45,6 +45,14 @@
   position: absolute;
   inset: 0;
   height: 200%;
+  background: linear-gradient(
+    to bottom,
+    light-dark(
+      hsl(0deg 0% 100% / 0.03),
+      hsl(0deg 0% 0% / 0.03)
+    ) 0%,
+    transparent 50%
+  );
   backdrop-filter: url(#filter) brightness(1.1) saturate(1.5);
   -webkit-backdrop-filter: url(#filter) brightness(1.1) saturate(1.5);
   mask-image: linear-gradient(
