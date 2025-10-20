@@ -4,6 +4,8 @@ import { GlassEffect } from '@liquid-svg-glass/react';
 import { GlassEffectControlPanel } from '../../components/GlassEffectControlPanel';
 import type { GlassEffectConfig } from '../../components/GlassEffectControlPanel/types';
 import { SharedBackground } from '../../components/SharedBackground';
+import DynamicBackgroundGlassShowcase from '../../components/DynamicBackgroundGlassShowcase';
+import { BackgroundSelector } from './BackgroundSelector';
 import './styles.css';
 
 const DEFAULT_LEFT: GlassEffectConfig = {
@@ -63,6 +65,7 @@ export function DebugPage() {
   const [rightDebug, setRightDebug] = useState(false);
   const [leftPanelOpen, setLeftPanelOpen] = useState(false);
   const [rightPanelOpen, setRightPanelOpen] = useState(false);
+  const [backgroundType, setBackgroundType] = useState('cyberpunk');
 
   const leftButtonRef = useRef<HTMLButtonElement>(null);
   const rightButtonRef = useRef<HTMLButtonElement>(null);
@@ -98,6 +101,11 @@ export function DebugPage() {
           <h1 className="debug-title">Debug Mode - Side-by-Side Comparison</h1>
         </nav>
 
+        <BackgroundSelector
+          selected={backgroundType}
+          onChange={setBackgroundType}
+        />
+
         <div className="split-container">
           {/* LEFT COLUMN */}
           <div className="column left-column">
@@ -116,7 +124,10 @@ export function DebugPage() {
               </button>
             </div>
 
-            <div className="glass-wrapper">
+            <DynamicBackgroundGlassShowcase
+              backgroundType={backgroundType}
+              showDecorations={true}
+            >
               <GlassEffect
                 draggable
                 preset={leftConfig.preset}
@@ -142,7 +153,7 @@ export function DebugPage() {
                 enablePerformanceOpts={leftConfig.enablePerformanceOpts}
                 enableFlickeringFix={leftConfig.enableFlickeringFix}
               />
-            </div>
+            </DynamicBackgroundGlassShowcase>
 
             <GlassEffectControlPanel
               isOpen={leftPanelOpen}
@@ -173,7 +184,10 @@ export function DebugPage() {
               </button>
             </div>
 
-            <div className="glass-wrapper">
+            <DynamicBackgroundGlassShowcase
+              backgroundType={backgroundType}
+              showDecorations={true}
+            >
               <GlassEffect
                 draggable
                 preset={rightConfig.preset}
@@ -199,7 +213,7 @@ export function DebugPage() {
                 enablePerformanceOpts={rightConfig.enablePerformanceOpts}
                 enableFlickeringFix={rightConfig.enableFlickeringFix}
               />
-            </div>
+            </DynamicBackgroundGlassShowcase>
 
             <GlassEffectControlPanel
               isOpen={rightPanelOpen}
