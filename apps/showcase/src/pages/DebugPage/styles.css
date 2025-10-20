@@ -163,6 +163,30 @@
     rgba(245, 158, 11, 0.15) 100%);
 }
 
+/* Wavy Background Overrides */
+.glass-wavy-wrapper {
+  min-height: 500px !important;
+  height: auto !important;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+}
+
+.glass-wavy-container {
+  min-height: 500px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Ensure GlassEffect is centered and visible on WavyBackground */
+.glass-wavy-container > div {
+  position: relative;
+  z-index: 10;
+}
+
 /* Responsive Design */
 @media (max-width: 1400px) {
   .split-container {

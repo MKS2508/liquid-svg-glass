@@ -56,6 +56,12 @@ const backgrounds: Background[] = [
     label: 'Fire',
     color: '#ff9a9e',
     description: 'Dashboard with warm gradients'
+  },
+  {
+    name: 'wavy',
+    label: 'Wavy',
+    color: '#38bdf8',
+    description: 'Animated waves with simplex noise'
   }
 ];
 
