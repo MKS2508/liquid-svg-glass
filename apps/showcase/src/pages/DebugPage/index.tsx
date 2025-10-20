@@ -14,7 +14,7 @@ const DEFAULT_LEFT: GlassEffectConfig = {
   border: 0.07,
   frost: 0.05,
   blur: 11,
-  blurBackground: 8,
+  blurBackground: 10,  // Phase 1: High backdrop blur
   displace: 0.2,
   scale: -180,
   alpha: 0.93,
@@ -32,24 +32,24 @@ const DEFAULT_LEFT: GlassEffectConfig = {
 };
 
 const DEFAULT_RIGHT: GlassEffectConfig = {
-  preset: 'bubble',
-  width: 200,
-  height: 200,
-  radius: 100,
-  border: 0.1,
-  frost: 0.08,
-  blur: 11,
-  blurBackground: 10,
-  displace: 0.3,
-  scale: -150,
-  alpha: 0.9,
-  lightness: 55,
-  r: 5,
-  g: 15,
-  b: 25,
-  x: 'G',
-  y: 'R',
-  blend: 'normal',
+  preset: 'dock',  // Same preset as Config A
+  width: 336,      // Same dimensions
+  height: 96,
+  radius: 16,
+  border: 0.07,    // Same border
+  frost: 0.05,     // Same frost
+  blur: 11,        // Same SVG blur
+  blurBackground: 0,  // Phase 1 DISABLED: NO backdrop blur
+  displace: 0.2,   // Same displace
+  scale: -180,     // Same scale
+  alpha: 0.93,     // Same alpha
+  lightness: 50,   // Same lightness
+  r: 0,            // Same chromatic
+  g: 10,
+  b: 20,
+  x: 'R',          // Same channel selectors
+  y: 'B',
+  blend: 'difference',  // Same blend mode
   // Phase 1 Features - ALL DISABLED
   enableBackdropExtension: false,
   enablePerformanceOpts: false,
@@ -102,7 +102,7 @@ export function DebugPage() {
           {/* LEFT COLUMN */}
           <div className="column left-column">
             <div className="column-header">
-              <h2>Config A - Dock Preset (Phase 1 Enabled)</h2>
+              <h2>Config A - Phase 1 ENABLED (Backdrop Blur: 10px)</h2>
               <button
                 ref={leftButtonRef}
                 onClick={() => setLeftPanelOpen(!leftPanelOpen)}
@@ -159,7 +159,7 @@ export function DebugPage() {
           {/* RIGHT COLUMN */}
           <div className="column right-column">
             <div className="column-header">
-              <h2>Config B - Bubble Preset (Phase 1 Disabled)</h2>
+              <h2>Config B - Phase 1 DISABLED (Backdrop Blur: 0px)</h2>
               <button
                 ref={rightButtonRef}
                 onClick={() => setRightPanelOpen(!rightPanelOpen)}
