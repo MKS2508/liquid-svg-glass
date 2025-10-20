@@ -13,6 +13,8 @@
     hsl(0 0% 100% / var(--frost, 0)),
     hsl(0 0% 0% / var(--frost, 0))
   );
+  backdrop-filter: url(#filter) brightness(1.1) saturate(1.5);
+  -webkit-backdrop-filter: url(#filter) brightness(1.1) saturate(1.5);
   box-shadow:
     0 0 2px 1px
       light-dark(
