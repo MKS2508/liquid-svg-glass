@@ -1,0 +1,594 @@
+// GlassEffect Control Panel - Dropdown Design
+
+// =============================================================================
+// VARIABLES
+// =============================================================================
+
+:root {
+  --theme-primary: #B392F0;
+  --theme-secondary: #F87683;
+  --theme-bg: #251B30;
+
+  --panel-bg: rgba(37, 27, 48, 0.95);
+  --panel-border: rgba(179, 146, 240, 0.2);
+  --panel-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  --panel-backdrop: blur(20px);
+  --panel-radius: 16px;
+  --panel-width: 420px;
+  --panel-max-height: 600px;
+
+  --tab-bg: rgba(179, 146, 240, 0.06);
+  --tab-hover: rgba(179, 146, 240, 0.1);
+  --tab-active: rgba(179, 146, 240, 0.2);
+  --tab-border: rgba(179, 146, 240, 0.15);
+
+  --slider-track: rgba(179, 146, 240, 0.2);
+  --slider-thumb: var(--theme-primary);
+  --slider-thumb-hover: #9f7cea;
+}
+
+// =============================================================================
+// MAIN PANEL
+// =============================================================================
+
+.controlPanel {
+  position: fixed;
+  width: var(--panel-width);
+  background: var(--panel-bg);
+  backdrop-filter: var(--panel-backdrop);
+  -webkit-backdrop-filter: var(--panel-backdrop);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--panel-radius);
+  box-shadow: var(--panel-shadow);
+  overflow: hidden;
+  z-index: 9999;
+  pointer-events: auto;
+
+  &:hover {
+    border-color: rgba(179, 146, 240, 0.3);
+  }
+}
+
+// =============================================================================
+// HEADER
+// =============================================================================
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: rgba(30, 41, 59, 0.7);
+  border-bottom: 1px solid var(--panel-border);
+
+  h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #f8fafc;
+    margin: 0;
+    flex: 1;
+  }
+}
+
+.headerActions {
+  display: flex;
+  gap: 8px;
+}
+
+.headerBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(179, 146, 240, 0.2);
+  border: none;
+  border-radius: 6px;
+  color: #cbd5e1;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(179, 146, 240, 0.3);
+    color: #f8fafc;
+  }
+
+  &.debugBtn {
+    &.active {
+      background: var(--theme-secondary);
+      color: white;
+    }
+  }
+}
+
+.closeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: rgba(179, 146, 240, 0.2);
+  border: none;
+  border-radius: 6px;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(248, 118, 131, 0.3);
+    color: #f87171;
+  }
+}
+
+// =============================================================================
+// TAB NAVIGATION
+// =============================================================================
+
+.tabNav {
+  display: flex;
+  background: var(--tab-bg);
+  border-bottom: 1px solid var(--tab-border);
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.tabBtn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 12px;
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  white-space: nowrap;
+  min-width: fit-content;
+
+  &:hover {
+    background: var(--tab-hover);
+    color: #f8fafc;
+  }
+
+  &.active {
+    background: var(--tab-active);
+    color: var(--theme-primary);
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--theme-primary);
+    }
+  }
+}
+
+// =============================================================================
+// TAB CONTENT
+// =============================================================================
+
+.tabContent {
+  max-height: var(--panel-max-height);
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(30, 41, 59, 0.5);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(179, 146, 240, 0.3);
+    border-radius: 4px;
+
+    &:hover {
+      background: rgba(179, 146, 240, 0.5);
+    }
+  }
+}
+
+.tabPanel {
+  padding: 20px;
+}
+
+// =============================================================================
+// PRESETS TAB
+// =============================================================================
+
+.presetGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.presetButton {
+  padding: 12px 16px;
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid var(--tab-border);
+  border-radius: 8px;
+  color: #cbd5e1;
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: capitalize;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(179, 146, 240, 0.1);
+    border-color: rgba(179, 146, 240, 0.3);
+    color: #f8fafc;
+    transform: translateY(-1px);
+  }
+
+  &.active {
+    background: rgba(179, 146, 240, 0.2);
+    border-color: var(--theme-primary);
+    color: var(--theme-primary);
+    box-shadow: 0 0 0 2px rgba(179, 146, 240, 0.1);
+  }
+}
+
+// =============================================================================
+// PARAMETERS
+// =============================================================================
+
+.parameterSection {
+  margin-bottom: 24px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  h4 {
+    font-size: 12px;
+    font-weight: 600;
+    color: #f8fafc;
+    margin: 0 0 12px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--tab-border);
+  }
+}
+
+.sliderControl {
+  margin-bottom: 16px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.sliderLabel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: #cbd5e1;
+  margin-bottom: 6px;
+
+  span {
+    font-family: 'SF Mono', Monaco, monospace;
+    color: var(--theme-primary);
+  }
+
+  &.redLabel {
+    color: #ef4444;
+
+    span {
+      color: #ef4444;
+    }
+  }
+
+  &.greenLabel {
+    color: #10b981;
+
+    span {
+      color: #10b981;
+    }
+  }
+
+  &.blueLabel {
+    color: #3b82f6;
+
+    span {
+      color: #3b82f6;
+    }
+  }
+}
+
+.slider {
+  width: 100%;
+  height: 6px;
+  background: var(--slider-track);
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: var(--slider-thumb);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: var(--slider-thumb-hover);
+      transform: scale(1.1);
+    }
+  }
+
+  &::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: var(--slider-thumb);
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+  }
+
+  &.redSlider {
+    &::-webkit-slider-thumb {
+      background: #ef4444;
+
+      &:hover {
+        background: #dc2626;
+      }
+    }
+
+    &::-moz-range-thumb {
+      background: #ef4444;
+    }
+  }
+
+  &.greenSlider {
+    &::-webkit-slider-thumb {
+      background: #10b981;
+
+      &:hover {
+        background: #059669;
+      }
+    }
+
+    &::-moz-range-thumb {
+      background: #10b981;
+    }
+  }
+
+  &.blueSlider {
+    &::-webkit-slider-thumb {
+      background: #3b82f6;
+
+      &:hover {
+        background: #2563eb;
+      }
+    }
+
+    &::-moz-range-thumb {
+      background: #3b82f6;
+    }
+  }
+}
+
+// =============================================================================
+// SELECT CONTROLS
+// =============================================================================
+
+.selectControl {
+  margin-bottom: 16px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: #cbd5e1;
+    margin-bottom: 6px;
+  }
+
+  select {
+    width: 100%;
+    padding: 8px 12px;
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid var(--tab-border);
+    border-radius: 6px;
+    color: #f8fafc;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: rgba(30, 41, 59, 0.8);
+      border-color: rgba(179, 146, 240, 0.3);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: var(--theme-primary);
+      box-shadow: 0 0 0 2px rgba(179, 146, 240, 0.1);
+    }
+  }
+}
+
+.channelSelector {
+  display: flex;
+  gap: 8px;
+
+  button {
+    flex: 1;
+    padding: 8px 12px;
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid var(--tab-border);
+    border-radius: 6px;
+    color: #cbd5e1;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: rgba(179, 146, 240, 0.1);
+      border-color: rgba(179, 146, 240, 0.3);
+      color: #f8fafc;
+    }
+
+    &.active {
+      background: rgba(179, 146, 240, 0.2);
+      border-color: var(--theme-primary);
+      color: var(--theme-primary);
+    }
+  }
+}
+
+// =============================================================================
+// TOGGLE CONTROLS (Phase 1)
+// =============================================================================
+
+.toggleControl {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.2s ease;
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #cbd5e1;
+
+    input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      accent-color: rgba(179, 146, 240, 0.8);
+    }
+
+    span {
+      user-select: none;
+    }
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(179, 146, 240, 0.3);
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.toggleDescription {
+  margin-top: 8px;
+  margin-left: 28px;
+  font-size: 0.8rem;
+  opacity: 0.6;
+  line-height: 1.4;
+  color: #94a3b8;
+}
+
+// =============================================================================
+// RESPONSIVE
+// =============================================================================
+
+@media (max-width: 768px) {
+  :root {
+    --panel-width: min(calc(100vw - 40px), 380px);
+    --panel-max-height: 500px;
+  }
+
+  .controlPanel {
+    right: 50%;
+    transform: translateX(50%);
+  }
+
+  .panelHeader {
+    padding: 12px 16px;
+
+    h3 {
+      font-size: 13px;
+    }
+  }
+
+  .tabBtn {
+    padding: 10px 8px;
+    font-size: 10px;
+  }
+
+  .tabPanel {
+    padding: 16px;
+  }
+
+  .presetGrid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .sliderControl {
+    margin-bottom: 14px;
+  }
+}
+
+@media (max-height: 700px) {
+  :root {
+    --panel-max-height: 400px;
+  }
+}
+
+@media (max-height: 500px) {
+  :root {
+    --panel-max-height: 300px;
+  }
+
+  .panelHeader {
+    padding: 8px 12px;
+  }
+
+  .tabPanel {
+    padding: 12px;
+  }
+}
+
+// Touch device optimizations
+@media (hover: none) and (pointer: coarse) {
+  .slider {
+    height: 10px;
+
+    &::-webkit-slider-thumb {
+      width: 24px;
+      height: 24px;
+    }
+
+    &::-moz-range-thumb {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
