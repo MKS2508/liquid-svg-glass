@@ -31,6 +31,14 @@
     0px 4px 16px rgba(17, 17, 26, 0.05) inset,
     0px 8px 24px rgba(17, 17, 26, 0.05) inset,
     0px 16px 56px rgba(17, 17, 26, 0.05) inset;
+
+  will-change: backdrop-filter, transform;
+  contain: layout style paint;
+  transform: translateZ(0);
+
+  @media (prefers-reduced-motion: reduce) {
+    will-change: auto;
+  }
 }
 
 .backdrop {
@@ -51,6 +59,7 @@
   );
   pointer-events: none;
   z-index: 0;
+  will-change: backdrop-filter;
 }
 
 .content {
