@@ -34,6 +34,7 @@ export interface GlassEffectProps extends DragCallbacks {
   // Individual visual effect props
   frost?: number;
   blur?: number;
+  blurBackground?: number;
   displace?: number;
   scale?: number;
   alpha?: number;

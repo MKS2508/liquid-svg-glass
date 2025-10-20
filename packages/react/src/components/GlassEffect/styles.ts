@@ -34,6 +34,7 @@ export const glassPresets = {
     alpha: 0.93,
     lightness: 50,
     blur: 11,
+    blurBackground: 8,
     x: 'R' as const,
     y: 'B' as const,
     blend: 'difference' as const,
@@ -53,6 +54,7 @@ export const glassPresets = {
     alpha: 0.93,
     lightness: 50,
     blur: 11,
+    blurBackground: 6,
     x: 'R' as const,
     y: 'B' as const,
     blend: 'difference' as const,
@@ -72,6 +74,7 @@ export const glassPresets = {
     alpha: 0.93,
     lightness: 50,
     blur: 11,
+    blurBackground: 10,
     x: 'R' as const,
     y: 'B' as const,
     blend: 'difference' as const,
@@ -79,7 +82,7 @@ export const glassPresets = {
     g: 10,
     b: 20,
   },
-  
+
   free: {
     width: 140,
     height: 280,
@@ -91,6 +94,7 @@ export const glassPresets = {
     alpha: 0.74,
     lightness: 60,
     blur: 10,
+    blurBackground: 5,
     x: 'R' as const,
     y: 'B' as const,
     blend: 'difference' as const,

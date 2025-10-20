@@ -57,6 +57,12 @@ export interface VisualEffects {
    * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/filter-function/blur | MDN blur()}
    */
   blur: number;
+  /**
+   * Desenfoque gaussiano en píxeles aplicado al backdrop-filter CSS.
+   * Controla el blur real del contenido de fondo detrás del elemento glass.
+   * @see {@link https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter | MDN backdrop-filter}
+   */
+  blurBackground: number;
 }
 
 /**

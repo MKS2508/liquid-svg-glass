@@ -55,6 +55,7 @@ const GlassEffect: React.FC<GlassEffectProps> = ({
   radius,
   frost,
   blur,
+  blurBackground,
   displace,
   scale,
   border,
@@ -85,6 +86,7 @@ const GlassEffect: React.FC<GlassEffectProps> = ({
       ...(radius !== undefined && { radius }),
       ...(frost !== undefined && { frost }),
       ...(blur !== undefined && { blur }),
+      ...(blurBackground !== undefined && { blurBackground }),
       ...(displace !== undefined && { displace }),
       ...(scale !== undefined && { scale }),
       ...(border !== undefined && { border }),
@@ -97,7 +99,7 @@ const GlassEffect: React.FC<GlassEffectProps> = ({
       ...(g !== undefined && { g }),
       ...(b !== undefined && { b }),
     };
-  }, [preset, customConfig, width, height, radius, frost, blur, displace, scale, border, alpha, lightness, x, y, blend, r, g, b]);
+  }, [preset, customConfig, width, height, radius, frost, blur, blurBackground, displace, scale, border, alpha, lightness, x, y, blend, r, g, b]);
 
   // Generate displacement map using SVG engine
   const { displacementDataUri, svgFilterAttributes } = useMemo(() => {
@@ -115,6 +117,7 @@ const GlassEffect: React.FC<GlassEffectProps> = ({
       alpha: currentConfig.alpha,
       lightness: currentConfig.lightness,
       blur: currentConfig.blur,
+      blurBackground: currentConfig.blurBackground,
       x: currentConfig.x,
       y: currentConfig.y,
       blend: currentConfig.blend,
@@ -164,6 +167,7 @@ const GlassEffect: React.FC<GlassEffectProps> = ({
     '--height': currentConfig.height,
     '--radius': currentConfig.radius,
     '--frost': currentConfig.frost,
+    '--blur-background': currentConfig.blurBackground,
     '--output-blur': currentConfig.displace,
   } as React.CSSProperties), [currentConfig]);
 

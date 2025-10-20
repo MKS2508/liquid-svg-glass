@@ -15,6 +15,7 @@ const PRESET_VALUES: Record<GlassPreset, Omit<import('./types').GlassEffectConfi
     border: 7,
     frost: 0.05,
     blur: 11,
+    blurBackground: 8,
     displace: 0.2,
     scale: -180,
     alpha: 0.93,
@@ -33,6 +34,7 @@ const PRESET_VALUES: Record<GlassPreset, Omit<import('./types').GlassEffectConfi
     border: 7,
     frost: 0,
     blur: 11,
+    blurBackground: 6,
     displace: 0,
     scale: -180,
     alpha: 0.93,
@@ -51,6 +53,7 @@ const PRESET_VALUES: Record<GlassPreset, Omit<import('./types').GlassEffectConfi
     border: 7,
     frost: 0,
     blur: 11,
+    blurBackground: 10,
     displace: 0,
     scale: -180,
     alpha: 0.93,
@@ -69,6 +72,7 @@ const PRESET_VALUES: Record<GlassPreset, Omit<import('./types').GlassEffectConfi
     border: 15,
     frost: 0,
     blur: 10,
+    blurBackground: 5,
     displace: 0,
     scale: -300,
     alpha: 0.74,
@@ -379,7 +383,7 @@ export function GlassEffectControlPanel({
                   </div>
                   <div className={styles.sliderControl}>
                     <div className={styles.sliderLabel}>
-                      Blur <span>{config.blur}px</span>
+                      Blur SVG Rect <span>{config.blur}px</span>
                     </div>
                     <input
                       type="range"
@@ -389,6 +393,20 @@ export function GlassEffectControlPanel({
                       step="1"
                       value={config.blur}
                       onChange={(e) => handleNumberChange('blur', Number(e.target.value))}
+                    />
+                  </div>
+                  <div className={styles.sliderControl}>
+                    <div className={styles.sliderLabel}>
+                      Blur Background <span>{config.blurBackground}px</span>
+                    </div>
+                    <input
+                      type="range"
+                      className={styles.slider}
+                      min="0"
+                      max="30"
+                      step="0.5"
+                      value={config.blurBackground}
+                      onChange={(e) => handleNumberChange('blurBackground', Number(e.target.value))}
                     />
                   </div>
                   <div className={styles.sliderControl}>

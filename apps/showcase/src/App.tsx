@@ -90,6 +90,7 @@ const DEFAULT_CONFIG: GlassEffectConfig = {
   border: 0.07,
   frost: 0.05,
   blur: 11,
+  blurBackground: 8,
   displace: 0.2,
   scale: -180,
   alpha: 0.93,
@@ -306,6 +307,7 @@ function App() {
                 border={glassConfig.border}
                 frost={glassConfig.frost}
                 blur={glassConfig.blur}
+                blurBackground={glassConfig.blurBackground}
                 displace={glassConfig.displace}
                 scale={glassConfig.scale}
                 alpha={glassConfig.alpha}
