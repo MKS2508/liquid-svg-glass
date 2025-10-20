@@ -16,6 +16,10 @@ export const glassEffectStyles = {
   nav: styles.nav,
   displacementDebug: styles.displacementDebug,
   displacementImageLabel: styles.displacementImageLabel,
+  // Phase 1 conditional classes
+  effectOptimized: styles.effectOptimized,
+  backdropOptimized: styles.backdropOptimized,
+  backdropFlickeringFix: styles.backdropFlickeringFix,
 } as const;
 
 export const glassPresets = {

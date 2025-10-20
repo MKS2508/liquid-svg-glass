@@ -48,4 +48,12 @@ export interface GlassEffectProps extends DragCallbacks {
   r?: number;
   g?: number;
   b?: number;
+
+  // Phase 1 Features (2025)
+  /** Habilitar backdrop extension (captura elementos cercanos) */
+  enableBackdropExtension?: boolean;
+  /** Habilitar optimizaciones de performance (GPU acceleration) */
+  enablePerformanceOpts?: boolean;
+  /** Habilitar flickering fix (gradient anti-flicker) */
+  enableFlickeringFix?: boolean;
 }

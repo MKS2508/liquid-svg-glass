@@ -31,7 +31,10 @@
     0px 4px 16px rgba(17, 17, 26, 0.05) inset,
     0px 8px 24px rgba(17, 17, 26, 0.05) inset,
     0px 16px 56px rgba(17, 17, 26, 0.05) inset;
+}
 
+// Phase 1: Performance optimizations (conditional)
+.effectOptimized {
   will-change: backdrop-filter, transform;
   contain: layout style paint;
   transform: translateZ(0);
@@ -45,14 +48,6 @@
   position: absolute;
   inset: 0;
   height: 200%;
-  background: linear-gradient(
-    to bottom,
-    light-dark(
-      hsl(0deg 0% 100% / 0.03),
-      hsl(0deg 0% 0% / 0.03)
-    ) 0%,
-    transparent 50%
-  );
   backdrop-filter: url(#filter) brightness(1.1) saturate(1.5);
   -webkit-backdrop-filter: url(#filter) brightness(1.1) saturate(1.5);
   mask-image: linear-gradient(
@@ -67,7 +62,23 @@
   );
   pointer-events: none;
   z-index: 0;
+}
+
+// Phase 1: Backdrop performance optimization (conditional)
+.backdropOptimized {
   will-change: backdrop-filter;
+}
+
+// Phase 1: Flickering fix with gradient (conditional)
+.backdropFlickeringFix {
+  background: linear-gradient(
+    to bottom,
+    light-dark(
+      hsl(0deg 0% 100% / 0.03),
+      hsl(0deg 0% 0% / 0.03)
+    ) 0%,
+    transparent 50%
+  );
 }
 
 .content {

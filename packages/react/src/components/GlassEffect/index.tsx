@@ -66,6 +66,10 @@ const GlassEffect: React.FC<GlassEffectProps> = ({
   r,
   g,
   b,
+  // Phase 1 feature flags (default: true)
+  enableBackdropExtension = true,
+  enablePerformanceOpts = true,
+  enableFlickeringFix = true,
 }) => {
   const logger = useMemo(() => GlassLogger.createGlassLogger(debug), [debug]);
   
@@ -181,7 +185,27 @@ const GlassEffect: React.FC<GlassEffectProps> = ({
     })
   }), [cssVariables, currentConfig, draggable, initialPosition]);
 
-  // Render content 
+  // Build conditional classNames for Phase 1 features
+  const effectClassName = useMemo(() => {
+    const classes = [glassEffectStyles.effect];
+    if (enablePerformanceOpts) {
+      classes.push(glassEffectStyles.effectOptimized);
+    }
+    return classes.join(' ');
+  }, [enablePerformanceOpts]);
+
+  const backdropClassName = useMemo(() => {
+    const classes = [glassEffectStyles.backdrop];
+    if (enablePerformanceOpts) {
+      classes.push(glassEffectStyles.backdropOptimized);
+    }
+    if (enableFlickeringFix) {
+      classes.push(glassEffectStyles.backdropFlickeringFix);
+    }
+    return classes.join(' ');
+  }, [enablePerformanceOpts, enableFlickeringFix]);
+
+  // Render content
   const renderContent = () => (
     <div className={glassEffectStyles.navWrap}>
       <nav className={glassEffectStyles.nav}>
@@ -203,12 +227,12 @@ const GlassEffect: React.FC<GlassEffectProps> = ({
         debug={debug}
       >
         <div
-          className={`${glassEffectStyles.container} ${glassEffectStyles.effect}`}
+          className={`${glassEffectStyles.container} ${effectClassName}`}
           data-preset={preset}
           data-debug={debug}
           style={glassStyle}
         >
-          <div className={glassEffectStyles.backdrop} />
+          {enableBackdropExtension && <div className={backdropClassName} />}
           {renderContent()}
           <svg className={glassEffectStyles.filter} xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -302,12 +326,12 @@ const GlassEffect: React.FC<GlassEffectProps> = ({
   // Non-draggable version - standalone glass effect
   return (
     <div
-      className={`${glassEffectStyles.container} ${glassEffectStyles.effect} ${className || ''}`}
+      className={`${glassEffectStyles.container} ${effectClassName} ${className || ''}`}
       data-preset={preset}
       data-debug={debug}
       style={glassStyle}
     >
-      <div className={glassEffectStyles.backdrop} />
+      {enableBackdropExtension && <div className={backdropClassName} />}
       {renderContent()}
       <svg className={glassEffectStyles.filter} xmlns="http://www.w3.org/2000/svg">
         <defs>
