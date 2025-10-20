@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion } from 'framer-motion';
@@ -373,6 +374,47 @@ function App() {
                         <meta itemProp="position" content="2" />
                     </li>
                 </ol>
+
+                <Link
+                    to="/debug"
+                    style={{
+                        position: 'absolute',
+                        right: '150px',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        padding: '8px 16px',
+                        background: 'rgba(102, 126, 234, 0.2)',
+                        border: '1px solid rgba(102, 126, 234, 0.3)',
+                        borderRadius: '8px',
+                        color: '#f8fafc',
+                        fontSize: '13px',
+                        fontWeight: 500,
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        transition: 'all 0.2s ease',
+                        textDecoration: 'none',
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.background = 'rgba(102, 126, 234, 0.3)';
+                        e.currentTarget.style.borderColor = 'rgba(102, 126, 234, 0.5)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.background = 'rgba(102, 126, 234, 0.2)';
+                        e.currentTarget.style.borderColor = 'rgba(102, 126, 234, 0.3)';
+                    }}
+                    title="Navigate to Debug Page"
+                    aria-label="Navigate to Debug Page"
+                >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <rect x="3" y="3" width="7" height="7" />
+                        <rect x="14" y="3" width="7" height="7" />
+                        <rect x="14" y="14" width="7" height="7" />
+                        <rect x="3" y="14" width="7" height="7" />
+                    </svg>
+                    Debug Mode
+                </Link>
 
                 <button
                     ref={controlButtonRef}
