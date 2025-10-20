@@ -1,0 +1,587 @@
+// InlineControlPanel - Always Visible Inline Design
+
+// =============================================================================
+// VARIABLES
+// =============================================================================
+
+:root {
+  --theme-primary: #B392F0;
+  --theme-secondary: #F87683;
+  --theme-bg: #251B30;
+
+  --panel-bg: rgba(37, 27, 48, 0.95);
+  --panel-border: rgba(179, 146, 240, 0.2);
+  --panel-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --panel-backdrop: blur(20px);
+  --panel-radius: 12px;
+
+  --tab-bg: rgba(179, 146, 240, 0.06);
+  --tab-hover: rgba(179, 146, 240, 0.1);
+  --tab-active: rgba(179, 146, 240, 0.2);
+  --tab-border: rgba(179, 146, 240, 0.15);
+
+  --slider-track: rgba(179, 146, 240, 0.2);
+  --slider-thumb: var(--theme-primary);
+  --slider-thumb-hover: #9f7cea;
+}
+
+// =============================================================================
+// MAIN PANEL
+// =============================================================================
+
+.controlPanel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--panel-bg);
+  backdrop-filter: var(--panel-backdrop);
+  -webkit-backdrop-filter: var(--panel-backdrop);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--panel-radius);
+  box-shadow: var(--panel-shadow);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  &:hover {
+    border-color: rgba(179, 146, 240, 0.3);
+  }
+}
+
+// =============================================================================
+// HEADER
+// =============================================================================
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: rgba(30, 41, 59, 0.7);
+  border-bottom: 1px solid var(--panel-border);
+  flex-shrink: 0;
+
+  h3 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #f8fafc;
+    margin: 0;
+    flex: 1;
+  }
+}
+
+.headerActions {
+  display: flex;
+  gap: 6px;
+}
+
+.headerBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 5px 10px;
+  background: rgba(179, 146, 240, 0.2);
+  border: none;
+  border-radius: 6px;
+  color: #cbd5e1;
+  font-size: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(179, 146, 240, 0.3);
+    color: #f8fafc;
+  }
+
+  &.debugBtn {
+    &.active {
+      background: var(--theme-secondary);
+      color: white;
+    }
+  }
+}
+
+// =============================================================================
+// TAB NAVIGATION
+// =============================================================================
+
+.tabNav {
+  display: flex;
+  flex-wrap: wrap;
+  background: var(--tab-bg);
+  border-bottom: 1px solid var(--tab-border);
+  flex-shrink: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.tabBtn {
+  flex: 1 1 33%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 10px 8px;
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 10px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  white-space: nowrap;
+  min-width: 0;
+
+  &:hover {
+    background: var(--tab-hover);
+    color: #f8fafc;
+  }
+
+  &.active {
+    background: var(--tab-active);
+    color: var(--theme-primary);
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--theme-primary);
+    }
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+// =============================================================================
+// TAB CONTENT
+// =============================================================================
+
+.tabContent {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(30, 41, 59, 0.5);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(179, 146, 240, 0.3);
+    border-radius: 3px;
+
+    &:hover {
+      background: rgba(179, 146, 240, 0.5);
+    }
+  }
+}
+
+.tabPanel {
+  padding: 16px;
+}
+
+// =============================================================================
+// PRESETS TAB
+// =============================================================================
+
+.presetGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.presetButton {
+  padding: 10px 12px;
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid var(--tab-border);
+  border-radius: 6px;
+  color: #cbd5e1;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(179, 146, 240, 0.1);
+    border-color: rgba(179, 146, 240, 0.3);
+    color: #f8fafc;
+    transform: translateY(-1px);
+  }
+
+  &.active {
+    background: rgba(179, 146, 240, 0.2);
+    border-color: var(--theme-primary);
+    color: var(--theme-primary);
+    box-shadow: 0 0 0 2px rgba(179, 146, 240, 0.1);
+  }
+}
+
+// =============================================================================
+// PARAMETERS
+// =============================================================================
+
+.parameterSection {
+  margin-bottom: 20px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  h4 {
+    font-size: 11px;
+    font-weight: 600;
+    color: #f8fafc;
+    margin: 0 0 10px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--tab-border);
+  }
+}
+
+.sliderControl {
+  margin-bottom: 14px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.sliderLabel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 500;
+  color: #cbd5e1;
+  margin-bottom: 5px;
+
+  span {
+    font-family: 'SF Mono', Monaco, monospace;
+    color: var(--theme-primary);
+  }
+
+  &.redLabel {
+    color: #ef4444;
+
+    span {
+      color: #ef4444;
+    }
+  }
+
+  &.greenLabel {
+    color: #10b981;
+
+    span {
+      color: #10b981;
+    }
+  }
+
+  &.blueLabel {
+    color: #3b82f6;
+
+    span {
+      color: #3b82f6;
+    }
+  }
+}
+
+.slider {
+  width: 100%;
+  height: 5px;
+  background: var(--slider-track);
+  border-radius: 2.5px;
+  outline: none;
+  cursor: pointer;
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    background: var(--slider-thumb);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: var(--slider-thumb-hover);
+      transform: scale(1.1);
+    }
+  }
+
+  &::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    background: var(--slider-thumb);
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+  }
+
+  &.redSlider {
+    &::-webkit-slider-thumb {
+      background: #ef4444;
+
+      &:hover {
+        background: #dc2626;
+      }
+    }
+
+    &::-moz-range-thumb {
+      background: #ef4444;
+    }
+  }
+
+  &.greenSlider {
+    &::-webkit-slider-thumb {
+      background: #10b981;
+
+      &:hover {
+        background: #059669;
+      }
+    }
+
+    &::-moz-range-thumb {
+      background: #10b981;
+    }
+  }
+
+  &.blueSlider {
+    &::-webkit-slider-thumb {
+      background: #3b82f6;
+
+      &:hover {
+        background: #2563eb;
+      }
+    }
+
+    &::-moz-range-thumb {
+      background: #3b82f6;
+    }
+  }
+}
+
+// =============================================================================
+// SELECT CONTROLS
+// =============================================================================
+
+.selectControl {
+  margin-bottom: 14px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  label {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    color: #cbd5e1;
+    margin-bottom: 5px;
+  }
+
+  select {
+    width: 100%;
+    padding: 7px 10px;
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid var(--tab-border);
+    border-radius: 5px;
+    color: #f8fafc;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: rgba(30, 41, 59, 0.8);
+      border-color: rgba(179, 146, 240, 0.3);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: var(--theme-primary);
+      box-shadow: 0 0 0 2px rgba(179, 146, 240, 0.1);
+    }
+  }
+}
+
+.channelSelector {
+  display: flex;
+  gap: 6px;
+
+  button {
+    flex: 1;
+    padding: 7px 10px;
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid var(--tab-border);
+    border-radius: 5px;
+    color: #cbd5e1;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: rgba(179, 146, 240, 0.1);
+      border-color: rgba(179, 146, 240, 0.3);
+      color: #f8fafc;
+    }
+
+    &.active {
+      background: rgba(179, 146, 240, 0.2);
+      border-color: var(--theme-primary);
+      color: var(--theme-primary);
+    }
+  }
+}
+
+// =============================================================================
+// TOGGLE CONTROLS (Phase 1)
+// =============================================================================
+
+.toggleControl {
+  margin-bottom: 16px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.2s ease;
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #cbd5e1;
+
+    input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+      accent-color: rgba(179, 146, 240, 0.8);
+      flex-shrink: 0;
+    }
+
+    span:not(.badge) {
+      user-select: none;
+      flex: 1;
+    }
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(179, 146, 240, 0.3);
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 6px;
+  background: linear-gradient(135deg, #f093fb, #f5576c);
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 4px rgba(240, 147, 251, 0.3);
+  flex-shrink: 0;
+}
+
+.toggleDescription {
+  margin-top: 6px;
+  margin-left: 24px;
+  font-size: 0.75rem;
+  opacity: 0.6;
+  line-height: 1.3;
+  color: #94a3b8;
+}
+
+// =============================================================================
+// RESPONSIVE
+// =============================================================================
+
+@media (max-width: 1400px) {
+  .controlPanel {
+    position: relative;
+    height: auto;
+    max-height: 80vh;
+  }
+
+  .tabNav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  .tabBtn {
+    flex: 0 0 auto;
+    padding: 10px 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .panelHeader {
+    padding: 10px 12px;
+
+    h3 {
+      font-size: 12px;
+    }
+  }
+
+  .tabBtn {
+    padding: 8px 6px;
+    font-size: 9px;
+  }
+
+  .tabPanel {
+    padding: 12px;
+  }
+
+  .presetGrid {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .sliderControl {
+    margin-bottom: 12px;
+  }
+}
+
+// Touch device optimizations
+@media (hover: none) and (pointer: coarse) {
+  .slider {
+    height: 8px;
+
+    &::-webkit-slider-thumb {
+      width: 20px;
+      height: 20px;
+    }
+
+    &::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
