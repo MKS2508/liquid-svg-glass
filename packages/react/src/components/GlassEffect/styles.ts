@@ -8,6 +8,7 @@ import styles from './glass-styles.module.scss';
 export const glassEffectStyles = {
   container: styles.container,
   effect: styles.effect,
+  backdrop: styles.backdrop,
   content: styles.content,
   draggable: styles.draggable,
   filter: styles.filter,

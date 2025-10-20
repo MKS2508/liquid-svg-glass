@@ -208,6 +208,7 @@ const GlassEffect: React.FC<GlassEffectProps> = ({
           data-debug={debug}
           style={glassStyle}
         >
+          <div className={glassEffectStyles.backdrop} />
           {renderContent()}
           <svg className={glassEffectStyles.filter} xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -306,6 +307,7 @@ const GlassEffect: React.FC<GlassEffectProps> = ({
       data-debug={debug}
       style={glassStyle}
     >
+      <div className={glassEffectStyles.backdrop} />
       {renderContent()}
       <svg className={glassEffectStyles.filter} xmlns="http://www.w3.org/2000/svg">
         <defs>
