@@ -10,6 +10,7 @@ import PackageManagerSelector from './components/PackageManagerSelector';
 import { TypingCodeBlock } from './components/SyntaxHighlighter';
 import DynamicBackgroundGlassShowcase from './components/DynamicBackgroundGlassShowcase';
 import { NavigationGrid } from './components/NavigationGrid';
+import { SharedBackground } from './components/SharedBackground';
 import type { NavCardProps } from './components/NavCard';
 import {
   GitHubIcon,
@@ -107,73 +108,6 @@ const DEFAULT_CONFIG: GlassEffectConfig = {
   enablePerformanceOpts: true,
   enableFlickeringFix: true,
 };
-
-// Scroll Progress Indicator
-const ScrollProgress = () => {
-    const progressRef = useRef<HTMLDivElement>(null);
-    
-    useEffect(() => {
-        if (!progressRef.current) return;
-        
-        const updateProgress = () => {
-            const scrolled = window.pageYOffset;
-            const maxHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const progress = Math.min(scrolled / maxHeight, 1);
-            
-            if (progressRef.current) {
-                progressRef.current.style.transform = `scaleX(${progress})`;
-            }
-        };
-        
-        window.addEventListener('scroll', updateProgress);
-        return () => window.removeEventListener('scroll', updateProgress);
-    }, []);
-    
-    return (
-        <div className="scroll-progress-container">
-            <div ref={progressRef} className="scroll-progress-bar"></div>
-        </div>
-    );
-};
-
-// Floating Particles Component
-const FloatingParticles = () => {
-    const particlesRef = useRef<HTMLDivElement>(null);
-    
-    useEffect(() => {
-        if (!particlesRef.current) return;
-        
-        const particles = particlesRef.current.querySelectorAll('.particle');
-        
-        particles.forEach((particle, index) => {
-            gsap.set(particle, {
-                x: Math.random() * window.innerWidth,
-                y: Math.random() * window.innerHeight,
-                scale: Math.random() * 0.5 + 0.5,
-                opacity: Math.random() * 0.3 + 0.1
-            });
-            
-            gsap.to(particle, {
-                y: "-=100",
-                x: `+=${Math.random() * 50 - 25}`,
-                duration: Math.random() * 3 + 2,
-                repeat: -1,
-                yoyo: true,
-                ease: "sine.inOut",
-                delay: index * 0.1
-            });
-        });
-    }, []);
-    
-    return (
-        <div ref={particlesRef} className="floating-particles">
-            {Array.from({ length: 15 }, (_, i) => (
-                <div key={i} className="particle">✨</div>
-            ))}
-        </div>
-    );
-};
-
 
 function App() {
     const [showVisualizer, setShowVisualizer] = useState(false);
@@ -298,36 +232,34 @@ function App() {
     }
 
     return (
-        <main className="app-container">
-            <GlassEffect
-                draggable
-                preset={glassConfig.preset}
-                width={glassConfig.width}
-                height={glassConfig.height}
-                radius={glassConfig.radius}
-                border={glassConfig.border}
-                frost={glassConfig.frost}
-                blur={glassConfig.blur}
-                blurBackground={glassConfig.blurBackground}
-                displace={glassConfig.displace}
-                scale={glassConfig.scale}
-                alpha={glassConfig.alpha}
-                lightness={glassConfig.lightness}
-                r={glassConfig.r}
-                g={glassConfig.g}
-                b={glassConfig.b}
-                x={glassConfig.x}
-                y={glassConfig.y}
-                blend={glassConfig.blend}
-                debug={debugMode}
-                // Phase 1 Features
-                enableBackdropExtension={glassConfig.enableBackdropExtension}
-                enablePerformanceOpts={glassConfig.enablePerformanceOpts}
-                enableFlickeringFix={glassConfig.enableFlickeringFix}
-            />
-
-            <ScrollProgress />
-            <FloatingParticles />
+        <SharedBackground>
+            <main className="app-container">
+                <GlassEffect
+                    draggable
+                    preset={glassConfig.preset}
+                    width={glassConfig.width}
+                    height={glassConfig.height}
+                    radius={glassConfig.radius}
+                    border={glassConfig.border}
+                    frost={glassConfig.frost}
+                    blur={glassConfig.blur}
+                    blurBackground={glassConfig.blurBackground}
+                    displace={glassConfig.displace}
+                    scale={glassConfig.scale}
+                    alpha={glassConfig.alpha}
+                    lightness={glassConfig.lightness}
+                    r={glassConfig.r}
+                    g={glassConfig.g}
+                    b={glassConfig.b}
+                    x={glassConfig.x}
+                    y={glassConfig.y}
+                    blend={glassConfig.blend}
+                    debug={debugMode}
+                    // Phase 1 Features
+                    enableBackdropExtension={glassConfig.enableBackdropExtension}
+                    enablePerformanceOpts={glassConfig.enablePerformanceOpts}
+                    enableFlickeringFix={glassConfig.enableFlickeringFix}
+                />
 
 
             <nav
@@ -1006,7 +938,8 @@ function App() {
                     </nav>
                 </div>
             </footer>
-        </main>
+            </main>
+        </SharedBackground>
     );
 }
 
