@@ -163,36 +163,38 @@ export function DebugPage() {
                 />
               </WavyBackground>
             ) : (
-              <DynamicBackgroundGlassShowcase
-                backgroundType={backgroundType}
-                showDecorations={true}
-              >
-                <GlassEffect
-                  draggable
-                  preset={leftConfig.preset}
-                  width={leftConfig.width}
-                  height={leftConfig.height}
-                  radius={leftConfig.radius}
-                  border={leftConfig.border}
-                  frost={leftConfig.frost}
-                  blur={leftConfig.blur}
-                  blurBackground={leftConfig.blurBackground}
-                  displace={leftConfig.displace}
-                  scale={leftConfig.scale}
-                  alpha={leftConfig.alpha}
-                  lightness={leftConfig.lightness}
-                  r={leftConfig.r}
-                  g={leftConfig.g}
-                  b={leftConfig.b}
-                  x={leftConfig.x}
-                  y={leftConfig.y}
-                  blend={leftConfig.blend}
-                  debug={leftDebug}
-                  enableBackdropExtension={leftConfig.enableBackdropExtension}
-                  enablePerformanceOpts={leftConfig.enablePerformanceOpts}
-                  enableFlickeringFix={leftConfig.enableFlickeringFix}
-                />
-              </DynamicBackgroundGlassShowcase>
+              <div className="glass-wrapper">
+                <DynamicBackgroundGlassShowcase
+                  backgroundType={backgroundType}
+                  showDecorations={true}
+                >
+                  <GlassEffect
+                    draggable
+                    preset={leftConfig.preset}
+                    width={leftConfig.width}
+                    height={leftConfig.height}
+                    radius={leftConfig.radius}
+                    border={leftConfig.border}
+                    frost={leftConfig.frost}
+                    blur={leftConfig.blur}
+                    blurBackground={leftConfig.blurBackground}
+                    displace={leftConfig.displace}
+                    scale={leftConfig.scale}
+                    alpha={leftConfig.alpha}
+                    lightness={leftConfig.lightness}
+                    r={leftConfig.r}
+                    g={leftConfig.g}
+                    b={leftConfig.b}
+                    x={leftConfig.x}
+                    y={leftConfig.y}
+                    blend={leftConfig.blend}
+                    debug={leftDebug}
+                    enableBackdropExtension={leftConfig.enableBackdropExtension}
+                    enablePerformanceOpts={leftConfig.enablePerformanceOpts}
+                    enableFlickeringFix={leftConfig.enableFlickeringFix}
+                  />
+                </DynamicBackgroundGlassShowcase>
+              </div>
             )}
 
             <GlassEffectControlPanel
@@ -262,36 +264,38 @@ export function DebugPage() {
                 />
               </WavyBackground>
             ) : (
-              <DynamicBackgroundGlassShowcase
-                backgroundType={backgroundType}
-                showDecorations={true}
-              >
-                <GlassEffect
-                  draggable
-                  preset={rightConfig.preset}
-                  width={rightConfig.width}
-                  height={rightConfig.height}
-                  radius={rightConfig.radius}
-                  border={rightConfig.border}
-                  frost={rightConfig.frost}
-                  blur={rightConfig.blur}
-                  blurBackground={rightConfig.blurBackground}
-                  displace={rightConfig.displace}
-                  scale={rightConfig.scale}
-                  alpha={rightConfig.alpha}
-                  lightness={rightConfig.lightness}
-                  r={rightConfig.r}
-                  g={rightConfig.g}
-                  b={rightConfig.b}
-                  x={rightConfig.x}
-                  y={rightConfig.y}
-                  blend={rightConfig.blend}
-                  debug={rightDebug}
-                  enableBackdropExtension={rightConfig.enableBackdropExtension}
-                  enablePerformanceOpts={rightConfig.enablePerformanceOpts}
-                  enableFlickeringFix={rightConfig.enableFlickeringFix}
-                />
-              </DynamicBackgroundGlassShowcase>
+              <div className="glass-wrapper">
+                <DynamicBackgroundGlassShowcase
+                  backgroundType={backgroundType}
+                  showDecorations={true}
+                >
+                  <GlassEffect
+                    draggable
+                    preset={rightConfig.preset}
+                    width={rightConfig.width}
+                    height={rightConfig.height}
+                    radius={rightConfig.radius}
+                    border={rightConfig.border}
+                    frost={rightConfig.frost}
+                    blur={rightConfig.blur}
+                    blurBackground={rightConfig.blurBackground}
+                    displace={rightConfig.displace}
+                    scale={rightConfig.scale}
+                    alpha={rightConfig.alpha}
+                    lightness={rightConfig.lightness}
+                    r={rightConfig.r}
+                    g={rightConfig.g}
+                    b={rightConfig.b}
+                    x={rightConfig.x}
+                    y={rightConfig.y}
+                    blend={rightConfig.blend}
+                    debug={rightDebug}
+                    enableBackdropExtension={rightConfig.enableBackdropExtension}
+                    enablePerformanceOpts={rightConfig.enablePerformanceOpts}
+                    enableFlickeringFix={rightConfig.enableFlickeringFix}
+                  />
+                </DynamicBackgroundGlassShowcase>
+              </div>
             )}
 
             <GlassEffectControlPanel
