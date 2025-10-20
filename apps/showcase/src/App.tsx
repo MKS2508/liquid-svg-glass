@@ -10,15 +10,17 @@ import { TypingCodeBlock } from './components/SyntaxHighlighter';
 import DynamicBackgroundGlassShowcase from './components/DynamicBackgroundGlassShowcase';
 import { NavigationGrid } from './components/NavigationGrid';
 import type { NavCardProps } from './components/NavCard';
-import { 
-  GitHubIcon, 
-  StorybookIcon, 
-  DocumentationIcon, 
-  RocketIcon, 
-  PlayIcon, 
+import {
+  GitHubIcon,
+  StorybookIcon,
+  DocumentationIcon,
+  RocketIcon,
+  PlayIcon,
   ToolIcon,
   BookIcon
 } from './components/IconSystem';
+import { GlassEffectControlPanel } from './components/GlassEffectControlPanel';
+import type { GlassEffectConfig } from './components/GlassEffectControlPanel/types';
 import './App.css';
 
 // Navigation items configuration
@@ -79,6 +81,30 @@ const navigationItems: NavCardProps[] = [
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger, TextPlugin);
+
+const DEFAULT_CONFIG: GlassEffectConfig = {
+  preset: 'free',
+  width: 140,
+  height: 280,
+  radius: 80,
+  border: 15,
+  frost: 0,
+  blur: 10,
+  displace: 0,
+  scale: -300,
+  alpha: 0.74,
+  lightness: 60,
+  r: 0,
+  g: 10,
+  b: 20,
+  x: 'R',
+  y: 'B',
+  blend: 'difference',
+  // Phase 1 Features (enabled by default)
+  enableBackdropExtension: true,
+  enablePerformanceOpts: true,
+  enableFlickeringFix: true,
+};
 
 // Scroll Progress Indicator
 const ScrollProgress = () => {
@@ -149,10 +175,27 @@ const FloatingParticles = () => {
 
 function App() {
     const [showVisualizer, setShowVisualizer] = useState(false);
-    
+    const [controlPanelOpen, setControlPanelOpen] = useState(false);
+    const [glassConfig, setGlassConfig] = useState<GlassEffectConfig>(DEFAULT_CONFIG);
+    const [debugMode, setDebugMode] = useState(false);
+    const controlButtonRef = useRef<HTMLButtonElement>(null);
+
+    const handleConfigChange = (updates: Partial<GlassEffectConfig>) => {
+        setGlassConfig((prev) => ({ ...prev, ...updates }));
+    };
+
+    const handleReset = () => {
+        setGlassConfig(DEFAULT_CONFIG);
+        setDebugMode(false);
+    };
+
+    const handleDebugToggle = () => {
+        setDebugMode((prev) => !prev);
+    };
+
     // Update navigation items with the visualizer callback
-    const updatedNavigationItems = navigationItems.map(item => 
-        item.title === "Technical Deep Dive" 
+    const updatedNavigationItems = navigationItems.map(item =>
+        item.title === "Technical Deep Dive"
             ? { ...item, onClick: () => setShowVisualizer(true) }
             : item
     );
@@ -254,17 +297,42 @@ function App() {
 
     return (
         <main className="app-container">
-        <GlassEffect draggable></GlassEffect>
+            <GlassEffect
+                draggable
+                preset={glassConfig.preset}
+                width={glassConfig.width}
+                height={glassConfig.height}
+                radius={glassConfig.radius}
+                border={glassConfig.border}
+                frost={glassConfig.frost}
+                blur={glassConfig.blur}
+                displace={glassConfig.displace}
+                scale={glassConfig.scale}
+                alpha={glassConfig.alpha}
+                lightness={glassConfig.lightness}
+                r={glassConfig.r}
+                g={glassConfig.g}
+                b={glassConfig.b}
+                x={glassConfig.x}
+                y={glassConfig.y}
+                blend={glassConfig.blend}
+                debug={debugMode}
+                // Phase 1 Features
+                enableBackdropExtension={glassConfig.enableBackdropExtension}
+                enablePerformanceOpts={glassConfig.enablePerformanceOpts}
+                enableFlickeringFix={glassConfig.enableFlickeringFix}
+            />
 
             <ScrollProgress />
             <FloatingParticles />
 
-            
-            <nav 
-                ref={breadcrumbsRef} 
-                className="breadcrumbs" 
+
+            <nav
+                ref={breadcrumbsRef}
+                className="breadcrumbs"
                 aria-label="Navegación de ubicación"
                 role="navigation"
+                style={{ position: 'relative' }}
             >
                 <script type="application/ld+json">
                 {JSON.stringify({
@@ -303,6 +371,56 @@ function App() {
                         <meta itemProp="position" content="2" />
                     </li>
                 </ol>
+
+                <button
+                    ref={controlButtonRef}
+                    onClick={() => setControlPanelOpen(!controlPanelOpen)}
+                    style={{
+                        position: 'absolute',
+                        right: '20px',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        padding: '8px 16px',
+                        background: 'rgba(179, 146, 240, 0.2)',
+                        border: '1px solid rgba(179, 146, 240, 0.3)',
+                        borderRadius: '8px',
+                        color: '#f8fafc',
+                        fontSize: '13px',
+                        fontWeight: 500,
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        transition: 'all 0.2s ease',
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.background = 'rgba(179, 146, 240, 0.3)';
+                        e.currentTarget.style.borderColor = 'rgba(179, 146, 240, 0.5)';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.background = 'rgba(179, 146, 240, 0.2)';
+                        e.currentTarget.style.borderColor = 'rgba(179, 146, 240, 0.3)';
+                    }}
+                    title="Toggle GlassEffect Controls"
+                    aria-label="Toggle GlassEffect Controls"
+                >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                    </svg>
+                    Controls
+                </button>
+
+                <GlassEffectControlPanel
+                    isOpen={controlPanelOpen}
+                    config={glassConfig}
+                    debug={debugMode}
+                    buttonRef={controlButtonRef}
+                    onChange={handleConfigChange}
+                    onReset={handleReset}
+                    onDebugToggle={handleDebugToggle}
+                    onClose={() => setControlPanelOpen(false)}
+                />
             </nav>
             
             <header 
