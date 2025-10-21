@@ -1,0 +1,281 @@
+// =============================================================================
+// VARIANT SELECTOR
+// =============================================================================
+
+.variantSelector {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+
+  button {
+    flex: 1;
+    min-width: 60px;
+    padding: 6px 10px;
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid rgba(179, 146, 240, 0.2);
+    border-radius: 6px;
+    color: #cbd5e1;
+    font-size: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: rgba(179, 146, 240, 0.1);
+      border-color: rgba(179, 146, 240, 0.3);
+      color: #f8fafc;
+    }
+
+    &.active {
+      background: rgba(179, 146, 240, 0.2);
+      border-color: rgba(179, 146, 240, 0.5);
+      color: var(--theme-primary);
+    }
+  }
+}
+
+// =============================================================================
+// VARIANT 1: WAVEFORM EDITOR
+// =============================================================================
+
+.waveformEditor {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.channelSelector {
+  display: flex;
+  gap: 8px;
+
+  button {
+    flex: 1;
+    padding: 10px 14px;
+    background: rgba(30, 41, 59, 0.6);
+    border: 2px solid;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-height: 40px;
+
+    &:hover {
+      background: rgba(30, 41, 59, 0.8);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    &.active {
+      background: rgba(30, 41, 59, 0.95);
+      font-weight: 700;
+      box-shadow: 0 0 0 3px rgba(179, 146, 240, 0.2), 0 4px 12px rgba(0, 0, 0, 0.3);
+      transform: scale(1.02);
+    }
+  }
+}
+
+.waveformCanvas {
+  width: 100%;
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(179, 146, 240, 0.2);
+  border-radius: 8px;
+  cursor: ns-resize;
+  transition: border-color 0.2s ease;
+
+  &:hover {
+    border-color: rgba(179, 146, 240, 0.4);
+  }
+
+  &:active {
+    cursor: ns-resize;
+    border-color: rgba(179, 146, 240, 0.6);
+  }
+}
+
+.fineControls {
+  display: flex;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(179, 146, 240, 0.15);
+}
+
+.fineControl {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  label {
+    font-size: 10px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  input[type="number"] {
+    width: 100%;
+    padding: 6px;
+    background: rgba(30, 41, 59, 0.8);
+    border: 1px solid;
+    border-radius: 4px;
+    color: #f8fafc;
+    font-size: 11px;
+    font-weight: 500;
+    text-align: center;
+    transition: all 0.2s ease;
+
+    &:focus {
+      outline: none;
+      background: rgba(30, 41, 59, 1);
+      box-shadow: 0 0 0 2px rgba(179, 146, 240, 0.2);
+    }
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      opacity: 0.5;
+    }
+  }
+}
+
+.waveformInfo {
+  font-size: 10px;
+  color: #94a3b8;
+  text-align: center;
+
+  p {
+    margin: 0;
+  }
+}
+
+// =============================================================================
+// VARIANT 2: VISUAL DISPLACEMENT
+// =============================================================================
+
+.visualDisplacement {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.displacementPreview {
+  width: 100%;
+  height: 140px;
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(179, 146, 240, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.displacementControls {
+  padding-top: 8px;
+  border-top: 1px solid rgba(179, 146, 240, 0.15);
+}
+
+// =============================================================================
+// VARIANT 3: CHROMATIC VISUALIZER
+// =============================================================================
+
+.chromaticVisualizer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.visualizerCanvas {
+  width: 100%;
+  height: 180px;
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(179, 146, 240, 0.2);
+  border-radius: 8px;
+}
+
+.visualizerControls {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+
+  .controlButton {
+    padding: 8px;
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid rgba(179, 146, 240, 0.2);
+    border-radius: 6px;
+    color: #cbd5e1;
+    font-size: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+
+    &:hover {
+      background: rgba(179, 146, 240, 0.1);
+      border-color: rgba(179, 146, 240, 0.3);
+    }
+
+    .value {
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 12px;
+      font-weight: 700;
+
+      &.red {
+        color: #ef4444;
+      }
+
+      &.green {
+        color: #10b981;
+      }
+
+      &.blue {
+        color: #3b82f6;
+      }
+    }
+
+    .arrows {
+      display: flex;
+      gap: 4px;
+
+      svg {
+        width: 12px;
+        height: 12px;
+      }
+    }
+  }
+}
+
+// =============================================================================
+// DISPLACEMENT CHANNEL SECTION (Integrated in UnifiedChromaticControl)
+// =============================================================================
+
+.displacementChannelSection {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(179, 146, 240, 0.15);
+
+  h5 {
+    font-size: 11px;
+    font-weight: 600;
+    color: #f8fafc;
+    margin: 0 0 12px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+}
+
+.channelControl {
+  margin-bottom: 12px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  label {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    color: #cbd5e1;
+    margin-bottom: 6px;
+  }
+}

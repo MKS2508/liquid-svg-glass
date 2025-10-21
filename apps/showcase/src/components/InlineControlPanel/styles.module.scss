@@ -422,32 +422,110 @@
 
 .channelSelector {
   display: flex;
-  gap: 6px;
+  gap: 8px;
 
   button {
     flex: 1;
-    padding: 7px 10px;
+    padding: 10px 14px;
     background: rgba(30, 41, 59, 0.6);
-    border: 1px solid var(--tab-border);
-    border-radius: 5px;
+    border: 2px solid var(--tab-border);
+    border-radius: 8px;
     color: #cbd5e1;
-    font-size: 11px;
-    font-weight: 500;
+    font-size: 12px;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
+    min-height: 40px;
 
     &:hover {
       background: rgba(179, 146, 240, 0.1);
       border-color: rgba(179, 146, 240, 0.3);
       color: #f8fafc;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
     &.active {
       background: rgba(179, 146, 240, 0.2);
       border-color: var(--theme-primary);
       color: var(--theme-primary);
+      font-weight: 700;
+      box-shadow: 0 0 0 3px rgba(179, 146, 240, 0.15);
+      transform: scale(1.02);
     }
   }
+}
+
+// =============================================================================
+// ACCORDION SECTIONS
+// =============================================================================
+
+.accordionSection {
+  margin-bottom: 12px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.accordionHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  color: #f8fafc;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.25s ease;
+
+  h4 {
+    margin: 0;
+    font-size: 11px;
+    font-weight: 600;
+    color: #f8fafc;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(179, 146, 240, 0.3);
+  }
+
+  &.accordionHeaderOpen {
+    background: rgba(179, 146, 240, 0.08);
+    border-color: rgba(179, 146, 240, 0.3);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+.accordionChevron {
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+  color: rgba(179, 146, 240, 0.8);
+}
+
+.accordionContent {
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.accordionContentOpen {
+  border: 1px solid rgba(179, 146, 240, 0.2);
+  border-top: none;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.accordionInner {
+  padding: 16px 14px;
 }
 
 // =============================================================================

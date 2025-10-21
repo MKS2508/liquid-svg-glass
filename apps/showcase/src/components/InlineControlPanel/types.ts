@@ -1,6 +1,6 @@
 import type { GlassPreset, BlendMode, ChannelSelector } from '@liquid-svg-glass/core';
 
-export type TabType = 'presets' | 'geometry' | 'effects' | 'chromatic' | 'channels';
+export type TabType = 'presets' | 'geometry' | 'effects' | 'chromatic-displacement';
 
 export interface GlassEffectConfig {
   preset: GlassPreset;
@@ -30,6 +30,9 @@ export interface GlassEffectConfig {
   enableBackdropExtension?: boolean;
   enablePerformanceOpts?: boolean;
   enableFlickeringFix?: boolean;
+
+  // Phase 2 Features (2025)
+  enableChromaticAberration?: boolean;
 }
 
 export interface InlineControlPanelProps {

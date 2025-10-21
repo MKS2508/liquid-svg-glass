@@ -147,6 +147,80 @@ export function encodeDataURI(svgContent: string): string {
 }
 //#endregion
 
+//#region CHROMATIC ABERRATION (PHASE 2)
+
+/**
+ * Generate SVG filter elements for true chromatic aberration using feColorMatrix + feOffset.
+ * Separates RGB channels and applies individual displacement offsets, then blends them progressively.
+ *
+ * Genera elementos de filtro SVG para aberración cromática real usando feColorMatrix + feOffset.
+ * Separa los canales RGB y aplica offsets de desplazamiento individuales, luego los mezcla progresivamente.
+ *
+ * @param {number} r - Red channel offset (-50 to +50) / Offset del canal rojo (-50 a +50)
+ * @param {number} g - Green channel offset (-50 to +50) / Offset del canal verde (-50 a +50)
+ * @param {number} b - Blue channel offset (-50 to +50) / Offset del canal azul (-50 a +50)
+ * @returns {string} SVG filter elements string / Cadena de elementos de filtro SVG
+ *
+ * @example
+ * ```typescript
+ * const elements = generateChromaticAberrationElements(50, 55, 45);
+ * // Returns SVG filter elements with feColorMatrix and feOffset for each channel
+ * ```
+ *
+ * @operation CHROMATIC_ABERRATION
+ * @performance O(1) - Template string construction
+ * @since 2.0.0 (Phase 2)
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/SVG/Element/feColorMatrix | MDN feColorMatrix}
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/SVG/Element/feOffset | MDN feOffset}
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/SVG/Element/feBlend | MDN feBlend}
+ */
+export function generateChromaticAberrationElements(r: number, _g: number, b: number): string {
+  // Scale offsets: convert -50..+50 range to pixel displacement
+  // Note: Green channel typically stays centered (offset 0) in chromatic aberration
+  const redOffset = r * -0.2;
+  const greenOffset = 0; // Green channel stays centered
+  const blueOffset = b * 0.2;
+
+  return `
+    <!-- Phase 2: True Chromatic Aberration with feColorMatrix + feOffset -->
+
+    <!-- Extract Red Channel -->
+    <feColorMatrix
+      type="matrix"
+      values="1 0 0 0 0
+              0 0 0 0 0
+              0 0 0 0 0
+              0 0 0 1 0"
+      result="redChannel"/>
+    <feOffset in="redChannel" dx="${redOffset}" dy="0" result="redOffset"/>
+
+    <!-- Extract Green Channel -->
+    <feColorMatrix
+      type="matrix"
+      values="0 0 0 0 0
+              0 1 0 0 0
+              0 0 0 0 0
+              0 0 0 1 0"
+      result="greenChannel"/>
+    <feOffset in="greenChannel" dx="${greenOffset}" dy="0" result="greenOffset"/>
+
+    <!-- Extract Blue Channel -->
+    <feColorMatrix
+      type="matrix"
+      values="0 0 0 0 0
+              0 0 0 0 0
+              0 0 1 0 0
+              0 0 0 1 0"
+      result="blueChannel"/>
+    <feOffset in="blueChannel" dx="${blueOffset}" dy="0" result="blueOffset"/>
+
+    <!-- Blend Channels Progressively -->
+    <feBlend in="redOffset" in2="greenOffset" mode="screen" result="redGreen"/>
+    <feBlend in="redGreen" in2="blueOffset" mode="screen" result="chromaticAberration"/>
+  `;
+}
+//#endregion
+
 //#region ATRIBUTOS DEL FILTRO
 
 /**
@@ -214,15 +288,16 @@ export function generateFilterAttributes(visual: VisualConfig): SVGFilterAttribu
 /**
  * Execute complete pipeline to generate SVG displacement map and filter attributes.
  * Orchestrates geometry calculation, SVG construction, encoding, and attribute generation steps.
- * 
+ *
  * Ejecuta el pipeline completo para generar el mapa de desplazamiento SVG y sus atributos de filtro.
  * Esta función orquesta los pasos de cálculo de geometría, construcción del SVG, codificación y generación de atributos.
- * 
+ *
  * @param {GeometryConfig} geometry - Effect geometry configuration / Configuración de geometría del efecto
  * @param {VisualConfig} visual - Effect visual configuration / Configuración visual del efecto
- * @returns {DisplacementMapResult} Object containing SVG Data URI, content, calculated geometry, and filter attributes
- *                                 Objeto que contiene el Data URI del SVG, contenido, geometría calculada y atributos del filtro
- * 
+ * @param {boolean} [enableChromaticAberration=false] - Enable Phase 2 chromatic aberration (feColorMatrix + feOffset)
+ * @returns {DisplacementMapResult} Object containing SVG Data URI, content, calculated geometry, filter attributes, and chromatic aberration elements
+ *                                 Objeto que contiene el Data URI del SVG, contenido, geometría calculada, atributos del filtro y elementos de aberración cromática
+ *
  * @example
  * ```typescript
  * // Basic usage - Uso básico
@@ -231,25 +306,30 @@ export function generateFilterAttributes(visual: VisualConfig): SVGFilterAttribu
  *   frost: 0.15, blur: 11, displace: 0.4, scale: 10, alpha: 0.95, lightness: 100,
  *   x: 'R', y: 'B', blend: 'screen', r: 50, g: 55, b: 45
  * };
- * 
+ *
+ * // Without Phase 2 (legacy mode)
  * const result = generateDisplacementMap(geometry, visual);
- * 
+ *
+ * // With Phase 2 (true chromatic aberration)
+ * const resultPhase2 = generateDisplacementMap(geometry, visual, true);
+ * console.log(resultPhase2.chromaticAberrationSVG); // SVG filter elements
+ *
  * console.log(result.dataUri);           // "data:image/svg+xml,..."
  * console.log(result.svgContent);        // "<svg class='displacement-image'>..."
  * console.log(result.calculatedGeometry.calculatedBorder); // 6
  * console.log(result.filterAttributes.red.scale);          // 60
- * 
+ *
  * // Using in React component
  * <feImage href={result.dataUri} result="map" />
- * <feDisplacementMap 
- *   in="SourceGraphic" 
+ * <feDisplacementMap
+ *   in="SourceGraphic"
  *   in2="map"
  *   scale={result.filterAttributes.red.scale}
  *   xChannelSelector={result.filterAttributes.red.xChannelSelector}
  *   yChannelSelector={result.filterAttributes.red.yChannelSelector}
  * />
  * ```
- * 
+ *
  * @operation PIPELINE_EXECUTION
  * @performance O(n) where n is SVG content length for encoding step
  * @since 1.0.0
@@ -257,30 +337,38 @@ export function generateFilterAttributes(visual: VisualConfig): SVGFilterAttribu
  */
 export function generateDisplacementMap(
   geometry: GeometryConfig,
-  visual: VisualConfig
+  visual: VisualConfig,
+  enableChromaticAberration: boolean = false
 ): {
   dataUri: string;
   svgContent: string;
   calculatedGeometry: CalculatedGeometry;
   filterAttributes: SVGFilterAttributes;
+  chromaticAberrationSVG: string;
 } {
   // Paso 1: Calcular geometría
   const calculatedGeometry = calculateBorderDimensions(geometry);
-  
+
   // Paso 2: Construir contenido SVG
   const svgContent = buildDisplacementSVG(calculatedGeometry, visual);
-  
+
   // Paso 3: Codificar como Data URI
   const dataUri = encodeDataURI(svgContent);
-  
+
   // Paso 4: Generar atributos del filtro
   const filterAttributes = generateFilterAttributes(visual);
-  
+
+  // Paso 5: Generar elementos de aberración cromática (Phase 2)
+  const chromaticAberrationSVG = enableChromaticAberration
+    ? generateChromaticAberrationElements(visual.r, visual.g, visual.b)
+    : '';
+
   return {
     dataUri,
     svgContent,
     calculatedGeometry,
-    filterAttributes
+    filterAttributes,
+    chromaticAberrationSVG
   };
 }
 //#endregion

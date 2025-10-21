@@ -57,4 +57,8 @@ export interface GlassEffectProps extends DragCallbacks {
   enablePerformanceOpts?: boolean;
   /** Habilitar flickering fix (gradient anti-flicker) */
   enableFlickeringFix?: boolean;
+
+  // Phase 2 Features (2025)
+  /** Habilitar chromatic aberration correcta (feColorMatrix + feOffset + feBlend) */
+  enableChromaticAberration?: boolean;
 }

@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import type { TabType, InlineControlPanelProps } from './types';
-import type { GlassPreset, ChannelSelector, BlendMode } from '@liquid-svg-glass/core';
+import type { GlassPreset, BlendMode } from '@liquid-svg-glass/core';
+import { AccordionSection } from './controls/AccordionSection';
+import { UnifiedChromaticControl } from './controls/UnifiedChromaticControl';
 import styles from './styles.module.scss';
 
 const PRESETS: GlassPreset[] = ['dock', 'pill', 'bubble', 'free'];
@@ -91,8 +93,6 @@ const BLEND_MODES: BlendMode[] = [
   'hue', 'saturation', 'color', 'luminosity'
 ];
 
-const CHANNEL_SELECTORS: ChannelSelector[] = ['R', 'G', 'B'];
-
 export function InlineControlPanel({
   config,
   debug,
@@ -101,6 +101,7 @@ export function InlineControlPanel({
   onDebugToggle
 }: InlineControlPanelProps) {
   const [activeTab, setActiveTab] = useState<TabType>('presets');
+  const [openAccordion, setOpenAccordion] = useState<string | null>('dimensions');
 
   const handlePresetChange = (preset: GlassPreset) => {
     const presetValues = PRESET_VALUES[preset];
@@ -111,10 +112,6 @@ export function InlineControlPanel({
   };
 
   const handleNumberChange = (key: keyof typeof config, value: number) => {
-    onChange({ [key]: value });
-  };
-
-  const handleChannelChange = (key: 'x' | 'y', value: ChannelSelector) => {
     onChange({ [key]: value });
   };
 
@@ -188,22 +185,15 @@ export function InlineControlPanel({
           Effects
         </button>
         <button
-          className={`${styles.tabBtn} ${activeTab === 'chromatic' ? styles.active : ''}`}
-          onClick={() => setActiveTab('chromatic')}
+          className={`${styles.tabBtn} ${activeTab === 'chromatic-displacement' ? styles.active : ''}`}
+          onClick={() => setActiveTab('chromatic-displacement')}
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+            <circle cx="12" cy="12" r="3" />
+            <path d="M3 12h3m12 0h3M12 3v3m0 12v3" />
+            <circle cx="12" cy="12" r="10" opacity="0.3" />
           </svg>
           Chromatic
-        </button>
-        <button
-          className={`${styles.tabBtn} ${activeTab === 'channels' ? styles.active : ''}`}
-          onClick={() => setActiveTab('channels')}
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-          </svg>
-          Channels
         </button>
       </div>
 
@@ -227,8 +217,11 @@ export function InlineControlPanel({
 
         {activeTab === 'geometry' && (
           <div className={styles.tabPanel}>
-            <div className={styles.parameterSection}>
-              <h4>Dimensions</h4>
+            <AccordionSection
+              title="Dimensions"
+              isOpen={openAccordion === 'dimensions'}
+              onToggle={() => setOpenAccordion(openAccordion === 'dimensions' ? null : 'dimensions')}
+            >
               <div className={styles.sliderControl}>
                 <div className={styles.sliderLabel}>
                   Width <span>{config.width}px</span>
@@ -257,9 +250,13 @@ export function InlineControlPanel({
                   onChange={(e) => handleNumberChange('height', Number(e.target.value))}
                 />
               </div>
-            </div>
-            <div className={styles.parameterSection}>
-              <h4>Shape</h4>
+            </AccordionSection>
+
+            <AccordionSection
+              title="Shape"
+              isOpen={openAccordion === 'shape'}
+              onToggle={() => setOpenAccordion(openAccordion === 'shape' ? null : 'shape')}
+            >
               <div className={styles.sliderControl}>
                 <div className={styles.sliderLabel}>
                   Radius <span>{config.radius}px</span>
@@ -288,14 +285,17 @@ export function InlineControlPanel({
                   onChange={(e) => handleNumberChange('border', Number(e.target.value))}
                 />
               </div>
-            </div>
+            </AccordionSection>
           </div>
         )}
 
         {activeTab === 'effects' && (
           <div className={styles.tabPanel}>
-            <div className={styles.parameterSection}>
-              <h4>Visual Effects</h4>
+            <AccordionSection
+              title="Visual Effects"
+              isOpen={openAccordion === 'visual-effects'}
+              onToggle={() => setOpenAccordion(openAccordion === 'visual-effects' ? null : 'visual-effects')}
+            >
               <div className={styles.sliderControl}>
                 <div className={styles.sliderLabel}>
                   Frost <span>{config.frost.toFixed(2)}</span>
@@ -394,11 +394,13 @@ export function InlineControlPanel({
                   onChange={(e) => handleNumberChange('lightness', Number(e.target.value))}
                 />
               </div>
-            </div>
+            </AccordionSection>
 
-            <div className={styles.parameterSection}>
-              <h4>Performance & Advanced</h4>
-
+            <AccordionSection
+              title="Performance & Advanced"
+              isOpen={openAccordion === 'performance-advanced'}
+              onToggle={() => setOpenAccordion(openAccordion === 'performance-advanced' ? null : 'performance-advanced')}
+            >
               <div className={styles.toggleControl}>
                 <label>
                   <input
@@ -443,95 +445,47 @@ export function InlineControlPanel({
                   Prevents color flickering on scroll edge with gradient overlay
                 </p>
               </div>
-            </div>
+
+              <div className={styles.toggleControl}>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={config.enableChromaticAberration ?? false}
+                    onChange={(e) => onChange({ enableChromaticAberration: e.target.checked })}
+                  />
+                  <span>Chromatic Aberration (Phase 2)</span>
+                  <span className={styles.badge}>NEW-PHASE2</span>
+                </label>
+                <p className={styles.toggleDescription}>
+                  True RGB channel separation with feColorMatrix + feOffset + feBlend
+                </p>
+              </div>
+            </AccordionSection>
           </div>
         )}
 
-        {activeTab === 'chromatic' && (
+        {activeTab === 'chromatic-displacement' && (
           <div className={styles.tabPanel}>
-            <div className={styles.parameterSection}>
-              <h4>RGB Channel Offsets</h4>
-              <div className={styles.sliderControl}>
-                <div className={`${styles.sliderLabel} ${styles.redLabel}`}>
-                  Red Channel <span>{config.r}</span>
-                </div>
-                <input
-                  type="range"
-                  className={`${styles.slider} ${styles.redSlider}`}
-                  min="-50"
-                  max="50"
-                  step="1"
-                  value={config.r}
-                  onChange={(e) => handleNumberChange('r', Number(e.target.value))}
-                />
-              </div>
-              <div className={styles.sliderControl}>
-                <div className={`${styles.sliderLabel} ${styles.greenLabel}`}>
-                  Green Channel <span>{config.g}</span>
-                </div>
-                <input
-                  type="range"
-                  className={`${styles.slider} ${styles.greenSlider}`}
-                  min="-50"
-                  max="50"
-                  step="1"
-                  value={config.g}
-                  onChange={(e) => handleNumberChange('g', Number(e.target.value))}
-                />
-              </div>
-              <div className={styles.sliderControl}>
-                <div className={`${styles.sliderLabel} ${styles.blueLabel}`}>
-                  Blue Channel <span>{config.b}</span>
-                </div>
-                <input
-                  type="range"
-                  className={`${styles.slider} ${styles.blueSlider}`}
-                  min="-50"
-                  max="50"
-                  step="1"
-                  value={config.b}
-                  onChange={(e) => handleNumberChange('b', Number(e.target.value))}
-                />
-              </div>
-            </div>
-          </div>
-        )}
+            <AccordionSection
+              title="Chromatic Aberration & Displacement"
+              isOpen={openAccordion === 'chromatic-aberration'}
+              onToggle={() => setOpenAccordion(openAccordion === 'chromatic-aberration' ? null : 'chromatic-aberration')}
+            >
+              <UnifiedChromaticControl
+                r={config.r}
+                g={config.g}
+                b={config.b}
+                x={config.x}
+                y={config.y}
+                onChange={(updates) => onChange(updates)}
+              />
+            </AccordionSection>
 
-        {activeTab === 'channels' && (
-          <div className={styles.tabPanel}>
-            <div className={styles.parameterSection}>
-              <h4>Displacement Channels</h4>
-              <div className={styles.selectControl}>
-                <label>X Channel (Horizontal)</label>
-                <div className={styles.channelSelector}>
-                  {CHANNEL_SELECTORS.map((channel) => (
-                    <button
-                      key={`x-${channel}`}
-                      className={config.x === channel ? styles.active : ''}
-                      onClick={() => handleChannelChange('x', channel)}
-                    >
-                      {channel}
-                    </button>
-                  ))}
-                </div>
-              </div>
-              <div className={styles.selectControl}>
-                <label>Y Channel (Vertical)</label>
-                <div className={styles.channelSelector}>
-                  {CHANNEL_SELECTORS.map((channel) => (
-                    <button
-                      key={`y-${channel}`}
-                      className={config.y === channel ? styles.active : ''}
-                      onClick={() => handleChannelChange('y', channel)}
-                    >
-                      {channel}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-            <div className={styles.parameterSection}>
-              <h4>Blend Mode</h4>
+            <AccordionSection
+              title="Blend Mode"
+              isOpen={openAccordion === 'blend-mode'}
+              onToggle={() => setOpenAccordion(openAccordion === 'blend-mode' ? null : 'blend-mode')}
+            >
               <div className={styles.selectControl}>
                 <label>Gradient Blend</label>
                 <select value={config.blend} onChange={(e) => handleBlendChange(e.target.value as BlendMode)}>
@@ -542,7 +496,7 @@ export function InlineControlPanel({
                   ))}
                 </select>
               </div>
-            </div>
+            </AccordionSection>
           </div>
         )}
       </div>
