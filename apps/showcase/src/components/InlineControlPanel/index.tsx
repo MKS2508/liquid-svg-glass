@@ -1,90 +1,10 @@
 import { useState } from 'react';
 import type { TabType, InlineControlPanelProps } from './types';
-import type { GlassPreset, BlendMode } from '@liquid-svg-glass/core';
+import type { BlendMode } from '@liquid-svg-glass/core';
 import { AccordionSection } from './controls/AccordionSection';
 import { UnifiedChromaticControl } from './controls/UnifiedChromaticControl';
+import { PresetShapeControl } from './PresetShapeControl';
 import styles from './styles.module.scss';
-
-const PRESETS: GlassPreset[] = ['dock', 'pill', 'bubble', 'free'];
-
-const PRESET_VALUES: Record<GlassPreset, Omit<import('./types').GlassEffectConfig, 'preset'>> = {
-  dock: {
-    width: 336,
-    height: 96,
-    radius: 16,
-    border: 7,
-    frost: 0.05,
-    blur: 11,
-    blurBackground: 8,
-    displace: 0.2,
-    scale: -180,
-    alpha: 0.93,
-    lightness: 50,
-    r: 0,
-    g: 10,
-    b: 20,
-    x: 'R',
-    y: 'B',
-    blend: 'difference',
-  },
-  pill: {
-    width: 200,
-    height: 80,
-    radius: 40,
-    border: 7,
-    frost: 0,
-    blur: 11,
-    blurBackground: 6,
-    displace: 0,
-    scale: -180,
-    alpha: 0.93,
-    lightness: 50,
-    r: 0,
-    g: 10,
-    b: 20,
-    x: 'R',
-    y: 'B',
-    blend: 'difference',
-  },
-  bubble: {
-    width: 140,
-    height: 140,
-    radius: 70,
-    border: 7,
-    frost: 0,
-    blur: 11,
-    blurBackground: 10,
-    displace: 0,
-    scale: -180,
-    alpha: 0.93,
-    lightness: 50,
-    r: 0,
-    g: 10,
-    b: 20,
-    x: 'R',
-    y: 'B',
-    blend: 'difference',
-  },
-  free: {
-    width: 140,
-    height: 280,
-    radius: 80,
-    border: 15,
-    frost: 0,
-    blur: 10,
-    blurBackground: 5,
-    displace: 0,
-    scale: -300,
-    alpha: 0.74,
-    lightness: 60,
-    r: 0,
-    g: 10,
-    b: 20,
-    x: 'R',
-    y: 'B',
-    blend: 'difference',
-  },
-};
 
 const BLEND_MODES: BlendMode[] = [
   'normal', 'multiply', 'screen', 'overlay',
@@ -100,16 +20,8 @@ export function InlineControlPanel({
   onReset,
   onDebugToggle
 }: InlineControlPanelProps) {
-  const [activeTab, setActiveTab] = useState<TabType>('presets');
+  const [activeTab, setActiveTab] = useState<TabType>('presets-shape');
   const [openAccordion, setOpenAccordion] = useState<string | null>('dimensions');
-
-  const handlePresetChange = (preset: GlassPreset) => {
-    const presetValues = PRESET_VALUES[preset];
-    onChange({
-      preset,
-      ...presetValues,
-    });
-  };
 
   const handleNumberChange = (key: keyof typeof config, value: number) => {
     onChange({ [key]: value });
@@ -154,8 +66,8 @@ export function InlineControlPanel({
       {/* Tab Navigation */}
       <div className={styles.tabNav}>
         <button
-          className={`${styles.tabBtn} ${activeTab === 'presets' ? styles.active : ''}`}
-          onClick={() => setActiveTab('presets')}
+          className={`${styles.tabBtn} ${activeTab === 'presets-shape' ? styles.active : ''}`}
+          onClick={() => setActiveTab('presets-shape')}
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <rect x="3" y="3" width="7" height="7" />
@@ -163,16 +75,7 @@ export function InlineControlPanel({
             <rect x="14" y="14" width="7" height="7" />
             <rect x="3" y="14" width="7" height="7" />
           </svg>
-          Presets
-        </button>
-        <button
-          className={`${styles.tabBtn} ${activeTab === 'geometry' ? styles.active : ''}`}
-          onClick={() => setActiveTab('geometry')}
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <rect x="3" y="3" width="18" height="18" rx="2" />
-          </svg>
-          Geometry
+          Presets & Shape
         </button>
         <button
           className={`${styles.tabBtn} ${activeTab === 'effects' ? styles.active : ''}`}
@@ -199,93 +102,9 @@ export function InlineControlPanel({
 
       {/* Tab Content */}
       <div className={styles.tabContent}>
-        {activeTab === 'presets' && (
+        {activeTab === 'presets-shape' && (
           <div className={styles.tabPanel}>
-            <div className={styles.presetGrid}>
-              {PRESETS.map((preset) => (
-                <button
-                  key={preset}
-                  className={`${styles.presetButton} ${config.preset === preset ? styles.active : ''}`}
-                  onClick={() => handlePresetChange(preset)}
-                >
-                  {preset}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {activeTab === 'geometry' && (
-          <div className={styles.tabPanel}>
-            <AccordionSection
-              title="Dimensions"
-              isOpen={openAccordion === 'dimensions'}
-              onToggle={() => setOpenAccordion(openAccordion === 'dimensions' ? null : 'dimensions')}
-            >
-              <div className={styles.sliderControl}>
-                <div className={styles.sliderLabel}>
-                  Width <span>{config.width}px</span>
-                </div>
-                <input
-                  type="range"
-                  className={styles.slider}
-                  min="50"
-                  max="800"
-                  step="10"
-                  value={config.width}
-                  onChange={(e) => handleNumberChange('width', Number(e.target.value))}
-                />
-              </div>
-              <div className={styles.sliderControl}>
-                <div className={styles.sliderLabel}>
-                  Height <span>{config.height}px</span>
-                </div>
-                <input
-                  type="range"
-                  className={styles.slider}
-                  min="50"
-                  max="800"
-                  step="10"
-                  value={config.height}
-                  onChange={(e) => handleNumberChange('height', Number(e.target.value))}
-                />
-              </div>
-            </AccordionSection>
-
-            <AccordionSection
-              title="Shape"
-              isOpen={openAccordion === 'shape'}
-              onToggle={() => setOpenAccordion(openAccordion === 'shape' ? null : 'shape')}
-            >
-              <div className={styles.sliderControl}>
-                <div className={styles.sliderLabel}>
-                  Radius <span>{config.radius}px</span>
-                </div>
-                <input
-                  type="range"
-                  className={styles.slider}
-                  min="0"
-                  max="100"
-                  step="1"
-                  value={config.radius}
-                  onChange={(e) => handleNumberChange('radius', Number(e.target.value))}
-                />
-              </div>
-              <div className={styles.sliderControl}>
-                <div className={styles.sliderLabel}>
-                  Border <span>{config.border}%</span>
-                </div>
-                <input
-                  type="range"
-                  className={styles.slider}
-                  min="0"
-                  max="50"
-                  step="1"
-                  value={config.border}
-                  onChange={(e) => handleNumberChange('border', Number(e.target.value))}
-                />
-              </div>
-            </AccordionSection>
+            <PresetShapeControl config={config} onChange={onChange} />
           </div>
         )}
 

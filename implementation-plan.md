@@ -485,6 +485,106 @@ _* Performance no afecta visual directamente pero es crítico para UX_
 
 ---
 
+## 🚫 Disclaimer de Desarrollo: Próximas Sesiones
+
+### Tema Prioritario: Glass Effect Mejorado (Sin Liquid Filters)
+
+**Prioridad**: Media 🟡
+**Impacto Estimado**: 15-20% mejora visual general
+**Complejidad**: Media
+**Sesiones Estimadas**: 2-3 sesiones
+
+#### Problemática Identificada
+
+La implementación actual tiene controles separados:
+- **Liquid Glass**: Filtros SVG con refracción y chromatic aberration
+- **Glass Base**: Efecto glass estándar con Gaussian blur simple
+
+**Gap Crítico**: El glass base puede mejorarse significativamente con técnicas modernas de CSS y research de estado del arte 2025.
+
+#### Áreas de Investigación Requeridas
+
+**1. Advanced CSS Glass Techniques (2025 State of the Art)**
+- **Multi-layer backdrop-filter**: Combinación de blur + saturate + contrast
+- **CSS Noise Textures**: Técnicas para añadir imperfecciones realistas
+- **Advanced Gradients**: Linear vs Radial vs Conic para glass effects
+- **Modern Box Shadows**: Capas múltiples para profundidad realista
+- **CSS Houdini**: Paint Worklets para efectos personalizados
+
+**2. Performance-Optimized Glass**
+- **GPU Acceleration Patterns**: `will-change`, `contain`, `transform3d`
+- **Backdrop Extension para Glass Simple**: Aplicar técnicas de Josh Comeau sin filtros SVG
+- **Adaptive Blur sin Filtros**: Blur radius dinámico basado en background
+- **Mobile-First Glass**: Optimizaciones específicas para dispositivos móviles
+
+**3. Interacciones y Estados**
+- **Independent Blur Controls**: Separar controles para liquid vs glass
+- **Hover Effects Glass**: Transiciones suaves en glass base
+- **Focus States Glass**: Glass patterns para accesibilidad
+- **Loading States Glass**: Patrones para skeletons/loading
+
+**4. Integración con Liquid Glass**
+- **Hybrid Effects**: Combinar glass base + liquid filters estratégicamente
+- **Progressive Enhancement**: Glass simple → Liquid glass según capabilities
+- **Fallback Strategies**: Glass mejorado cuando SVG filters no disponibles
+- **Unified Controls**: API unificada para ambos tipos de glass
+
+#### Referencias a Investigar
+
+**State of the Art CSS Glass 2025**:
+- Modern CSS backdrop-filter combinations
+- CSS gradients avanzados para efectos glass
+- Performance patterns para glass effects
+- Mobile optimizations para glass
+
+**Ejemplo Base a Mejorar**:
+```css
+.glass {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.25));
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+```
+
+**Técnicas a Explorar**:
+- Multi-layer backdrop-filter con diferentes valores
+- Advanced gradients con más de 2 color stops
+- Noise patterns usando CSS data URIs
+- Box shadows con múltiples capas para depth
+- Transitions más sofisticadas con spring physics
+
+#### Implementation Roadmap para Glass Mejorado
+
+**Fase 1: Research CSS Glass 2025** (1 sesión)
+- Investigar técnicas modernas de CSS glass
+- Compilar ejemplos de state-of-the-art
+- Analizar performance patterns
+- Documentar browser support
+
+**Fase 2: Enhanced Glass Base** (1-2 sesiones)
+- Implementar controles individuales para glass vs liquid
+- Integrar multi-layer backdrop-filter
+- Añadir advanced gradients y shadows
+- Optimizar para mobile
+
+**Fase 3: Hybrid Effects** (opcional)
+- Combinar glass base + liquid filters
+- Implementar progressive enhancement
+- Crear unified API
+- Testing y optimización
+
+#### Success Metrics
+
+- **Visual Quality**: +20% improvement en glass base
+- **Performance**: <5ms overhead para glass avanzado
+- **API Usability**: Controles intuitivos y separados
+- **Browser Support**: 95%+ para enhanced glass (sin SVG)
+
+---
+
 **Versión del Plan**: 1.0.0
 **Última Actualización**: 2025-10-20
 **Status**: 🔴 Fase 0 en progreso

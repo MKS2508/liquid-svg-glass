@@ -230,6 +230,84 @@
     color: var(--theme-primary);
     box-shadow: 0 0 0 2px rgba(179, 146, 240, 0.1);
   }
+
+  .icon {
+    font-size: 16px;
+    margin-right: 6px;
+  }
+
+  .label {
+    font-size: 11px;
+  }
+}
+
+// =============================================================================
+// PRESET & SHAPE UNIFIED CONTROL
+// =============================================================================
+
+.presetShapeControl {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .presetGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    > .label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #f8fafc;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+  }
+
+  .shapeControls {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    .control {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+
+      .label {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 11px;
+        font-weight: 500;
+        color: #cbd5e1;
+
+        .value {
+          font-family: 'SF Mono', Monaco, monospace;
+          color: var(--theme-primary);
+          font-size: 10px;
+        }
+      }
+    }
+
+    .compactRow {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+
+      .control {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+    }
+  }
 }
 
 // =============================================================================

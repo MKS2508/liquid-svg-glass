@@ -32,6 +32,8 @@ const DEFAULT_LEFT: GlassEffectConfig = {
   enableBackdropExtension: true,
   enablePerformanceOpts: true,
   enableFlickeringFix: true,
+  // Phase 2 Features - ENABLED for testing
+  enableChromaticAberration: true,
 };
 
 const DEFAULT_RIGHT: GlassEffectConfig = {
@@ -57,6 +59,8 @@ const DEFAULT_RIGHT: GlassEffectConfig = {
   enableBackdropExtension: false,
   enablePerformanceOpts: false,
   enableFlickeringFix: false,
+  // Phase 2 Features - DISABLED for comparison
+  enableChromaticAberration: false,
 };
 
 export function DebugPage() {
@@ -155,6 +159,7 @@ export function DebugPage() {
                   enableBackdropExtension={leftConfig.enableBackdropExtension}
                   enablePerformanceOpts={leftConfig.enablePerformanceOpts}
                   enableFlickeringFix={leftConfig.enableFlickeringFix}
+                  enableChromaticAberration={leftConfig.enableChromaticAberration}
                 />
               </WavyBackground>
             ) : (
@@ -187,6 +192,7 @@ export function DebugPage() {
                     enableBackdropExtension={leftConfig.enableBackdropExtension}
                     enablePerformanceOpts={leftConfig.enablePerformanceOpts}
                     enableFlickeringFix={leftConfig.enableFlickeringFix}
+                    enableChromaticAberration={leftConfig.enableChromaticAberration}
                   />
                 </DynamicBackgroundGlassShowcase>
               </div>
@@ -234,6 +240,7 @@ export function DebugPage() {
                   enableBackdropExtension={rightConfig.enableBackdropExtension}
                   enablePerformanceOpts={rightConfig.enablePerformanceOpts}
                   enableFlickeringFix={rightConfig.enableFlickeringFix}
+                  enableChromaticAberration={rightConfig.enableChromaticAberration}
                 />
               </WavyBackground>
             ) : (
@@ -266,6 +273,7 @@ export function DebugPage() {
                     enableBackdropExtension={rightConfig.enableBackdropExtension}
                     enablePerformanceOpts={rightConfig.enablePerformanceOpts}
                     enableFlickeringFix={rightConfig.enableFlickeringFix}
+                    enableChromaticAberration={rightConfig.enableChromaticAberration}
                   />
                 </DynamicBackgroundGlassShowcase>
               </div>

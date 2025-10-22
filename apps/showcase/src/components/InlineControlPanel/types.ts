@@ -1,6 +1,6 @@
 import type { GlassPreset, BlendMode, ChannelSelector } from '@liquid-svg-glass/core';
 
-export type TabType = 'presets' | 'geometry' | 'effects' | 'chromatic-displacement';
+export type TabType = 'presets-shape' | 'effects' | 'chromatic-displacement';
 
 export interface GlassEffectConfig {
   preset: GlassPreset;
