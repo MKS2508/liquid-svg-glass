@@ -1,11 +1,14 @@
 {
   "name": "@liquid-svg-glass/core",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Framework-agnostic core utilities for creating SVG liquid glass effects",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "bun run tsc",
     "dev": "bun run tsc --watch",
